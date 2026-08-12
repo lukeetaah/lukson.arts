@@ -1,17 +1,18 @@
+<!-- Sitio base adaptado desde el HTML fuente proporcionado. :contentReference[oaicite:0]{index=0} -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>LUKSON ARTS</title>
+    <title>lukson.arts — Creative Systems by Lucas Correa</title>
 
     <meta
         name="description"
         content="Lukson Arts — Creative Technology, AI, Products & Interactive Systems by Lucas Correa."
     >
 
-    <meta property="og:title" content="LUKSON ARTS">
+    <meta property="og:title" content="lukson.arts — Creative Systems">
     <meta
         property="og:description"
         content="Ideas become systems. Products, games, languages, simulations & experimental systems."
@@ -48,20 +49,39 @@
             --mono: 'Space Mono', monospace;
             --serif: 'Fraunces', Georgia, serif;
 
-            --ink: #3f4a5c;
-            --ink-soft: #48546a;
-            --ink-panel: #4b5878;
+            --ink: #050507;
+            --ink-soft: #0b0b10;
+            --ink-panel: #101016;
 
-            --paper: #f2f1ec;
-            --paper-dim: #b7bfcf;
+            --paper: #f2f2f5;
+            --paper-dim: #9ea0ad;
+            --silver: #d9d9e1;
+            --silver-bright: #ffffff;
 
-            --line: rgba(242, 241, 236, 0.10);
-            --line-strong: rgba(242, 241, 236, 0.22);
+            --line: rgba(255, 255, 255, 0.09);
+            --line-strong: rgba(255, 255, 255, 0.18);
 
-            --accent: #5eead4;
+            --accent: #8b5cf6;
+            --violet: #8b5cf6;
+            --pink: #f472b6;
+            --blue: #38bdf8;
+
+            --brand-gradient: linear-gradient(
+                115deg,
+                #dfe1ea 0%,
+                #ffffff 22%,
+                #c084fc 42%,
+                #f472b6 58%,
+                #60a5fa 78%,
+                #dfe1ea 100%
+            );
+
+            --brand-glow:
+                0 0 22px rgba(139, 92, 246, 0.18),
+                0 0 48px rgba(96, 165, 250, 0.08);
 
             --rail-x: 34px;
-            --container: 820px;
+            --container: 900px;
         }
 
 
@@ -74,11 +94,29 @@
         }
 
         body {
-            background: var(--ink);
+            background:
+                radial-gradient(circle at 50% -8%, rgba(139, 92, 246, 0.14), transparent 30%),
+                radial-gradient(circle at 80% 28%, rgba(56, 189, 248, 0.07), transparent 25%),
+                radial-gradient(circle at 15% 72%, rgba(244, 114, 182, 0.05), transparent 24%),
+                #050507;
             color: var(--paper);
             font-family: var(--sans);
             min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.24;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(to bottom, black, transparent 88%);
         }
 
 
@@ -96,12 +134,13 @@
 
             z-index: 100;
 
-            background: rgba(63, 74, 92, 0.82);
+            background: rgba(5, 5, 7, 0.72);
 
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
 
             border-bottom: 1px solid var(--line);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
         }
 
         .header-inner {
@@ -121,55 +160,51 @@
 
 
         /* =========================================================
-           LOGO MARK
+           BRAND MARK
         ========================================================= */
 
-        .mark {
-            width: 20px;
-            height: 20px;
+        .brand-logo {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
             flex-shrink: 0;
+            border-radius: 10px;
+            padding: 3px;
+            background:
+                linear-gradient(#08080b, #08080b) padding-box,
+                var(--brand-gradient) border-box;
+            border: 1px solid transparent;
+            box-shadow: var(--brand-glow);
+            transition:
+                transform 0.35s ease,
+                box-shadow 0.35s ease;
         }
 
-        .mark circle {
-            fill: none;
-            stroke: var(--accent);
-            stroke-width: 1.4;
-            opacity: 0.9;
+        .brand-logo img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 7px;
+            filter: saturate(1.08) contrast(1.05);
         }
 
-        .mark line {
-            stroke: var(--accent);
-            stroke-width: 1;
-            opacity: 0.55;
-        }
-
-        .mark .n2,
-        .mark .n3 {
-            animation: pulse 3.2s ease-in-out infinite;
-        }
-
-        .mark .n3 {
-            animation-delay: 1.6s;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.9;
-                r: 1.6;
-            }
-
-            50% {
-                opacity: 0.3;
-                r: 2.4;
-            }
+        .brand-logo:hover {
+            transform: translateY(-1px) scale(1.04);
+            box-shadow:
+                0 0 20px rgba(139, 92, 246, 0.25),
+                0 0 34px rgba(244, 114, 182, 0.12),
+                0 0 52px rgba(56, 189, 248, 0.08);
         }
 
         header h1 {
             font-family: var(--sans);
-            font-size: 0.78rem;
-            letter-spacing: 0.34em;
-            font-weight: 600;
-            color: var(--paper);
+            font-size: 0.8rem;
+            letter-spacing: 0.28em;
+            font-weight: 700;
+            color: var(--silver-bright);
+            text-shadow: 0 0 18px rgba(255,255,255,0.08);
         }
 
         .tagline {
@@ -178,9 +213,7 @@
             letter-spacing: 0.1em;
             color: var(--paper-dim);
             font-weight: 400;
-
             padding-left: 0.9rem;
-
             border-left: 1px solid var(--line-strong);
         }
 
@@ -208,7 +241,9 @@
             transition:
                 opacity 0.2s ease,
                 filter 0.2s ease,
-                border-color 0.2s ease;
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
         }
 
         .lang-switch:hover {
@@ -219,7 +254,112 @@
         .lang-switch.active {
             opacity: 1;
             filter: grayscale(0);
-            border-color: var(--accent);
+            border-color: transparent;
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.08),
+                0 0 18px rgba(139,92,246,0.12);
+            background: rgba(255,255,255,0.04);
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            position: relative;
+            z-index: 1;
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 8.5rem 1.5rem 2.8rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.24em;
+            color: #b7b9c7;
+
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .hero-badge span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                var(--pink),
+                var(--violet),
+                var(--blue)
+            );
+
+            box-shadow:
+                0 0 10px rgba(139,92,246,0.55),
+                0 0 20px rgba(56,189,248,0.22);
+        }
+
+        .hero h2 {
+            margin-top: 1rem;
+            max-width: 760px;
+
+            font-family: var(--serif);
+            font-size: clamp(3rem, 7vw, 6.4rem);
+            line-height: 0.92;
+            font-weight: 500;
+
+            letter-spacing: -0.04em;
+        }
+
+        .hero-line {
+            display: block;
+        }
+
+        .hero-line-main {
+            color: #f0f0f4;
+        }
+
+        .hero-gradient {
+            width: max-content;
+            max-width: 100%;
+
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            background-size: 200% 100%;
+
+            animation: shimmer 8s ease-in-out infinite;
+
+            text-shadow:
+                0 0 30px rgba(139,92,246,0.08);
+        }
+
+        .hero-copy {
+            max-width: 670px;
+            margin-top: 1.5rem;
+
+            font-size: 0.95rem;
+            line-height: 1.75;
+
+            color: var(--paper-dim);
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
         }
 
 
@@ -233,7 +373,7 @@
 
             max-width: var(--container);
 
-            margin: 58px auto 0;
+            margin: 76px auto 0;
 
             display: flex;
             flex-direction: column;
@@ -261,8 +401,9 @@
                 linear-gradient(
                     to bottom,
                     transparent,
-                    var(--line-strong) 4%,
-                    var(--line-strong) 96%,
+                    rgba(139, 92, 246, 0.28) 10%,
+                    rgba(255,255,255,0.14) 48%,
+                    rgba(56, 189, 248, 0.22) 88%,
                     transparent
                 );
         }
@@ -279,10 +420,11 @@
             font-size: 0.66rem;
             letter-spacing: 0.28em;
 
-            color: var(--paper-dim);
+            color: #acafbd;
+            text-transform: uppercase;
 
             padding:
-                1.6rem
+                1.9rem
                 1.4rem
                 0.9rem
                 calc(var(--rail-x) + 2.4rem);
@@ -324,12 +466,14 @@
             text-decoration: none;
             color: var(--paper);
 
-            border-bottom: 1px solid var(--line);
-            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.055);
+            border-radius: 16px;
 
             transition:
                 background-color 0.4s ease,
-                padding 0.4s ease;
+                padding 0.4s ease,
+                border-color 0.35s ease,
+                box-shadow 0.35s ease;
         }
 
 
@@ -348,9 +492,11 @@
 
             border-radius: 50%;
 
-            background: var(--ink);
+            background: #07070a;
+            border: 1px solid rgba(255,255,255,0.22);
 
-            border: 1px solid var(--line-strong);
+            box-shadow:
+                0 0 0 1px rgba(139,92,246,0.04);
 
             transform: translate(-50%, -50%);
 
@@ -377,12 +523,16 @@
 
             overflow: hidden;
 
-            opacity: 0.85;
+            opacity: 0.92;
+
+            filter:
+                drop-shadow(0 8px 24px rgba(0,0,0,0.22));
 
             transition:
                 width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                opacity 0.4s ease;
+                opacity 0.4s ease,
+                filter 0.4s ease;
         }
 
         .project-icon img {
@@ -415,11 +565,18 @@
 
             letter-spacing: 0.02em;
 
-            opacity: 0.82;
+            opacity: 0.9;
+
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 220% 100%;
 
             transition:
                 opacity 0.3s ease,
-                color 0.3s ease;
+                color 0.3s ease,
+                background-position 0.45s ease;
         }
 
         .project-desc {
@@ -537,15 +694,16 @@
 
             overflow: hidden;
 
-            border-radius: 12px;
+            border-radius: 14px;
 
-            background: rgba(25, 31, 42, 0.96);
+            background: rgba(7, 7, 10, 0.96);
 
-            border: 1px solid rgba(242, 241, 236, 0.18);
+            border: 1px solid rgba(255,255,255,0.12);
 
             box-shadow:
-                0 25px 70px rgba(0, 0, 0, 0.38),
-                0 0 0 1px rgba(255, 255, 255, 0.03);
+                0 30px 100px rgba(0, 0, 0, 0.58),
+                0 0 0 1px rgba(255, 255, 255, 0.025),
+                0 0 40px rgba(139,92,246,0.08);
 
             transition:
                 opacity 0.35s ease,
@@ -578,10 +736,10 @@
             background:
                 linear-gradient(
                     135deg,
-                    rgba(255,255,255,0.07),
+                    rgba(255,255,255,0.08),
                     transparent 35%,
                     transparent 70%,
-                    rgba(0,0,0,0.20)
+                    rgba(0,0,0,0.22)
                 );
         }
 
@@ -591,7 +749,19 @@
         ========================================================= */
 
         .project:hover {
-            background-color: var(--ink-panel);
+            background:
+                linear-gradient(
+                    100deg,
+                    rgba(255,255,255,0.035),
+                    rgba(139,92,246,0.07) 50%,
+                    rgba(56,189,248,0.035)
+                );
+
+            border-color: rgba(255,255,255,0.10);
+
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,0.035),
+                0 20px 80px rgba(0,0,0,0.18);
 
             padding-top: 1.9rem;
             padding-bottom: 1.9rem;
@@ -599,20 +769,11 @@
 
         .project:hover .project-node {
             background: var(--accent);
-
-            border-color: var(--accent);
+            border-color: rgba(255,255,255,0.8);
 
             box-shadow:
-                0 0 0 3px color-mix(
-                    in srgb,
-                    var(--accent) 22%,
-                    transparent
-                ),
-                0 0 14px color-mix(
-                    in srgb,
-                    var(--accent) 55%,
-                    transparent
-                );
+                0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent),
+                0 0 18px color-mix(in srgb, var(--accent) 65%, transparent);
         }
 
         .project:hover .project-icon {
@@ -620,11 +781,15 @@
             height: 124px;
 
             opacity: 1;
+
+            filter:
+                drop-shadow(0 12px 30px rgba(0,0,0,0.35))
+                drop-shadow(0 0 20px color-mix(in srgb, var(--accent) 16%, transparent));
         }
 
         .project:hover .project-name {
             opacity: 1;
-            color: var(--paper);
+            background-position: 100% 0;
         }
 
         .project:hover .project-desc {
@@ -701,7 +866,7 @@
             position: relative;
             z-index: 1;
 
-            padding: 2rem;
+            padding: 3rem 2rem 3.5rem;
 
             text-align: center;
 
@@ -713,6 +878,31 @@
             color: var(--paper-dim);
 
             border-top: 1px solid var(--line);
+
+            background:
+                radial-gradient(circle at 50% 0%, rgba(139,92,246,0.08), transparent 42%),
+                rgba(5,5,7,0.82);
+        }
+
+        footer::before {
+            content: 'LA';
+
+            display: block;
+            width: max-content;
+
+            margin: 0 auto 1rem;
+
+            font-family: var(--sans);
+            font-weight: 700;
+            font-size: 0.72rem;
+            letter-spacing: 0.32em;
+
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            opacity: 0.8;
         }
 
         footer a {
@@ -721,12 +911,26 @@
             text-decoration: none;
 
             border-bottom: 1px solid var(--line-strong);
+
+            transition:
+                color 0.25s ease,
+                border-color 0.25s ease,
+                text-shadow 0.25s ease;
+        }
+
+        footer .footer-name {
+            color: var(--silver);
+            border-bottom-color: rgba(255,255,255,0.18);
         }
 
         footer a:hover {
-            color: var(--accent);
+            color: var(--silver-bright);
 
-            border-color: var(--accent);
+            border-color: rgba(244,114,182,0.75);
+
+            text-shadow:
+                0 0 10px rgba(139,92,246,0.35),
+                0 0 22px rgba(56,189,248,0.18);
         }
 
 
@@ -737,6 +941,12 @@
         .project:focus-visible {
             outline: 2px solid var(--accent);
             outline-offset: -2px;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid #c084fc;
+            outline-offset: 3px;
         }
 
 
@@ -789,6 +999,19 @@
 
         @media (max-width: 700px) {
 
+            .hero {
+                padding: 7.2rem 1.2rem 2.4rem;
+            }
+
+            .hero h2 {
+                font-size: clamp(2.85rem, 15vw, 4.4rem);
+            }
+
+            .hero-copy {
+                font-size: 0.82rem;
+                line-height: 1.65;
+            }
+
             :root {
                 --rail-x: 18px;
             }
@@ -799,6 +1022,16 @@
 
             .tagline {
                 display: none;
+            }
+
+            .brand-logo {
+                width: 32px;
+                height: 32px;
+            }
+
+            header h1 {
+                font-size: 0.72rem;
+                letter-spacing: 0.22em;
             }
 
             .projects {
@@ -880,6 +1113,12 @@
             .section-label {
                 padding-left: 2.6rem;
             }
+
+            footer {
+                padding-left: 1.2rem;
+                padding-right: 1.2rem;
+                line-height: 1.9;
+            }
         }
 
 
@@ -894,6 +1133,7 @@
             *::after {
                 transition-duration: 0.01ms !important;
                 animation: none !important;
+                scroll-behavior: auto !important;
             }
         }
 
@@ -914,59 +1154,14 @@
 
             <div class="header-left">
 
-                <svg
-                    class="mark"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                >
-
-                    <line
-                        x1="12"
-                        y1="4"
-                        x2="5"
-                        y2="18"
-                    ></line>
-
-                    <line
-                        x1="12"
-                        y1="4"
-                        x2="19"
-                        y2="18"
-                    ></line>
-
-                    <line
-                        x1="5"
-                        y1="18"
-                        x2="19"
-                        y2="18"
-                    ></line>
-
-                    <circle
-                        class="n1"
-                        cx="12"
-                        cy="4"
-                        r="1.8"
-                    ></circle>
-
-                    <circle
-                        class="n2"
-                        cx="5"
-                        cy="18"
-                        r="1.8"
-                    ></circle>
-
-                    <circle
-                        class="n3"
-                        cx="19"
-                        cy="18"
-                        r="1.8"
-                    ></circle>
-
-                </svg>
-
+                <a class="brand-logo" href="#top" aria-label="Lukson Arts">
+                    <img
+                        src="ICONOS/lukson.arts.png"
+                        alt="lukson.arts"
+                    >
+                </a>
 
                 <h1>LUKSON ARTS</h1>
-
 
                 <span
                     class="tagline"
@@ -1009,8 +1204,37 @@
 
 
     <!-- =========================================================
+         HERO
+    ========================================================= -->
+
+    <section class="hero" id="top" aria-labelledby="hero-title">
+
+        <div class="hero-badge">
+            <span></span>
+            LUKSON.ARTS
+        </div>
+
+        <h2 id="hero-title">
+            <span class="hero-line hero-line-main">Ideas become</span>
+            <span class="hero-line hero-gradient">systems.</span>
+        </h2>
+
+        <p
+            class="hero-copy"
+            data-es="Apps, juegos, lenguajes y experimentos diseñados para convertir ideas raras en experiencias reales."
+            data-en="Apps, games, languages and experiments designed to turn strange ideas into real experiences."
+        >
+            Apps, juegos, lenguajes y experimentos diseñados para convertir ideas raras en experiencias reales.
+        </p>
+
+    </section>
+
+
+    <!-- =========================================================
          PROJECTS
     ========================================================= -->
+
+    <main>
 
     <nav
         class="projects"
@@ -1683,6 +1907,8 @@
 
     </nav>
 
+    </main>
+
 
     <!-- =========================================================
          FOOTER
@@ -1690,19 +1916,29 @@
 
     <footer>
 
-        <span
-            data-es="LUCAS CORREA · AI-ASSISTED · HUMAN-DIRECTED"
-            data-en="LUCAS CORREA · AI-ASSISTED · HUMAN-DIRECTED"
+        <a
+            class="footer-name"
+            href="mailto:lucascorrea@outlook.com.ar"
+            aria-label="Enviar un correo a Lucas Correa"
         >
-            LUCAS CORREA · AI-ASSISTED · HUMAN-DIRECTED
-        </span>
+            <span
+                data-es="LUCAS CORREA · CREADO CON IA · DIRIGIDO POR HUMANOS"
+                data-en="LUCAS CORREA · AI-ASSISTED · HUMAN-DIRECTED"
+            >
+                LUCAS CORREA · CREADO CON IA · DIRIGIDO POR HUMANOS
+            </span>
+        </a>
 
-        &nbsp;&nbsp;·&nbsp;&nbsp;
+        <span class="footer-separator">
+            &nbsp;&nbsp;·&nbsp;&nbsp;
+        </span>
 
         <a
             href="https://github.com/lukeetaah"
             target="_blank"
             rel="noopener"
+            data-es="GITHUB"
+            data-en="GITHUB"
         >
             GITHUB
         </a>
@@ -1743,6 +1979,8 @@
                 });
 
         }
+
+        setLang('es');
 
     </script>
 
