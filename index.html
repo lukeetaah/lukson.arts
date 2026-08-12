@@ -75,7 +75,7 @@ header{
   display:flex;align-items:center;justify-content:space-between;gap:1rem;
 }
 .brand{display:flex;align-items:center;gap:.8rem;text-decoration:none;min-width:0}
-.brand-logo{width:48px;height:48px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.025)}
+.brand-logo{width:144px;height:144px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.025)}
 .brand-logo img{width:100%;height:100%;object-fit:contain;transform:scale(1.08)}
 .brand-name{font:600 .8rem/1 var(--sans);letter-spacing:.22em}
 .brand-tagline{margin-top:.22rem;font:400 .54rem/1.2 var(--mono);letter-spacing:.06em;color:var(--muted)}
@@ -209,8 +209,8 @@ footer{border-top:1px solid var(--line);margin-top:2rem}
 
 @media (max-width:700px){
   .header-inner,main,.footer-inner{width:min(var(--container),calc(100% - 1rem))}
-  .header-inner{min-height:66px}
-  .brand-logo{width:44px;height:44px}
+  .header-inner{min-height:132px}
+  .brand-logo{width:132px;height:132px}
   .brand-tagline{display:none}
   .hero{padding:3.1rem 0 1.8rem}
   .hero h1{font-size:clamp(1.85rem,9vw,2.8rem)}
@@ -247,14 +247,6 @@ footer{border-top:1px solid var(--line);margin-top:2rem}
   <div class="header-inner">
     <a class="brand" href="#" aria-label="lukson.arts">
       <span class="brand-logo" aria-hidden="true"><img src="/icono/lukson.arts.png" alt=""></span>
-      <span>
-        <span class="brand-name">lukson.arts</span>
-        <span
-          class="brand-tagline"
-          data-es="Tus ideas se vuelven sistemas"
-          data-en="Your ideas become systems"
-        >Tus ideas se vuelven sistemas</span>
-      </span>
     </a>
 
     <div class="lang-switches" role="group" aria-label="Idioma">
@@ -345,9 +337,9 @@ footer{border-top:1px solid var(--line);margin-top:2rem}
                         href="https://aman.free.je/?i=1"
                         target="_blank"
                         rel="noopener noreferrer"
-                        data-es="IR AL JUEGO"
-                        data-en="OPEN PROJECT"
-                    ><span class="play-label">IR AL JUEGO</span> <span aria-hidden="true">↗</span></a>
+                        data-es="IR A LA APP"
+                        data-en="OPEN APP"
+                    ><span class="play-label">IR A LA APP</span> <span aria-hidden="true">↗</span></a>
                 </div>
             </div>
         </article>
@@ -391,9 +383,9 @@ footer{border-top:1px solid var(--line);margin-top:2rem}
                         href="https://planet-club.vercel.app/sendero"
                         target="_blank"
                         rel="noopener noreferrer"
-                        data-es="IR AL JUEGO"
-                        data-en="OPEN PROJECT"
-                    ><span class="play-label">IR AL JUEGO</span> <span aria-hidden="true">↗</span></a>
+                        data-es="IR A LA APP"
+                        data-en="OPEN APP"
+                    ><span class="play-label">IR A LA APP</span> <span aria-hidden="true">↗</span></a>
                 </div>
             </div>
         </article>
@@ -437,9 +429,9 @@ footer{border-top:1px solid var(--line);margin-top:2rem}
                         href="https://umbral-gules.vercel.app/en"
                         target="_blank"
                         rel="noopener noreferrer"
-                        data-es="IR AL JUEGO"
-                        data-en="OPEN PROJECT"
-                    ><span class="play-label">IR AL JUEGO</span> <span aria-hidden="true">↗</span></a>
+                        data-es="IR A LA APP"
+                        data-en="OPEN APP"
+                    ><span class="play-label">IR A LA APP</span> <span aria-hidden="true">↗</span></a>
                 </div>
             </div>
         </article>
@@ -447,52 +439,6 @@ footer{border-top:1px solid var(--line);margin-top:2rem}
     <div class="section-label">
       <span data-es="JUEGOS" data-en="GAMES">JUEGOS</span>
     </div>
-
-        <article class="project" style="--accent:#f5b860" data-project>
-            <button class="project-toggle" type="button" aria-expanded="false">
-                <span class="project-node" aria-hidden="true"></span>
-
-                <span class="project-icon" aria-hidden="true">
-                    <img src="/icono/mi mandato.png" alt="" loading="lazy" decoding="async">
-                </span>
-
-                <span class="project-title">MI MANDATO</span>
-
-                <span class="project-flags" aria-label="Idiomas">
-                    <span class="game-flag" title="Español">🇦🇷</span>
-                </span>
-
-                <span class="project-chevron" aria-hidden="true">⌄</span>
-            </button>
-
-            <div class="project-detail" hidden>
-                <div class="project-preview">
-                    <span class="preview-label">PREVIEW</span>
-                    <img src="/icono/mi mandato_SS_1.png" alt="Captura de pantalla de MI MANDATO" loading="lazy" decoding="async">
-                </div>
-
-                <div class="project-info">
-                    <p
-                        class="project-desc"
-                        data-es="Simulación política narrativa. Asumís la presidencia de la República del Sur en 2032. Finanzas frágiles, inflación persistente, presión política, sindicatos, medios, mercados, gobernadores y ciudadanos. Cada decisión tiene consecuencias. Algunas vuelven meses después de formas inesperadas."
-                        data-en="A narrative political simulation. You assume the presidency of the República del Sur in 2032. Fragile finances, persistent inflation, political pressure, unions, media, markets, governors and citizens. Every decision has consequences. Some return months later in unexpected forms."
-                    >Simulación política narrativa. Asumís la presidencia de la República del Sur en 2032. Finanzas frágiles, inflación persistente, presión política, sindicatos, medios, mercados, gobernadores y ciudadanos. Cada decisión tiene consecuencias. Algunas vuelven meses después de formas inesperadas.</p>
-
-                    <div class="project-meta">
-                        <span data-es="SIMULACIÓN · JUEGO NARRATIVO" data-en="SIMULATION · NARRATIVE GAME">SIMULACIÓN · JUEGO NARRATIVO</span>
-                    </div>
-
-                    <a
-                        class="play-button"
-                        href="https://mi-mandato.vercel.app/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        data-es="IR AL JUEGO"
-                        data-en="OPEN PROJECT"
-                    ><span class="play-label">IR AL JUEGO</span> <span aria-hidden="true">↗</span></a>
-                </div>
-            </div>
-        </article>
 
         <article class="project" style="--accent:#f97066" data-project>
             <button class="project-toggle" type="button" aria-expanded="false">
@@ -678,6 +624,52 @@ footer{border-top:1px solid var(--line);margin-top:2rem}
             </div>
         </article>
 
+        <article class="project" style="--accent:#f5b860" data-project>
+            <button class="project-toggle" type="button" aria-expanded="false">
+                <span class="project-node" aria-hidden="true"></span>
+
+                <span class="project-icon" aria-hidden="true">
+                    <img src="/icono/mi mandato.png" alt="" loading="lazy" decoding="async">
+                </span>
+
+                <span class="project-title">MI MANDATO</span>
+
+                <span class="project-flags" aria-label="Idiomas">
+                    <span class="game-flag" title="Español">🇦🇷</span>
+                </span>
+
+                <span class="project-chevron" aria-hidden="true">⌄</span>
+            </button>
+
+            <div class="project-detail" hidden>
+                <div class="project-preview">
+                    <span class="preview-label">PREVIEW</span>
+                    <img src="/icono/mi mandato_SS_1.png" alt="Captura de pantalla de MI MANDATO" loading="lazy" decoding="async">
+                </div>
+
+                <div class="project-info">
+                    <p
+                        class="project-desc"
+                        data-es="Simulación política narrativa. Asumís la presidencia de la República del Sur en 2032. Finanzas frágiles, inflación persistente, presión política, sindicatos, medios, mercados, gobernadores y ciudadanos. Cada decisión tiene consecuencias. Algunas vuelven meses después de formas inesperadas."
+                        data-en="A narrative political simulation. You assume the presidency of the República del Sur in 2032. Fragile finances, persistent inflation, political pressure, unions, media, markets, governors and citizens. Every decision has consequences. Some return months later in unexpected forms."
+                    >Simulación política narrativa. Asumís la presidencia de la República del Sur en 2032. Finanzas frágiles, inflación persistente, presión política, sindicatos, medios, mercados, gobernadores y ciudadanos. Cada decisión tiene consecuencias. Algunas vuelven meses después de formas inesperadas.</p>
+
+                    <div class="project-meta">
+                        <span data-es="SIMULACIÓN · JUEGO NARRATIVO" data-en="SIMULATION · NARRATIVE GAME">SIMULACIÓN · JUEGO NARRATIVO</span>
+                    </div>
+
+                    <a
+                        class="play-button"
+                        href="https://mi-mandato.vercel.app/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-es="IR AL JUEGO"
+                        data-en="OPEN PROJECT"
+                    ><span class="play-label">IR AL JUEGO</span> <span aria-hidden="true">↗</span></a>
+                </div>
+            </div>
+        </article>
+
   </section>
 </main>
 
@@ -735,7 +727,7 @@ function setLang(lang) {
 
   document.querySelectorAll(".play-button").forEach(btn => {
     const label = btn.querySelector(".play-label");
-    if (label) label.textContent = safeLang === "en" ? "OPEN PROJECT" : "IR AL JUEGO";
+    if (label) label.textContent = btn.getAttribute("data-" + safeLang);
   });
 
   document.querySelectorAll(".lang-switch").forEach(btn => {
