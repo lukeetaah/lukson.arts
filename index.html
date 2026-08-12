@@ -677,147 +677,15 @@ footer{border-top:1px solid var(--line);margin-top:2rem}
   <div class="footer-inner">
     <div class="footer-brand">lukson.arts</div>
 
-    <div
-      class="footer-tagline"
-      data-es="Tus ideas se vuelven sistemas"
-      data-en="Your ideas become systems"
-    >
-      Tus ideas se vuelven sistemas
-    </div>
 
-    <div class="footer-links">
-      <a
-        class="footer-icon-link"
-        href="https://www.linkedin.com/in/lucas-correa-3300211a6/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="LinkedIn de Lucas Correa"
-      >
-        <span aria-hidden="true">in</span>
-        <span>Lucas Correa</span>
-      </a>
-      <a class="footer-icon-link" href="https://github.com/lukeetaah" target="_blank" rel="noopener noreferrer">
-        <span aria-hidden="true">◈</span>
-        <span>GitHub</span>
-      </a>
-    </div>
+    <!-- =========================================================
+         VERCEL WEB ANALYTICS
+    ========================================================= -->
 
-    <div
-      class="footer-small"
-      data-es="Creado con IA · Dirigido por humanos"
-      data-en="AI-Assisted · Human-Directed"
-    >Creado con IA · Dirigido por humanos</div>
-    <div class="footer-year">Argentina · 2026</div>
-  </div>
-</footer>
+    <script type="module">
+        import { inject } from 'https://cdn.jsdelivr.net/npm/@vercel/analytics@1.4.1/dist/index.mjs';
+        inject();
+    </script>
 
-<script>
-const LANGUAGE_KEY = "lukson-language";
-const loader = document.getElementById("loader");
-const searchInput = document.getElementById("projectSearch");
-
-function setLang(lang) {
-  const safeLang = lang === "en" ? "en" : "es";
-  document.documentElement.lang = safeLang;
-
-  document.querySelectorAll("[data-es][data-en]").forEach(el => {
-    if (el.classList.contains("play-button")) return;
-    el.textContent = el.getAttribute("data-" + safeLang);
-  });
-
-  document.querySelectorAll(".play-button").forEach(btn => {
-    const label = btn.querySelector(".play-label");
-    if (label) label.textContent = btn.getAttribute("data-" + safeLang);
-  });
-
-  document.querySelectorAll(".lang-switch").forEach(btn => {
-    const active = btn.dataset.lang === safeLang;
-    btn.classList.toggle("active", active);
-    btn.setAttribute("aria-pressed", active ? "true" : "false");
-  });
-
-  if (searchInput) {
-    searchInput.placeholder =
-      searchInput.getAttribute("data-placeholder-" + safeLang);
-    searchInput.setAttribute(
-      "aria-label",
-      safeLang === "en" ? "Search projects" : "Buscar proyectos"
-    );
-  }
-
-  try { localStorage.setItem(LANGUAGE_KEY, safeLang); } catch (_) {}
-}
-
-document.querySelectorAll(".lang-switch").forEach(btn => {
-  btn.addEventListener("click", () => setLang(btn.dataset.lang));
-});
-
-/* Accordion: one project open at a time. */
-document.querySelectorAll(".project-toggle").forEach(toggle => {
-  toggle.addEventListener("click", () => {
-    const card = toggle.closest(".project");
-    const detail = card.querySelector(".project-detail");
-    const wasOpen = toggle.getAttribute("aria-expanded") === "true";
-
-    document.querySelectorAll(".project-toggle[aria-expanded='true']").forEach(other => {
-      if (other !== toggle) {
-        other.setAttribute("aria-expanded", "false");
-        const otherDetail = other.closest(".project").querySelector(".project-detail");
-        otherDetail.hidden = true;
-      }
-    });
-
-    toggle.setAttribute("aria-expanded", wasOpen ? "false" : "true");
-    detail.hidden = wasOpen;
-  });
-});
-
-/* Minimal project search. */
-if (searchInput) {
-  searchInput.addEventListener("input", () => {
-    const query = searchInput.value.trim().toLowerCase();
-
-    document.querySelectorAll(".project").forEach(card => {
-      const title = card.querySelector(".project-title")?.textContent.toLowerCase() || "";
-      const description = card.querySelector(".project-desc")?.textContent.toLowerCase() || "";
-      const match = !query || title.includes(query) || description.includes(query);
-      card.hidden = !match;
-
-      if (!match) {
-        const toggle = card.querySelector(".project-toggle");
-        const detail = card.querySelector(".project-detail");
-        toggle.setAttribute("aria-expanded", "false");
-        detail.hidden = true;
-      }
-    });
-
-    document.querySelectorAll(".section-label").forEach(label => {
-      const nextProjects = [];
-      let node = label.nextElementSibling;
-      while (node && node.classList.contains("project")) {
-        nextProjects.push(node);
-        node = node.nextElementSibling;
-      }
-      label.hidden = query && !nextProjects.some(p => !p.hidden);
-    });
-  });
-}
-
-(() => {
-  let saved = "es";
-  try {
-    const stored = localStorage.getItem(LANGUAGE_KEY);
-    if (stored === "es" || stored === "en") saved = stored;
-  } catch (_) {}
-  setLang(saved);
-})();
-
-function hideLoader() {
-  document.body.classList.remove("is-loading");
-  loader?.classList.add("hidden");
-}
-window.addEventListener("load", hideLoader, {once:true});
-window.setTimeout(hideLoader, 800);
-</script>
 </body>
 </html>
