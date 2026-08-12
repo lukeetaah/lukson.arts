@@ -3,13 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
 <title>lukson.arts</title>
-<meta name="description" content="lukson.arts — Creative Technology, AI, Products & Interactive Systems by Lucas Correa.">
+
+<meta
+  name="description"
+  content="lukson.arts — Creative Technology, AI, Products & Interactive Systems by Lucas Correa."
+>
+
 <meta name="theme-color" content="#050507">
+<meta name="color-scheme" content="dark">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+  rel="stylesheet"
+>
 
 <link rel="preload" as="image" href="/icono/lukson.arts.png">
 
@@ -19,18 +30,24 @@
   --panel:#0b0b10;
   --paper:#f3f1ec;
   --muted:#898c98;
+
   --line:rgba(243,241,236,.085);
   --line-strong:rgba(243,241,236,.16);
+
   --sans:'Space Grotesk',system-ui,sans-serif;
   --mono:'Space Mono',monospace;
   --serif:'Fraunces',Georgia,serif;
+
   --pink:#f472b6;
   --violet:#a78bfa;
   --blue:#60a5fa;
+
   --container:840px;
 }
 
-*,*::before,*::after{
+*,
+*::before,
+*::after{
   box-sizing:border-box;
   margin:0;
   padding:0;
@@ -48,9 +65,14 @@ body{
   color:var(--paper);
   font-family:var(--sans);
   background:
-    radial-gradient(circle at 50% -14%,rgba(139,92,246,.075),transparent 28rem),
+    radial-gradient(
+      circle at 50% -14%,
+      rgba(139,92,246,.075),
+      transparent 28rem
+    ),
     var(--bg);
   -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
 }
 
 body::before{
@@ -60,14 +82,35 @@ body::before{
   pointer-events:none;
   z-index:-1;
   opacity:.24;
+
   background:
-    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+    linear-gradient(
+      rgba(255,255,255,.018) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.018) 1px,
+      transparent 1px
+    );
+
   background-size:48px 48px;
-  mask-image:linear-gradient(to bottom,black,transparent 72%);
+
+  mask-image:linear-gradient(
+    to bottom,
+    black,
+    transparent 72%
+  );
+
+  -webkit-mask-image:linear-gradient(
+    to bottom,
+    black,
+    transparent 72%
+  );
 }
 
-a,button{
+a,
+button{
   -webkit-tap-highlight-color:transparent;
 }
 
@@ -75,16 +118,66 @@ button{
   font:inherit;
 }
 
-/* LOADER */
+/* =========================================================
+   SVG FLAGS
+   No dependemos de emojis ni de fuentes del sistema.
+   ========================================================= */
+
+.flag-icon{
+  display:block;
+  width:20px;
+  height:14px;
+  flex:0 0 auto;
+  overflow:hidden;
+  border-radius:2px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.10),
+    0 1px 3px rgba(0,0,0,.35);
+}
+
+.header-flag{
+  width:18px;
+  height:13px;
+}
+
+.project-flags{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.28rem;
+  min-width:48px;
+  white-space:nowrap;
+}
+
+.game-flag{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+}
+
+.game-flag .flag-icon{
+  width:19px;
+  height:13px;
+}
+
+/* =========================================================
+   LOADER
+   ========================================================= */
 
 .loader{
   position:fixed;
   inset:0;
   z-index:1000;
+
   display:grid;
   place-items:center;
+
   background:var(--bg);
-  transition:opacity .4s ease,visibility .4s ease;
+
+  transition:
+    opacity .4s ease,
+    visibility .4s ease;
 }
 
 .loader.hidden{
@@ -103,8 +196,13 @@ button{
   width:68px;
   height:68px;
   object-fit:contain;
+
   animation:float 2.4s ease-in-out infinite;
-  filter:drop-shadow(0 0 18px rgba(167,139,250,.2));
+
+  filter:
+    drop-shadow(
+      0 0 18px rgba(167,139,250,.2)
+    );
 }
 
 .loader-status{
@@ -114,29 +212,46 @@ button{
 }
 
 @keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-4px)}
+  0%,100%{
+    transform:translateY(0)
+  }
+
+  50%{
+    transform:translateY(-4px)
+  }
 }
 
-/* HEADER */
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 header{
   position:sticky;
   top:0;
   z-index:100;
+
   border-bottom:1px solid var(--line);
+
   background:rgba(5,5,7,.78);
+
   backdrop-filter:blur(18px) saturate(130%);
   -webkit-backdrop-filter:blur(18px) saturate(130%);
 }
 
 .header-inner{
-  width:min(var(--container),calc(100% - 1.5rem));
+  width:min(
+    var(--container),
+    calc(100% - 1.5rem)
+  );
+
   min-height:72px;
+
   margin:0 auto;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   gap:1rem;
 }
 
@@ -144,25 +259,33 @@ header{
   display:flex;
   align-items:center;
   gap:.8rem;
+
   text-decoration:none;
+
   min-width:0;
 }
 
 .brand-logo{
   width:144px;
   height:144px;
+
   display:grid;
   place-items:center;
+
   border:1px solid rgba(255,255,255,.08);
   border-radius:14px;
+
   overflow:hidden;
+
   background:rgba(255,255,255,.025);
 }
 
 .brand-logo img{
   width:100%;
   height:100%;
+
   object-fit:contain;
+
   transform:scale(1.08);
 }
 
@@ -173,41 +296,86 @@ header{
 
 .brand-tagline{
   margin-top:.22rem;
+
   font:400 .54rem/1.2 var(--mono);
   letter-spacing:.06em;
+
   color:var(--muted);
 }
 
+/* =========================================================
+   LANGUAGE SWITCH
+   ========================================================= */
+
 .lang-switches{
   display:flex;
-  gap:.25rem;
+  align-items:center;
+  gap:.35rem;
 }
 
 .lang-switch{
-  width:34px;
-  height:30px;
+  width:40px;
+  height:34px;
+
   padding:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
   border:1px solid transparent;
   border-radius:999px;
+
   background:transparent;
+
   cursor:pointer;
-  opacity:.45;
-  filter:grayscale(.65);
-  transition:opacity .2s ease,filter .2s ease,background .2s ease,border-color .2s ease;
+
+  opacity:.42;
+
+  transition:
+    opacity .2s ease,
+    background .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
 }
 
-.lang-switch:hover,
+.lang-switch:hover{
+  opacity:.9;
+
+  background:rgba(255,255,255,.04);
+
+  border-color:var(--line);
+
+  transform:translateY(-1px);
+}
+
 .lang-switch.active{
   opacity:1;
-  filter:none;
-  background:rgba(255,255,255,.045);
-  border-color:var(--line);
+
+  background:rgba(255,255,255,.055);
+
+  border-color:rgba(243,241,236,.14);
+
+  box-shadow:
+    0 0 0 1px rgba(167,139,250,.05),
+    0 4px 18px rgba(0,0,0,.18);
 }
 
-/* MAIN */
+.lang-switch:focus-visible{
+  outline:1px solid var(--violet);
+  outline-offset:2px;
+}
+
+/* =========================================================
+   MAIN
+   ========================================================= */
 
 main{
-  width:min(var(--container),calc(100% - 1.5rem));
+  width:min(
+    var(--container),
+    calc(100% - 1.5rem)
+  );
+
   margin:0 auto;
 }
 
@@ -218,43 +386,77 @@ main{
 .hero-kicker{
   display:flex;
   align-items:center;
+
   gap:.55rem;
+
   color:var(--muted);
+
   font:400 .54rem/1 var(--mono);
+
   letter-spacing:.18em;
+
   text-transform:uppercase;
 }
 
 .hero-dot{
   width:5px;
   height:5px;
+
+  flex:0 0 auto;
+
   border-radius:50%;
-  background:linear-gradient(135deg,var(--pink),var(--violet),var(--blue));
-  box-shadow:0 0 10px rgba(167,139,250,.4);
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--pink),
+      var(--violet),
+      var(--blue)
+    );
+
+  box-shadow:
+    0 0 10px rgba(167,139,250,.4);
 }
 
 .hero h1{
   margin-top:1rem;
-  font:500 clamp(2rem,5vw,3.4rem)/1 var(--serif);
+
+  font:
+    500 clamp(2rem,5vw,3.4rem)/1
+    var(--serif);
+
   letter-spacing:-.02em;
 }
 
 .hero-sub{
   margin-top:.9rem;
+
   max-width:680px;
+
   color:var(--muted);
+
   font-size:.86rem;
   line-height:1.6;
 }
 
 .hero-line{
   margin-top:1.35rem;
+
   width:160px;
   height:1px;
-  background:linear-gradient(90deg,var(--pink),var(--violet),var(--blue));
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--pink),
+      var(--violet),
+      var(--blue)
+    );
 }
 
-/* SEARCH */
+/* =========================================================
+   SEARCH
+   ========================================================= */
 
 .project-search{
   position:relative;
@@ -264,15 +466,26 @@ main{
 .project-search input{
   width:100%;
   height:34px;
+
   padding:0 .7rem;
+
   border:1px solid var(--line);
   border-radius:999px;
+
   outline:none;
+
   background:rgba(255,255,255,.018);
+
   color:var(--paper);
+
   font:400 .58rem/1 var(--mono);
+
   letter-spacing:.08em;
-  transition:border-color .2s ease,background .2s ease;
+
+  transition:
+    border-color .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
 }
 
 .project-search input::placeholder{
@@ -281,34 +494,56 @@ main{
 
 .project-search input:focus{
   border-color:var(--line-strong);
+
   background:rgba(255,255,255,.028);
+
+  box-shadow:
+    0 0 0 3px rgba(167,139,250,.035);
 }
 
-/* SECTION */
+/* =========================================================
+   SECTION LABEL
+   ========================================================= */
 
 .section-label{
   display:flex;
   align-items:center;
+
   gap:.7rem;
+
   margin:1.25rem 0 .6rem;
   padding:.5rem 0;
+
   color:var(--muted);
+
   font:400 .55rem/1 var(--mono);
+
   letter-spacing:.20em;
+
   text-transform:uppercase;
 }
 
 .section-label::after{
   content:"";
+
   width:60px;
   height:1px;
-  background:linear-gradient(90deg,var(--line-strong),transparent);
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--line-strong),
+      transparent
+    );
 }
 
-/* PROJECTS */
+/* =========================================================
+   PROJECTS
+   ========================================================= */
 
 .project{
   --accent:var(--violet);
+
   border-top:1px solid var(--line);
 }
 
@@ -322,17 +557,32 @@ main{
 
 .project-toggle{
   position:relative;
+
   width:100%;
   min-height:78px;
+
   padding:0 .75rem 0 2.2rem;
+
   border:0;
+
   background:transparent;
+
   color:var(--paper);
+
   display:grid;
-  grid-template-columns:auto 1fr auto auto;
+
+  grid-template-columns:
+    auto
+    1fr
+    auto
+    auto;
+
   align-items:center;
+
   gap:.8rem;
+
   text-align:left;
+
   cursor:pointer;
 }
 
@@ -348,73 +598,97 @@ main{
 
 .project-node{
   position:absolute;
+
   left:5px;
   top:50%;
+
   transform:translateY(-50%);
+
   width:6px;
   height:6px;
+
   border-radius:50%;
+
   background:var(--accent);
-  box-shadow:0 0 10px color-mix(in srgb,var(--accent) 55%,transparent);
+
+  box-shadow:
+    0 0 10px
+    color-mix(
+      in srgb,
+      var(--accent) 55%,
+      transparent
+    );
 }
 
 .project-icon{
   width:42px;
   height:42px;
+
   display:grid;
   place-items:center;
+
   overflow:hidden;
+
   border:1px solid rgba(255,255,255,.07);
   border-radius:12px;
+
   background:rgba(255,255,255,.018);
 }
 
 .project-icon img{
   width:100%;
   height:100%;
+
   object-fit:contain;
+
   padding:.3rem;
 }
 
 .text-icon{
   text-align:center;
-  font:700 .42rem/1.05 var(--mono);
+
+  font:
+    700 .42rem/1.05
+    var(--mono);
+
   letter-spacing:.05em;
+
   color:var(--paper);
 }
 
 .project-title{
-  font:500 1rem/1.1 var(--serif);
+  font:
+    500 1rem/1.1
+    var(--serif);
+
   letter-spacing:.01em;
 }
 
-.project-flags{
-  display:flex;
-  align-items:center;
-  gap:.12rem;
-  white-space:nowrap;
-}
-
-.game-flag{
-  font-size:.9rem;
-  line-height:1;
-}
-
 .project-chevron{
-  font:400 1rem/1 var(--mono);
+  font:
+    400 1rem/1
+    var(--mono);
+
   color:var(--muted);
-  transition:transform .25s ease,color .25s ease;
+
+  transition:
+    transform .25s ease,
+    color .25s ease;
 }
 
-.project-toggle[aria-expanded="true"] .project-chevron{
+.project-toggle[aria-expanded="true"]
+.project-chevron{
   transform:rotate(180deg);
   color:var(--paper);
 }
 
 .project-detail{
   display:grid;
+
   grid-template-columns:1fr;
+
   gap:.8rem;
+
   padding:0 .75rem 1rem 2.2rem;
 }
 
@@ -424,33 +698,51 @@ main{
 
 .project-preview{
   position:relative;
+
   min-width:0;
+
   aspect-ratio:16/7;
+
   overflow:hidden;
+
   border:1px solid rgba(255,255,255,.08);
   border-radius:14px;
+
   background:#08080c;
 }
 
 .project-preview img{
   display:block;
+
   width:100%;
   height:100%;
+
   object-fit:contain;
+
   background:#08080c;
 }
 
 .preview-label{
   position:absolute;
+
   top:.5rem;
   left:.5rem;
+
   z-index:2;
+
   padding:.28rem .4rem;
+
   border:1px solid rgba(255,255,255,.08);
   border-radius:999px;
+
   background:rgba(5,5,7,.6);
+
   color:rgba(243,241,236,.62);
-  font:400 .43rem/1 var(--mono);
+
+  font:
+    400 .43rem/1
+    var(--mono);
+
   letter-spacing:.13em;
 }
 
@@ -458,120 +750,243 @@ main{
   display:flex;
   flex-direction:column;
   justify-content:center;
+
   min-width:0;
 }
 
 .project-desc{
   color:var(--muted);
+
   font-size:.78rem;
+
   line-height:1.68;
 }
 
 .project-meta{
   margin-top:.7rem;
-  color:color-mix(in srgb,var(--accent) 78%,var(--paper));
-  font:400 .52rem/1.3 var(--mono);
+
+  color:
+    color-mix(
+      in srgb,
+      var(--accent) 78%,
+      var(--paper)
+    );
+
+  font:
+    400 .52rem/1.3
+    var(--mono);
+
   letter-spacing:.08em;
+
   text-transform:uppercase;
 }
 
 .play-button{
   display:inline-flex;
+
   align-items:center;
   justify-content:center;
+
   gap:.55rem;
+
   align-self:flex-start;
+
   margin-top:1rem;
+
   padding:.65rem .9rem;
-  border:1px solid color-mix(in srgb,var(--accent) 38%,var(--line-strong));
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--accent) 38%,
+      var(--line-strong)
+    );
+
   border-radius:999px;
+
   background:transparent;
+
   color:var(--paper);
+
   text-decoration:none;
-  font:500 .56rem/1 var(--mono);
+
+  font:
+    500 .56rem/1
+    var(--mono);
+
   letter-spacing:.12em;
-  transition:background .2s ease,border-color .2s ease,transform .2s ease;
+
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
 }
 
 .play-button:hover{
-  background:color-mix(in srgb,var(--accent) 10%,transparent);
-  border-color:color-mix(in srgb,var(--accent) 65%,var(--line-strong));
+  background:
+    color-mix(
+      in srgb,
+      var(--accent) 10%,
+      transparent
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--accent) 65%,
+      var(--line-strong)
+    );
+
   transform:translateY(-1px);
 }
 
-/* FOOTER */
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 footer{
   border-top:1px solid var(--line);
+
   margin-top:2rem;
 }
 
 .footer-inner{
-  width:min(var(--container),calc(100% - 1.5rem));
+  width:min(
+    var(--container),
+    calc(100% - 1.5rem)
+  );
+
   margin:0 auto;
-  padding:2rem 0 2.6rem;
+
+  padding:2.2rem 0 2.8rem;
+
   text-align:center;
 }
 
 .footer-brand{
-  font:600 .76rem/1 var(--sans);
+  font:
+    600 .76rem/1
+    var(--sans);
+
   letter-spacing:.2em;
 }
 
 .footer-tagline{
-  margin-top:.6rem;
-  font:400 .66rem/1.4 var(--mono);
-  letter-spacing:.09em;
+  margin-top:.65rem;
+
   color:var(--paper);
+
+  font:
+    400 .66rem/1.4
+    var(--mono);
+
+  letter-spacing:.09em;
+}
+
+.footer-tagline a{
+  color:var(--paper);
+  text-decoration:none;
+
+  border-bottom:1px solid rgba(167,139,250,.5);
+
+  transition:
+    color .2s ease,
+    border-color .2s ease;
+}
+
+.footer-tagline a:hover{
+  color:var(--violet);
+
+  border-color:var(--violet);
 }
 
 .footer-links{
   display:flex;
+
   justify-content:center;
   align-items:center;
-  gap:1rem;
-  margin-top:1rem;
+
+  gap:1.2rem;
+
+  margin-top:1.15rem;
 }
 
 .footer-icon-link{
   display:inline-flex;
+
   align-items:center;
+
   gap:.35rem;
+
   color:var(--muted);
+
   text-decoration:none;
-  font:400 .56rem/1 var(--mono);
+
+  font:
+    400 .56rem/1
+    var(--mono);
+
   letter-spacing:.08em;
+
   border-bottom:1px solid transparent;
-  transition:color .2s ease,border-color .2s ease;
+
+  transition:
+    color .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
 }
 
 .footer-icon-link:hover{
   color:var(--paper);
+
   border-color:var(--violet);
+
+  transform:translateY(-1px);
+}
+
+.footer-link-mark{
+  font-size:.78rem;
+  opacity:.9;
 }
 
 .footer-small{
-  margin-top:.85rem;
+  margin-top:1rem;
+
   color:var(--muted);
-  font:400 .53rem/1.4 var(--mono);
+
+  font:
+    400 .53rem/1.4
+    var(--mono);
+
   letter-spacing:.08em;
 }
 
 .footer-year{
   margin-top:.45rem;
+
   color:rgba(137,140,152,.5);
-  font:400 .5rem/1 var(--mono);
+
+  font:
+    400 .5rem/1
+    var(--mono);
+
   letter-spacing:.13em;
 }
 
-/* MOBILE */
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media (max-width:700px){
 
   .header-inner,
   main,
   .footer-inner{
-    width:min(var(--container),calc(100% - 1rem));
+    width:min(
+      var(--container),
+      calc(100% - 1rem)
+    );
   }
 
   .header-inner{
@@ -592,7 +1007,12 @@ footer{
   }
 
   .hero h1{
-    font-size:clamp(1.85rem,9vw,2.8rem);
+    font-size:
+      clamp(
+        1.85rem,
+        9vw,
+        2.8rem
+      );
   }
 
   .hero-sub{
@@ -605,14 +1025,22 @@ footer{
 
   .project-toggle{
     min-height:70px;
+
     padding-left:2rem;
-    grid-template-columns:auto 1fr auto auto;
+
+    grid-template-columns:
+      auto
+      1fr
+      auto
+      auto;
+
     gap:.65rem;
   }
 
   .project-icon{
     width:38px;
     height:38px;
+
     border-radius:11px;
   }
 
@@ -620,13 +1048,25 @@ footer{
     font-size:.94rem;
   }
 
-  .game-flag{
-    font-size:.82rem;
+  .project-flags{
+    min-width:44px;
+    gap:.2rem;
+  }
+
+  .game-flag .flag-icon{
+    width:18px;
+    height:12px;
   }
 
   .project-detail{
     grid-template-columns:1fr;
-    padding:0 .55rem .8rem 2rem;
+
+    padding:
+      0
+      .55rem
+      .8rem
+      2rem;
+
     gap:.8rem;
   }
 
@@ -647,11 +1087,14 @@ footer{
   }
 
   .footer-links{
-    gap:.8rem;
+    gap:.9rem;
+    flex-wrap:wrap;
   }
 }
 
-/* REDUCED MOTION */
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
 
 @media (prefers-reduced-motion:reduce){
 
@@ -659,93 +1102,352 @@ footer{
     scroll-behavior:auto;
   }
 
-  *,*::before,*::after{
+  *,
+  *::before,
+  *::after{
     animation:none!important;
     transition-duration:.01ms!important;
   }
 }
 </style>
 
-<!-- VERCEL WEB ANALYTICS -->
+<!-- =========================================================
+     VERCEL WEB ANALYTICS
+     ========================================================= -->
+
 <script>
   window.va = window.va || function () {
     (window.vaq = window.vaq || []).push(arguments);
   };
 </script>
 
-<script defer src="/_vercel/insights/script.js"></script>
+<script
+  defer
+  src="/_vercel/insights/script.js">
+</script>
 
 </head>
 
 <body class="is-loading">
 
-<div class="loader" id="loader" aria-hidden="true">
+<!-- =========================================================
+     SVG SYMBOLS
+     Banderas embebidas: no dependen de emojis ni de fuentes.
+     ========================================================= -->
+
+<svg
+  aria-hidden="true"
+  width="0"
+  height="0"
+  style="position:absolute;overflow:hidden"
+>
+  <defs>
+
+    <!-- ARGENTINA -->
+    <symbol id="flag-ar" viewBox="0 0 24 16">
+
+      <rect
+        x="0"
+        y="0"
+        width="24"
+        height="16"
+        fill="#74ACDF"
+      />
+
+      <rect
+        x="0"
+        y="5.333"
+        width="24"
+        height="5.334"
+        fill="#FFFFFF"
+      />
+
+      <circle
+        cx="12"
+        cy="8"
+        r="2.15"
+        fill="#F6B40E"
+      />
+
+      <circle
+        cx="12"
+        cy="8"
+        r="1.25"
+        fill="#E6A700"
+      />
+
+      <g
+        stroke="#F6B40E"
+        stroke-width=".38"
+        stroke-linecap="round"
+      >
+        <line x1="12" y1="4.85" x2="12" y2="3.9"/>
+        <line x1="12" y1="11.15" x2="12" y2="12.1"/>
+        <line x1="8.85" y1="8" x2="7.9" y2="8"/>
+        <line x1="15.15" y1="8" x2="16.1" y2="8"/>
+
+        <line
+          x1="9.78"
+          y1="5.78"
+          x2="9.1"
+          y2="5.1"
+        />
+
+        <line
+          x1="14.22"
+          y1="5.78"
+          x2="14.9"
+          y2="5.1"
+        />
+
+        <line
+          x1="9.78"
+          y1="10.22"
+          x2="9.1"
+          y2="10.9"
+        />
+
+        <line
+          x1="14.22"
+          y1="10.22"
+          x2="14.9"
+          y2="10.9"
+        />
+      </g>
+
+    </symbol>
+
+    <!-- UNITED STATES -->
+    <symbol id="flag-us" viewBox="0 0 24 16">
+
+      <rect
+        x="0"
+        y="0"
+        width="24"
+        height="16"
+        fill="#FFFFFF"
+      />
+
+      <rect x="0" y="0" width="24" height="1.23" fill="#B22234"/>
+      <rect x="0" y="2.46" width="24" height="1.23" fill="#B22234"/>
+      <rect x="0" y="4.92" width="24" height="1.23" fill="#B22234"/>
+      <rect x="0" y="7.38" width="24" height="1.23" fill="#B22234"/>
+      <rect x="0" y="9.84" width="24" height="1.23" fill="#B22234"/>
+      <rect x="0" y="12.30" width="24" height="1.23" fill="#B22234"/>
+      <rect x="0" y="14.76" width="24" height="1.24" fill="#B22234"/>
+
+      <rect
+        x="0"
+        y="0"
+        width="10.5"
+        height="8.65"
+        fill="#3C3B6E"
+      />
+
+      <g fill="#FFFFFF">
+
+        <circle cx="1.35" cy="1.15" r=".38"/>
+        <circle cx="3.15" cy="1.15" r=".38"/>
+        <circle cx="4.95" cy="1.15" r=".38"/>
+        <circle cx="6.75" cy="1.15" r=".38"/>
+        <circle cx="8.55" cy="1.15" r=".38"/>
+
+        <circle cx="2.25" cy="2.28" r=".38"/>
+        <circle cx="4.05" cy="2.28" r=".38"/>
+        <circle cx="5.85" cy="2.28" r=".38"/>
+        <circle cx="7.65" cy="2.28" r=".38"/>
+        <circle cx="9.45" cy="2.28" r=".38"/>
+
+        <circle cx="1.35" cy="3.41" r=".38"/>
+        <circle cx="3.15" cy="3.41" r=".38"/>
+        <circle cx="4.95" cy="3.41" r=".38"/>
+        <circle cx="6.75" cy="3.41" r=".38"/>
+        <circle cx="8.55" cy="3.41" r=".38"/>
+
+        <circle cx="2.25" cy="4.54" r=".38"/>
+        <circle cx="4.05" cy="4.54" r=".38"/>
+        <circle cx="5.85" cy="4.54" r=".38"/>
+        <circle cx="7.65" cy="4.54" r=".38"/>
+        <circle cx="9.45" cy="4.54" r=".38"/>
+
+        <circle cx="1.35" cy="5.67" r=".38"/>
+        <circle cx="3.15" cy="5.67" r=".38"/>
+        <circle cx="4.95" cy="5.67" r=".38"/>
+        <circle cx="6.75" cy="5.67" r=".38"/>
+        <circle cx="8.55" cy="5.67" r=".38"/>
+
+        <circle cx="2.25" cy="6.80" r=".38"/>
+        <circle cx="4.05" cy="6.80" r=".38"/>
+        <circle cx="5.85" cy="6.80" r=".38"/>
+        <circle cx="7.65" cy="6.80" r=".38"/>
+        <circle cx="9.45" cy="6.80" r=".38"/>
+
+      </g>
+
+    </symbol>
+
+  </defs>
+</svg>
+
+
+<!-- =========================================================
+     LOADER
+     ========================================================= -->
+
+<div
+  class="loader"
+  id="loader"
+  aria-hidden="true"
+>
   <div class="loader-inner">
-    <img class="loader-logo" src="/icono/lukson.arts.png" alt="">
-    <div class="loader-status" id="loaderStatus">SYSTEM INITIALIZING</div>
-  </div>
-</div>
 
-<header>
-  <div class="header-inner">
+    <img
+      class="loader-logo"
+      src="/icono/lukson.arts.png"
+      alt=""
+    >
 
-    <a class="brand" href="#" aria-label="lukson.arts">
-      <span class="brand-logo" aria-hidden="true">
-        <img src="/icono/lukson.arts.png" alt="">
-      </span>
-    </a>
-
-    <div class="lang-switches" role="group" aria-label="Idioma">
-      <button class="lang-switch active"
-              type="button"
-              data-lang="es"
-              aria-label="Español"
-              aria-pressed="true">
-        🇦🇷
-      </button>
-
-      <button class="lang-switch"
-              type="button"
-              data-lang="en"
-              aria-label="English"
-              aria-pressed="false">
-        🇺🇸
-      </button>
+    <div
+      class="loader-status"
+      id="loaderStatus"
+    >
+      SYSTEM INITIALIZING
     </div>
 
   </div>
+</div>
+
+
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
+
+<header>
+
+  <div class="header-inner">
+
+    <a
+      class="brand"
+      href="#"
+      aria-label="lukson.arts"
+    >
+
+      <span
+        class="brand-logo"
+        aria-hidden="true"
+      >
+        <img
+          src="/icono/lukson.arts.png"
+          alt=""
+        >
+      </span>
+
+    </a>
+
+
+    <div
+      class="lang-switches"
+      role="group"
+      aria-label="Idioma"
+    >
+
+      <button
+        class="lang-switch active"
+        type="button"
+        data-lang="es"
+        aria-label="Español"
+        aria-pressed="true"
+        title="Español"
+      >
+
+        <svg
+          class="flag-icon header-flag"
+          viewBox="0 0 24 16"
+          aria-hidden="true"
+        >
+          <use href="#flag-ar"></use>
+        </svg>
+
+      </button>
+
+
+      <button
+        class="lang-switch"
+        type="button"
+        data-lang="en"
+        aria-label="English"
+        aria-pressed="false"
+        title="English"
+      >
+
+        <svg
+          class="flag-icon header-flag"
+          viewBox="0 0 24 16"
+          aria-hidden="true"
+        >
+          <use href="#flag-us"></use>
+        </svg>
+
+      </button>
+
+    </div>
+
+  </div>
+
 </header>
+
+
+<!-- =========================================================
+     MAIN
+     ========================================================= -->
 
 <main>
 
   <section class="hero">
 
     <div class="hero-kicker">
-      <span class="hero-dot" aria-hidden="true"></span>
+
+      <span
+        class="hero-dot"
+        aria-hidden="true"
+      ></span>
 
       <span
         data-es="SISTEMAS · PRODUCTOS · EXPERIMENTOS"
-        data-en="SYSTEMS · PRODUCTS · EXPERIMENTS">
+        data-en="SYSTEMS · PRODUCTS · EXPERIMENTS"
+      >
         SISTEMAS · PRODUCTOS · EXPERIMENTOS
       </span>
+
     </div>
+
 
     <h1
       data-es="Tus ideas se vuelven sistemas."
-      data-en="Your ideas become systems.">
+      data-en="Your ideas become systems."
+    >
       Tus ideas se vuelven sistemas.
     </h1>
+
 
     <p
       class="hero-sub"
       data-es="Productos, juegos, lenguajes y experimentos interactivos."
-      data-en="Products, games, languages and interactive experiments.">
+      data-en="Products, games, languages and interactive experiments."
+    >
       Productos, juegos, lenguajes y experimentos interactivos.
     </p>
 
-    <div class="hero-line" aria-hidden="true"></div>
+
+    <div
+      class="hero-line"
+      aria-hidden="true"
+    ></div>
 
   </section>
+
+
+  <!-- SEARCH -->
 
   <div class="project-search">
 
@@ -762,78 +1464,154 @@ footer{
 
   </div>
 
+
   <section aria-label="Proyectos">
 
-    <!-- =========================
+
+    <!-- =====================================================
          APPS · PRODUCTOS
          ALFABÉTICO
-    ========================== -->
+         ===================================================== -->
 
     <div class="section-label">
+
       <span
         data-es="APPS · PRODUCTOS"
-        data-en="APPS · PRODUCTS">
+        data-en="APPS · PRODUCTS"
+      >
         APPS · PRODUCTOS
       </span>
+
     </div>
+
 
     <!-- AMAN -->
 
-    <article class="project" style="--accent:#a78bfa" data-project>
+    <article
+      class="project"
+      style="--accent:#a78bfa"
+      data-project
+    >
 
-      <button class="project-toggle"
-              type="button"
-              aria-expanded="false">
+      <button
+        class="project-toggle"
+        type="button"
+        aria-expanded="false"
+      >
 
-        <span class="project-node" aria-hidden="true"></span>
+        <span
+          class="project-node"
+          aria-hidden="true"
+        ></span>
 
-        <span class="project-icon" aria-hidden="true">
+
+        <span
+          class="project-icon"
+          aria-hidden="true"
+        >
+
           <img
             src="/icono/AMAN.png"
             alt=""
             loading="lazy"
-            decoding="async">
+            decoding="async"
+          >
+
         </span>
 
-        <span class="project-title">AMAN</span>
 
-        <span class="project-flags" aria-label="Idiomas">
-          <span class="game-flag" title="Español">🇦🇷</span>
-          <span class="game-flag" title="English">🇺🇸</span>
+        <span class="project-title">
+          AMAN
         </span>
 
-        <span class="project-chevron" aria-hidden="true">⌄</span>
+
+        <span
+          class="project-flags"
+          aria-label="Español e inglés"
+        >
+
+          <span
+            class="game-flag"
+            title="Español"
+          >
+            <svg
+              class="flag-icon"
+              viewBox="0 0 24 16"
+              aria-hidden="true"
+            >
+              <use href="#flag-ar"></use>
+            </svg>
+          </span>
+
+          <span
+            class="game-flag"
+            title="English"
+          >
+            <svg
+              class="flag-icon"
+              viewBox="0 0 24 16"
+              aria-hidden="true"
+            >
+              <use href="#flag-us"></use>
+            </svg>
+          </span>
+
+        </span>
+
+
+        <span
+          class="project-chevron"
+          aria-hidden="true"
+        >
+          ⌄
+        </span>
 
       </button>
 
-      <div class="project-detail" hidden>
+
+      <div
+        class="project-detail"
+        hidden
+      >
 
         <div class="project-preview">
-          <span class="preview-label">PREVIEW</span>
+
+          <span class="preview-label">
+            PREVIEW
+          </span>
 
           <img
             src="/icono/AMAN_SS_1.png"
             alt="Captura de pantalla de AMAN"
             loading="lazy"
-            decoding="async">
+            decoding="async"
+          >
+
         </div>
+
 
         <div class="project-info">
 
           <p
             class="project-desc"
             data-es="AMAN (Axiomatic Multimodal Adaptive Network) es un lenguaje experimental de 67 axiomas combinables, diseñado para ser pronunciable por cualquier persona y explorado de forma adaptativa, háptica y sonora. Los conceptos se combinan para construir significado, en lugar de memorizar vocabulario."
-            data-en="AMAN (Axiomatic Multimodal Adaptive Network) is an experimental language built from 67 combinable conceptual axioms, designed to be pronounceable by anyone and experienced through adaptive, haptic, and sound-based interaction. Instead of memorizing thousands of words, concepts combine to construct meaning.">
+            data-en="AMAN (Axiomatic Multimodal Adaptive Network) is an experimental language built from 67 combinable conceptual axioms, designed to be pronounceable by anyone and experienced through adaptive, haptic, and sound-based interaction. Instead of memorizing thousands of words, concepts combine to construct meaning."
+          >
             AMAN (Axiomatic Multimodal Adaptive Network) es un lenguaje experimental de 67 axiomas combinables, diseñado para ser pronunciable por cualquier persona y explorado de forma adaptativa, háptica y sonora. Los conceptos se combinan para construir significado, en lugar de memorizar vocabulario.
           </p>
 
+
           <div class="project-meta">
+
             <span
               data-es="LENGUAJE EXPERIMENTAL"
-              data-en="EXPERIMENTAL LANGUAGE">
+              data-en="EXPERIMENTAL LANGUAGE"
+            >
               LENGUAJE EXPERIMENTAL
             </span>
+
           </div>
+
 
           <a
             class="play-button"
@@ -841,10 +1619,16 @@ footer{
             target="_blank"
             rel="noopener noreferrer"
             data-es="IR A LA APP"
-            data-en="OPEN APP">
+            data-en="OPEN APP"
+          >
 
-            <span class="play-label">IR A LA APP</span>
-            <span aria-hidden="true">↗</span>
+            <span class="play-label">
+              IR A LA APP
+            </span>
+
+            <span aria-hidden="true">
+              ↗
+            </span>
 
           </a>
 
@@ -854,62 +1638,123 @@ footer{
 
     </article>
 
+
     <!-- SENDERO -->
 
-    <article class="project" style="--accent:#5eead4" data-project>
+    <article
+      class="project"
+      style="--accent:#5eead4"
+      data-project
+    >
 
-      <button class="project-toggle"
-              type="button"
-              aria-expanded="false">
+      <button
+        class="project-toggle"
+        type="button"
+        aria-expanded="false"
+      >
 
-        <span class="project-node" aria-hidden="true"></span>
+        <span
+          class="project-node"
+          aria-hidden="true"
+        ></span>
 
-        <span class="project-icon" aria-hidden="true">
+
+        <span
+          class="project-icon"
+          aria-hidden="true"
+        >
+
           <img
             src="/icono/Sendero.png"
             alt=""
             loading="lazy"
-            decoding="async">
+            decoding="async"
+          >
+
         </span>
 
-        <span class="project-title">SENDERO</span>
 
-        <span class="project-flags" aria-label="Idiomas">
-          <span class="game-flag" title="Español">🇦🇷</span>
+        <span class="project-title">
+          SENDERO
         </span>
 
-        <span class="project-chevron" aria-hidden="true">⌄</span>
+
+        <span
+          class="project-flags"
+          aria-label="Español"
+        >
+
+          <span
+            class="game-flag"
+            title="Español"
+          >
+
+            <svg
+              class="flag-icon"
+              viewBox="0 0 24 16"
+              aria-hidden="true"
+            >
+              <use href="#flag-ar"></use>
+            </svg>
+
+          </span>
+
+        </span>
+
+
+        <span
+          class="project-chevron"
+          aria-hidden="true"
+        >
+          ⌄
+        </span>
 
       </button>
 
-      <div class="project-detail" hidden>
+
+      <div
+        class="project-detail"
+        hidden
+      >
 
         <div class="project-preview">
-          <span class="preview-label">PREVIEW</span>
+
+          <span class="preview-label">
+            PREVIEW
+          </span>
 
           <img
             src="/icono/Sendero_SS_1.png"
             alt="Captura de pantalla de SENDERO"
             loading="lazy"
-            decoding="async">
+            decoding="async"
+          >
+
         </div>
+
 
         <div class="project-info">
 
           <p
             class="project-desc"
             data-es="Un espacio para moverte mejor y vivir con más equilibrio, sin competir por ser perfecto. Seguís tu balance entre movimiento, sueño, hidratación, bienestar mental, comunidad, alimentación y naturaleza, y cada día te propone el próximo paso posible, no una lista imposible. El centro nunca es la app: son las duplas, mentores y encuentros reales con otra gente. Empieza con un camino de 12 semanas, pero puede seguir creciendo."
-            data-en="A space to move better and live with more balance, without competing to be perfect. You track your balance across movement, sleep, hydration, mental wellbeing, community, food and nature, and each day it suggests the next possible step, not an impossible checklist. The app is never the point — real pairs, mentors and encounters with other people are. It starts as a 12-week path, but it can keep growing.">
+            data-en="A space to move better and live with more balance, without competing to be perfect. You track your balance across movement, sleep, hydration, mental wellbeing, community, food and nature, and each day it suggests the next possible step, not an impossible checklist. The app is never the point — real pairs, mentors and encounters with other people are. It starts as a 12-week path, but it can keep growing."
+          >
             Un espacio para moverte mejor y vivir con más equilibrio, sin competir por ser perfecto. Seguís tu balance entre movimiento, sueño, hidratación, bienestar mental, comunidad, alimentación y naturaleza, y cada día te propone el próximo paso posible, no una lista imposible. El centro nunca es la app: son las duplas, mentores y encuentros reales con otra gente. Empieza con un camino de 12 semanas, pero puede seguir creciendo.
           </p>
 
+
           <div class="project-meta">
+
             <span
               data-es="BIENESTAR · COMUNIDAD"
-              data-en="WELLBEING · COMMUNITY">
+              data-en="WELLBEING · COMMUNITY"
+            >
               BIENESTAR · COMUNIDAD
             </span>
+
           </div>
+
 
           <a
             class="play-button"
@@ -917,10 +1762,16 @@ footer{
             target="_blank"
             rel="noopener noreferrer"
             data-es="IR A LA APP"
-            data-en="OPEN APP">
+            data-en="OPEN APP"
+          >
 
-            <span class="play-label">IR A LA APP</span>
-            <span aria-hidden="true">↗</span>
+            <span class="play-label">
+              IR A LA APP
+            </span>
+
+            <span aria-hidden="true">
+              ↗
+            </span>
 
           </a>
 
@@ -930,63 +1781,139 @@ footer{
 
     </article>
 
+
     <!-- UMBRAL -->
 
-    <article class="project" style="--accent:#7dd3fc" data-project>
+    <article
+      class="project"
+      style="--accent:#7dd3fc"
+      data-project
+    >
 
-      <button class="project-toggle"
-              type="button"
-              aria-expanded="false">
+      <button
+        class="project-toggle"
+        type="button"
+        aria-expanded="false"
+      >
 
-        <span class="project-node" aria-hidden="true"></span>
+        <span
+          class="project-node"
+          aria-hidden="true"
+        ></span>
 
-        <span class="project-icon" aria-hidden="true">
+
+        <span
+          class="project-icon"
+          aria-hidden="true"
+        >
+
           <img
             src="/icono/UMBRAL.png"
             alt=""
             loading="lazy"
-            decoding="async">
+            decoding="async"
+          >
+
         </span>
 
-        <span class="project-title">UMBRAL</span>
 
-        <span class="project-flags" aria-label="Idiomas">
-          <span class="game-flag" title="Español">🇦🇷</span>
-          <span class="game-flag" title="English">🇺🇸</span>
+        <span class="project-title">
+          UMBRAL
         </span>
 
-        <span class="project-chevron" aria-hidden="true">⌄</span>
+
+        <span
+          class="project-flags"
+          aria-label="Español e inglés"
+        >
+
+          <span
+            class="game-flag"
+            title="Español"
+          >
+
+            <svg
+              class="flag-icon"
+              viewBox="0 0 24 16"
+              aria-hidden="true"
+            >
+              <use href="#flag-ar"></use>
+            </svg>
+
+          </span>
+
+
+          <span
+            class="game-flag"
+            title="English"
+          >
+
+            <svg
+              class="flag-icon"
+              viewBox="0 0 24 16"
+              aria-hidden="true"
+            >
+              <use href="#flag-us"></use>
+            </svg>
+
+          </span>
+
+        </span>
+
+
+        <span
+          class="project-chevron"
+          aria-hidden="true"
+        >
+          ⌄
+        </span>
 
       </button>
 
-      <div class="project-detail" hidden>
+
+      <div
+        class="project-detail"
+        hidden
+      >
 
         <div class="project-preview">
-          <span class="preview-label">PREVIEW</span>
+
+          <span class="preview-label">
+            PREVIEW
+          </span>
 
           <img
             src="/icono/UMBRAL_SS_1.png"
             alt="Captura de pantalla de UMBRAL"
             loading="lazy"
-            decoding="async">
+            decoding="async"
+          >
+
         </div>
+
 
         <div class="project-info">
 
           <p
             class="project-desc"
             data-es="Investigación abierta que corre entera en tu navegador. Escuchás sonidos breves y contás qué te evocan: un color, una forma, una sensación. El sistema aprende de tus propias respuestas, las compara contra controles y contra otras personas, y puede concluir con honestidad que no encontró nada. Sin cuenta, sin micrófono, sin promesas de leer tu mente."
-            data-en="An open research experiment that runs entirely in your browser. You listen to short sounds and describe what they evoke — a color, a shape, a feeling. The system learns from your own responses, checks them against controls and other people, and can honestly conclude it found nothing. No account, no microphone, no claims about reading your mind.">
+            data-en="An open research experiment that runs entirely in your browser. You listen to short sounds and describe what they evoke — a color, a shape, a feeling. The system learns from your own responses, checks them against controls and other people, and can honestly conclude it found nothing. No account, no microphone, no claims about reading your mind."
+          >
             Investigación abierta que corre entera en tu navegador. Escuchás sonidos breves y contás qué te evocan: un color, una forma, una sensación. El sistema aprende de tus propias respuestas, las compara contra controles y contra otras personas, y puede concluir con honestidad que no encontró nada. Sin cuenta, sin micrófono, sin promesas de leer tu mente.
           </p>
 
+
           <div class="project-meta">
+
             <span
               data-es="INVESTIGACIÓN · CIENCIA COGNITIVA"
-              data-en="RESEARCH · COGNITIVE SCIENCE">
+              data-en="RESEARCH · COGNITIVE SCIENCE"
+            >
               INVESTIGACIÓN · CIENCIA COGNITIVA
             </span>
+
           </div>
+
 
           <a
             class="play-button"
@@ -994,10 +1921,16 @@ footer{
             target="_blank"
             rel="noopener noreferrer"
             data-es="IR A LA APP"
-            data-en="OPEN APP">
+            data-en="OPEN APP"
+          >
 
-            <span class="play-label">IR A LA APP</span>
-            <span aria-hidden="true">↗</span>
+            <span class="play-label">
+              IR A LA APP
+            </span>
+
+            <span aria-hidden="true">
+              ↗
+            </span>
 
           </a>
 
@@ -1007,76 +1940,156 @@ footer{
 
     </article>
 
-    <!-- =========================
+
+    <!-- =====================================================
          JUEGOS
          ALFABÉTICO
-    ========================== -->
+         ===================================================== -->
 
     <div class="section-label">
+
       <span
         data-es="JUEGOS"
-        data-en="GAMES">
+        data-en="GAMES"
+      >
         JUEGOS
       </span>
+
     </div>
+
 
     <!-- CORPORITY -->
 
-    <article class="project" style="--accent:#f97066" data-project>
+    <article
+      class="project"
+      style="--accent:#f97066"
+      data-project
+    >
 
-      <button class="project-toggle"
-              type="button"
-              aria-expanded="false">
+      <button
+        class="project-toggle"
+        type="button"
+        aria-expanded="false"
+      >
 
-        <span class="project-node" aria-hidden="true"></span>
+        <span
+          class="project-node"
+          aria-hidden="true"
+        ></span>
 
-        <span class="project-icon" aria-hidden="true">
+
+        <span
+          class="project-icon"
+          aria-hidden="true"
+        >
+
           <img
             src="/icono/Corpority.png"
             alt=""
             loading="lazy"
-            decoding="async">
+            decoding="async"
+          >
+
         </span>
 
-        <span class="project-title">CORPORITY</span>
 
-        <span class="project-flags" aria-label="Idiomas">
-          <span class="game-flag" title="Español">🇦🇷</span>
-          <span class="game-flag" title="English">🇺🇸</span>
+        <span class="project-title">
+          CORPORITY
         </span>
 
-        <span class="project-chevron" aria-hidden="true">⌄</span>
+
+        <span
+          class="project-flags"
+          aria-label="Español e inglés"
+        >
+
+          <span
+            class="game-flag"
+            title="Español"
+          >
+
+            <svg
+              class="flag-icon"
+              viewBox="0 0 24 16"
+              aria-hidden="true"
+            >
+              <use href="#flag-ar"></use>
+            </svg>
+
+          </span>
+
+
+          <span
+            class="game-flag"
+            title="English"
+          >
+
+            <svg
+              class="flag-icon"
+              viewBox="0 0 24 16"
+              aria-hidden="true"
+            >
+              <use href="#flag-us"></use>
+            </svg>
+
+          </span>
+
+        </span>
+
+
+        <span
+          class="project-chevron"
+          aria-hidden="true"
+        >
+          ⌄
+        </span>
 
       </button>
 
-      <div class="project-detail" hidden>
+
+      <div
+        class="project-detail"
+        hidden
+      >
 
         <div class="project-preview">
-          <span class="preview-label">PREVIEW</span>
+
+          <span class="preview-label">
+            PREVIEW
+          </span>
 
           <img
             src="/icono/Corpority_SS_1.png"
             alt="Captura de pantalla de CORPORITY"
             loading="lazy"
-            decoding="async">
+            decoding="async"
+          >
+
         </div>
+
 
         <div class="project-info">
 
           <p
             class="project-desc"
             data-es="Simulación de supervivencia corporativa. Empezás una carrera y tratás de sobrevivir los años de trabajo. Jefes, política de oficina, oportunidades, eventos inesperados, burnout y absurdo organizacional. El objetivo: llegar al final con suficiente plata y suficiente cordura."
-            data-en="Corporate survival simulation. You start a career and try to survive years of work. Bosses, office politics, opportunities, unexpected events, burnout and organizational absurdity. The goal: reach the end with enough money and enough sanity.">
+            data-en="Corporate survival simulation. You start a career and try to survive years of work. Bosses, office politics, opportunities, unexpected events, burnout and organizational absurdity. The goal: reach the end with enough money and enough sanity."
+          >
             Simulación de supervivencia corporativa. Empezás una carrera y tratás de sobrevivir los años de trabajo. Jefes, política de oficina, oportunidades, eventos inesperados, burnout y absurdo organizacional. El objetivo: llegar al final con suficiente plata y suficiente cordura.
           </p>
 
+
           <div class="project-meta">
+
             <span
               data-es="SIMULACIÓN · SÁTIRA"
-              data-en="SIMULATION · SATIRE">
+              data-en="SIMULATION · SATIRE"
+            >
               SIMULACIÓN · SÁTIRA
             </span>
+
           </div>
+
 
           <a
             class="play-button"
@@ -1084,10 +2097,16 @@ footer{
             target="_blank"
             rel="noopener noreferrer"
             data-es="IR AL JUEGO"
-            data-en="OPEN PROJECT">
+            data-en="OPEN PROJECT"
+          >
 
-            <span class="play-label">IR AL JUEGO</span>
-            <span aria-hidden="true">↗</span>
+            <span class="play-label">
+              IR AL JUEGO
+            </span>
+
+            <span aria-hidden="true">
+              ↗
+            </span>
 
           </a>
 
@@ -1097,62 +2116,123 @@ footer{
 
     </article>
 
+
     <!-- EL BUCLE -->
 
-    <article class="project" style="--accent:#e879f9" data-project>
+    <article
+      class="project"
+      style="--accent:#e879f9"
+      data-project
+    >
 
-      <button class="project-toggle"
-              type="button"
-              aria-expanded="false">
+      <button
+        class="project-toggle"
+        type="button"
+        aria-expanded="false"
+      >
 
-        <span class="project-node" aria-hidden="true"></span>
+        <span
+          class="project-node"
+          aria-hidden="true"
+        ></span>
 
-        <span class="project-icon" aria-hidden="true">
+
+        <span
+          class="project-icon"
+          aria-hidden="true"
+        >
+
           <img
             src="/icono/EL BUCLE.png"
             alt=""
             loading="lazy"
-            decoding="async">
+            decoding="async"
+          >
+
         </span>
 
-        <span class="project-title">EL BUCLE</span>
 
-        <span class="project-flags" aria-label="Idiomas">
-          <span class="game-flag" title="Español">🇦🇷</span>
+        <span class="project-title">
+          EL BUCLE
         </span>
 
-        <span class="project-chevron" aria-hidden="true">⌄</span>
+
+        <span
+          class="project-flags"
+          aria-label="Español"
+        >
+
+          <span
+            class="game-flag"
+            title="Español"
+          >
+
+            <svg
+              class="flag-icon"
+              viewBox="0 0 24 16"
+              aria-hidden="true"
+            >
+              <use href="#flag-ar"></use>
+            </svg>
+
+          </span>
+
+        </span>
+
+
+        <span
+          class="project-chevron"
+          aria-hidden="true"
+        >
+          ⌄
+        </span>
 
       </button>
 
-      <div class="project-detail" hidden>
+
+      <div
+        class="project-detail"
+        hidden
+      >
 
         <div class="project-preview">
-          <span class="preview-label">PREVIEW</span>
+
+          <span class="preview-label">
+            PREVIEW
+          </span>
 
           <img
             src="/icono/EL BUCLE_SS_1.png"
             alt="Captura de pantalla de EL BUCLE"
             loading="lazy"
-            decoding="async">
+            decoding="async"
+          >
+
         </div>
+
 
         <div class="project-info">
 
           <p
             class="project-desc"
             data-es="Una experiencia narrativa interactiva nacida del universo RUPTURA. Un relato que no se limita a ser leído: las decisiones alteran la ruta y convierten al jugador en parte de la historia. El proyecto explora qué ocurre cuando un cómic, un juego y una narrativa ramificada empiezan a compartir el mismo espacio."
-            data-en="An interactive narrative experience born from the RUPTURA universe. A story that isn't simply read: choices alter the route and turn the player into part of the story. The project explores what happens when a comic, a game and branching narrative begin to share the same space.">
+            data-en="An interactive narrative experience born from the RUPTURA universe. A story that isn't simply read: choices alter the route and turn the player into part of the story. The project explores what happens when a comic, a game and branching narrative begin to share the same space."
+          >
             Una experiencia narrativa interactiva nacida del universo RUPTURA. Un relato que no se limita a ser leído: las decisiones alteran la ruta y convierten al jugador en parte de la historia. El proyecto explora qué ocurre cuando un cómic, un juego y una narrativa ramificada empiezan a compartir el mismo espacio.
           </p>
 
+
           <div class="project-meta">
+
             <span
               data-es="NARRATIVA INTERACTIVA · FICCIÓN"
-              data-en="INTERACTIVE NARRATIVE · FICTION">
+              data-en="INTERACTIVE NARRATIVE · FICTION"
+            >
               NARRATIVA INTERACTIVA · FICCIÓN
             </span>
+
           </div>
+
 
           <a
             class="play-button"
@@ -1160,10 +2240,16 @@ footer{
             target="_blank"
             rel="noopener noreferrer"
             data-es="IR AL JUEGO"
-            data-en="OPEN PROJECT">
+            data-en="OPEN PROJECT"
+          >
 
-            <span class="play-label">IR AL JUEGO</span>
-            <span aria-hidden="true">↗</span>
+            <span class="play-label">
+              IR AL JUEGO
+            </span>
+
+            <span aria-hidden="true">
+              ↗
+            </span>
 
           </a>
 
@@ -1173,58 +2259,120 @@ footer{
 
     </article>
 
+
     <!-- EL ORIGEN -->
 
-    <article class="project" style="--accent:#c8785a" data-project>
+    <article
+      class="project"
+      style="--accent:#c8785a"
+      data-project
+    >
 
-      <button class="project-toggle"
-              type="button"
-              aria-expanded="false">
+      <button
+        class="project-toggle"
+        type="button"
+        aria-expanded="false"
+      >
 
-        <span class="project-node" aria-hidden="true"></span>
+        <span
+          class="project-node"
+          aria-hidden="true"
+        ></span>
 
-        <span class="project-icon" aria-hidden="true">
-          <span class="text-icon">EL<br>ORIGEN</span>
+
+        <span
+          class="project-icon"
+          aria-hidden="true"
+        >
+
+          <span class="text-icon">
+            EL<br>ORIGEN
+          </span>
+
         </span>
 
-        <span class="project-title">EL ORIGEN</span>
 
-        <span class="project-flags" aria-label="Idiomas">
-          <span class="game-flag" title="Español">🇦🇷</span>
+        <span class="project-title">
+          EL ORIGEN
         </span>
 
-        <span class="project-chevron" aria-hidden="true">⌄</span>
+
+        <span
+          class="project-flags"
+          aria-label="Español"
+        >
+
+          <span
+            class="game-flag"
+            title="Español"
+          >
+
+            <svg
+              class="flag-icon"
+              viewBox="0 0 24 16"
+              aria-hidden="true"
+            >
+              <use href="#flag-ar"></use>
+            </svg>
+
+          </span>
+
+        </span>
+
+
+        <span
+          class="project-chevron"
+          aria-hidden="true"
+        >
+          ⌄
+        </span>
 
       </button>
 
-      <div class="project-detail" hidden>
+
+      <div
+        class="project-detail"
+        hidden
+      >
 
         <div class="project-preview">
-          <span class="preview-label">PREVIEW</span>
+
+          <span class="preview-label">
+            PREVIEW
+          </span>
 
           <img
             src="/icono/el-origen_SS_1.png"
             alt="Captura de pantalla de EL ORIGEN"
             loading="lazy"
-            decoding="async">
+            decoding="async"
+          >
+
         </div>
+
 
         <div class="project-info">
 
           <p
             class="project-desc"
             data-es="Horror psicológico. Entrás al departamento de tu abuela para una tasación. Los objetos no son decoración: son pistas. Documentos, fotos, notas y evidencia física. El horror viene de entender. No hay monstruos. Hay comprensión."
-            data-en="Psychological horror. You enter your grandmother's apartment for an appraisal. The objects aren't decoration: they're clues. Documents, photos, notes and physical evidence. The horror comes from understanding. There are no monsters. There is comprehension.">
+            data-en="Psychological horror. You enter your grandmother's apartment for an appraisal. The objects aren't decoration: they're clues. Documents, photos, notes and physical evidence. The horror comes from understanding. There are no monsters. There is comprehension."
+          >
             Horror psicológico. Entrás al departamento de tu abuela para una tasación. Los objetos no son decoración: son pistas. Documentos, fotos, notas y evidencia física. El horror viene de entender. No hay monstruos. Hay comprensión.
           </p>
 
+
           <div class="project-meta">
+
             <span
               data-es="HORROR · JUEGO · BETA"
-              data-en="HORROR · GAME · BETA">
+              data-en="HORROR · GAME · BETA"
+            >
               HORROR · JUEGO · BETA
             </span>
+
           </div>
+
 
           <a
             class="play-button"
@@ -1232,10 +2380,16 @@ footer{
             target="_blank"
             rel="noopener noreferrer"
             data-es="IR AL JUEGO"
-            data-en="OPEN PROJECT">
+            data-en="OPEN PROJECT"
+          >
 
-            <span class="play-label">IR AL JUEGO</span>
-            <span aria-hidden="true">↗</span>
+            <span class="play-label">
+              IR AL JUEGO
+            </span>
+
+            <span aria-hidden="true">
+              ↗
+            </span>
 
           </a>
 
@@ -1245,62 +2399,123 @@ footer{
 
     </article>
 
+
     <!-- MANDÍBULA -->
 
-    <article class="project" style="--accent:#84cc16" data-project>
+    <article
+      class="project"
+      style="--accent:#84cc16"
+      data-project
+    >
 
-      <button class="project-toggle"
-              type="button"
-              aria-expanded="false">
+      <button
+        class="project-toggle"
+        type="button"
+        aria-expanded="false"
+      >
 
-        <span class="project-node" aria-hidden="true"></span>
+        <span
+          class="project-node"
+          aria-hidden="true"
+        ></span>
 
-        <span class="project-icon" aria-hidden="true">
+
+        <span
+          class="project-icon"
+          aria-hidden="true"
+        >
+
           <img
             src="/icono/MANDIBULA.png"
             alt=""
             loading="lazy"
-            decoding="async">
+            decoding="async"
+          >
+
         </span>
 
-        <span class="project-title">MANDÍBULA</span>
 
-        <span class="project-flags" aria-label="Idiomas">
-          <span class="game-flag" title="Español">🇦🇷</span>
+        <span class="project-title">
+          MANDÍBULA
         </span>
 
-        <span class="project-chevron" aria-hidden="true">⌄</span>
+
+        <span
+          class="project-flags"
+          aria-label="Español"
+        >
+
+          <span
+            class="game-flag"
+            title="Español"
+          >
+
+            <svg
+              class="flag-icon"
+              viewBox="0 0 24 16"
+              aria-hidden="true"
+            >
+              <use href="#flag-ar"></use>
+            </svg>
+
+          </span>
+
+        </span>
+
+
+        <span
+          class="project-chevron"
+          aria-hidden="true"
+        >
+          ⌄
+        </span>
 
       </button>
 
-      <div class="project-detail" hidden>
+
+      <div
+        class="project-detail"
+        hidden
+      >
 
         <div class="project-preview">
-          <span class="preview-label">PREVIEW</span>
+
+          <span class="preview-label">
+            PREVIEW
+          </span>
 
           <img
             src="/icono/MANDIBULA_SS_1.png"
             alt="Captura de pantalla de MANDÍBULA"
             loading="lazy"
-            decoding="async">
+            decoding="async"
+          >
+
         </div>
+
 
         <div class="project-info">
 
           <p
             class="project-desc"
             data-es="Estrategia asimétrica viva. Gobernás una colonia de Acromyrmex lobicornis en la estepa patagónica. Un ecosistema sistémico pensado para distraerte: administrás recursos, reaccionás al entorno y tomás decisiones mientras la colonia sigue su propia lógica. Dificultad ajustable durante la partida, controles táctiles y desktop, partidas locales de 12–20 minutos."
-            data-en="A living asymmetric strategy game. You govern a colony of Acromyrmex lobicornis in the Patagonian steppe. A systemic ecosystem designed as a distraction: manage resources, react to the environment and make decisions while the colony follows its own logic. Adjustable difficulty, touch and desktop controls, and 12–20 minute local sessions.">
+            data-en="A living asymmetric strategy game. You govern a colony of Acromyrmex lobicornis in the Patagonian steppe. A systemic ecosystem designed as a distraction: manage resources, react to the environment and make decisions while the colony follows its own logic. Adjustable difficulty, touch and desktop controls, and 12–20 minute local sessions."
+          >
             Estrategia asimétrica viva. Gobernás una colonia de Acromyrmex lobicornis en la estepa patagónica. Un ecosistema sistémico pensado para distraerte: administrás recursos, reaccionás al entorno y tomás decisiones mientras la colonia sigue su propia lógica. Dificultad ajustable durante la partida, controles táctiles y desktop, partidas locales de 12–20 minutos.
           </p>
 
+
           <div class="project-meta">
+
             <span
               data-es="ECOSISTEMA PATAGÓNICO · SIMULACIÓN SISTÉMICA"
-              data-en="PATAGONIAN ECOSYSTEM · SYSTEMIC SIMULATION">
+              data-en="PATAGONIAN ECOSYSTEM · SYSTEMIC SIMULATION"
+            >
               ECOSISTEMA PATAGÓNICO · SIMULACIÓN SISTÉMICA
             </span>
+
           </div>
+
 
           <a
             class="play-button"
@@ -1308,10 +2523,16 @@ footer{
             target="_blank"
             rel="noopener noreferrer"
             data-es="IR AL JUEGO"
-            data-en="OPEN PROJECT">
+            data-en="OPEN PROJECT"
+          >
 
-            <span class="play-label">IR AL JUEGO</span>
-            <span aria-hidden="true">↗</span>
+            <span class="play-label">
+              IR AL JUEGO
+            </span>
+
+            <span aria-hidden="true">
+              ↗
+            </span>
 
           </a>
 
@@ -1321,62 +2542,123 @@ footer{
 
     </article>
 
+
     <!-- MI MANDATO -->
 
-    <article class="project" style="--accent:#f5b860" data-project>
+    <article
+      class="project"
+      style="--accent:#f5b860"
+      data-project
+    >
 
-      <button class="project-toggle"
-              type="button"
-              aria-expanded="false">
+      <button
+        class="project-toggle"
+        type="button"
+        aria-expanded="false"
+      >
 
-        <span class="project-node" aria-hidden="true"></span>
+        <span
+          class="project-node"
+          aria-hidden="true"
+        ></span>
 
-        <span class="project-icon" aria-hidden="true">
+
+        <span
+          class="project-icon"
+          aria-hidden="true"
+        >
+
           <img
             src="/icono/mi mandato.png"
             alt=""
             loading="lazy"
-            decoding="async">
+            decoding="async"
+          >
+
         </span>
 
-        <span class="project-title">MI MANDATO</span>
 
-        <span class="project-flags" aria-label="Idiomas">
-          <span class="game-flag" title="Español">🇦🇷</span>
+        <span class="project-title">
+          MI MANDATO
         </span>
 
-        <span class="project-chevron" aria-hidden="true">⌄</span>
+
+        <span
+          class="project-flags"
+          aria-label="Español"
+        >
+
+          <span
+            class="game-flag"
+            title="Español"
+          >
+
+            <svg
+              class="flag-icon"
+              viewBox="0 0 24 16"
+              aria-hidden="true"
+            >
+              <use href="#flag-ar"></use>
+            </svg>
+
+          </span>
+
+        </span>
+
+
+        <span
+          class="project-chevron"
+          aria-hidden="true"
+        >
+          ⌄
+        </span>
 
       </button>
 
-      <div class="project-detail" hidden>
+
+      <div
+        class="project-detail"
+        hidden
+      >
 
         <div class="project-preview">
-          <span class="preview-label">PREVIEW</span>
+
+          <span class="preview-label">
+            PREVIEW
+          </span>
 
           <img
             src="/icono/mi mandato_SS_1.png"
             alt="Captura de pantalla de MI MANDATO"
             loading="lazy"
-            decoding="async">
+            decoding="async"
+          >
+
         </div>
+
 
         <div class="project-info">
 
           <p
             class="project-desc"
             data-es="Simulación política narrativa. Asumís la presidencia de la República del Sur en 2032. Finanzas frágiles, inflación persistente, presión política, sindicatos, medios, mercados, gobernadores y ciudadanos. Cada decisión tiene consecuencias. Algunas vuelven meses después de formas inesperadas."
-            data-en="A narrative political simulation. You assume the presidency of the República del Sur in 2032. Fragile finances, persistent inflation, political pressure, unions, media, markets, governors and citizens. Every decision has consequences. Some return months later in unexpected forms.">
+            data-en="A narrative political simulation. You assume the presidency of the República del Sur in 2032. Fragile finances, persistent inflation, political pressure, unions, media, markets, governors and citizens. Every decision has consequences. Some return months later in unexpected forms."
+          >
             Simulación política narrativa. Asumís la presidencia de la República del Sur en 2032. Finanzas frágiles, inflación persistente, presión política, sindicatos, medios, mercados, gobernadores y ciudadanos. Cada decisión tiene consecuencias. Algunas vuelven meses después de formas inesperadas.
           </p>
 
+
           <div class="project-meta">
+
             <span
               data-es="SIMULACIÓN · JUEGO NARRATIVO"
-              data-en="SIMULATION · NARRATIVE GAME">
+              data-en="SIMULATION · NARRATIVE GAME"
+            >
               SIMULACIÓN · JUEGO NARRATIVO
             </span>
+
           </div>
+
 
           <a
             class="play-button"
@@ -1384,10 +2666,16 @@ footer{
             target="_blank"
             rel="noopener noreferrer"
             data-es="IR AL JUEGO"
-            data-en="OPEN PROJECT">
+            data-en="OPEN PROJECT"
+          >
 
-            <span class="play-label">IR AL JUEGO</span>
-            <span aria-hidden="true">↗</span>
+            <span class="play-label">
+              IR AL JUEGO
+            </span>
+
+            <span aria-hidden="true">
+              ↗
+            </span>
 
           </a>
 
@@ -1401,145 +2689,357 @@ footer{
 
 </main>
 
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
 <footer>
 
   <div class="footer-inner">
 
-    <div class="footer-brand">lukson.arts</div>
+    <div class="footer-brand">
+      lukson.arts
+    </div>
+
+
+    <div class="footer-tagline">
+
+      Creado con IA por
+      <a
+        href="https://www.linkedin.com/in/lucas-correa-3300211a6/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="LinkedIn de Lucas Correa"
+      >
+        Lucas Correa
+      </a>
+
+    </div>
+
+
+    <div class="footer-links">
+
+      <a
+        class="footer-icon-link"
+        href="https://www.linkedin.com/in/lucas-correa-3300211a6/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="LinkedIn de Lucas Correa"
+      >
+
+        <span
+          class="footer-link-mark"
+          aria-hidden="true"
+        >
+          in
+        </span>
+
+        LinkedIn
+
+      </a>
+
+
+      <a
+        class="footer-icon-link"
+        href="https://github.com/lukeetaah/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub de Lukeetaah"
+      >
+
+        <span
+          class="footer-link-mark"
+          aria-hidden="true"
+        >
+          ↗
+        </span>
+
+        GitHub
+
+      </a>
+
+    </div>
+
+
+    <div class="footer-small">
+      CREATIVE TECHNOLOGY · AI · PRODUCTS · EXPERIMENTS
+    </div>
+
+
+    <div class="footer-year">
+      © 2026 LUKSON.ARTS
+    </div>
 
   </div>
 
 </footer>
 
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
 <script>
 (function () {
+
   "use strict";
 
-  /*
-   * =========================================================
-   * LOADER
-   * =========================================================
-   *
-   * El loader nunca depende de Analytics ni de ninguna imagen
-   * externa para desaparecer.
-   */
 
-  const loader = document.getElementById("loader");
-  const loaderStatus = document.getElementById("loaderStatus");
+  /* =======================================================
+     LOADER
+     ======================================================= */
+
+  const loader =
+    document.getElementById("loader");
+
+  const loaderStatus =
+    document.getElementById("loaderStatus");
+
 
   function hideLoader() {
-    if (!loader) return;
 
-    loader.classList.add("hidden");
-    document.body.classList.remove("is-loading");
-  }
-
-  // Seguridad absoluta: incluso si algo falla, el sitio se libera.
-  const loaderSafetyTimer = setTimeout(hideLoader, 1800);
-
-  function finishLoading() {
-    clearTimeout(loaderSafetyTimer);
-
-    if (loaderStatus) {
-      loaderStatus.textContent = "SYSTEM READY";
+    if (!loader) {
+      return;
     }
 
+    loader.classList.add("hidden");
+
+    document.body.classList.remove(
+      "is-loading"
+    );
+
+  }
+
+
+  const loaderSafetyTimer =
+    setTimeout(
+      hideLoader,
+      1800
+    );
+
+
+  function finishLoading() {
+
+    clearTimeout(
+      loaderSafetyTimer
+    );
+
+
+    if (loaderStatus) {
+
+      loaderStatus.textContent =
+        "SYSTEM READY";
+
+    }
+
+
     requestAnimationFrame(function () {
-      requestAnimationFrame(hideLoader);
-    });
-  }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", finishLoading, {
-      once: true
-    });
-  } else {
-    finishLoading();
-  }
-
-  /*
-   * =========================================================
-   * ACCORDIONS
-   * =========================================================
-   */
-
-  const projectToggles = document.querySelectorAll(".project-toggle");
-
-  projectToggles.forEach(function (toggle) {
-    toggle.addEventListener("click", function () {
-      const detail = toggle.nextElementSibling;
-      if (!detail) return;
-
-      const wasOpen = toggle.getAttribute("aria-expanded") === "true";
-
-      // Cerramos los demás.
-      projectToggles.forEach(function (otherToggle) {
-        if (otherToggle === toggle) return;
-
-        const otherDetail = otherToggle.nextElementSibling;
-
-        otherToggle.setAttribute("aria-expanded", "false");
-
-        if (otherDetail) {
-          otherDetail.hidden = true;
-        }
-      });
-
-      // Abrimos/cerramos el actual.
-      toggle.setAttribute(
-        "aria-expanded",
-        wasOpen ? "false" : "true"
+      requestAnimationFrame(
+        hideLoader
       );
 
-      detail.hidden = wasOpen;
     });
-  });
 
-  /*
-   * =========================================================
-   * IDIOMA
-   * =========================================================
-   */
+  }
 
-  const langButtons = document.querySelectorAll(".lang-switch");
-  const translatableElements = document.querySelectorAll(
-    "[data-es][data-en]"
+
+  if (
+    document.readyState ===
+    "loading"
+  ) {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      finishLoading,
+      {
+        once:true
+      }
+    );
+
+  } else {
+
+    finishLoading();
+
+  }
+
+
+  /* =======================================================
+     ACCORDIONS
+     ======================================================= */
+
+  const projectToggles =
+    document.querySelectorAll(
+      ".project-toggle"
+    );
+
+
+  projectToggles.forEach(
+    function (toggle) {
+
+      toggle.addEventListener(
+        "click",
+        function () {
+
+          const detail =
+            toggle.nextElementSibling;
+
+          if (!detail) {
+            return;
+          }
+
+
+          const wasOpen =
+            toggle.getAttribute(
+              "aria-expanded"
+            ) === "true";
+
+
+          projectToggles.forEach(
+            function (otherToggle) {
+
+              if (
+                otherToggle === toggle
+              ) {
+                return;
+              }
+
+
+              const otherDetail =
+                otherToggle.nextElementSibling;
+
+
+              otherToggle.setAttribute(
+                "aria-expanded",
+                "false"
+              );
+
+
+              if (otherDetail) {
+
+                otherDetail.hidden =
+                  true;
+
+              }
+
+            }
+          );
+
+
+          toggle.setAttribute(
+            "aria-expanded",
+            wasOpen
+              ? "false"
+              : "true"
+          );
+
+
+          detail.hidden =
+            wasOpen;
+
+        }
+      );
+
+    }
   );
 
+
+  /* =======================================================
+     IDIOMA
+     ======================================================= */
+
+  const langButtons =
+    document.querySelectorAll(
+      ".lang-switch"
+    );
+
+
+  const translatableElements =
+    document.querySelectorAll(
+      "[data-es][data-en]"
+    );
+
+
   function setLanguage(lang) {
-    const selectedLang = lang === "en" ? "en" : "es";
 
-    document.documentElement.lang = selectedLang;
+    const selectedLang =
+      lang === "en"
+        ? "en"
+        : "es";
 
-    translatableElements.forEach(function (element) {
-      const value = element.getAttribute("data-" + selectedLang);
 
-      if (value !== null) {
-        element.textContent = value;
+    document.documentElement.lang =
+      selectedLang;
+
+
+    translatableElements.forEach(
+      function (element) {
+
+        const value =
+          element.getAttribute(
+            "data-" + selectedLang
+          );
+
+
+        if (value !== null) {
+
+          element.textContent =
+            value;
+
+        }
+
       }
-    });
+    );
 
-    langButtons.forEach(function (button) {
-      const isActive = button.dataset.lang === selectedLang;
 
-      button.classList.toggle("active", isActive);
-      button.setAttribute(
-        "aria-pressed",
-        isActive ? "true" : "false"
-      );
-    });
+    langButtons.forEach(
+      function (button) {
 
-    const searchInput = document.getElementById("projectSearch");
+        const isActive =
+          button.dataset.lang ===
+          selectedLang;
 
-    if (searchInput) {
-      const placeholder =
-        searchInput.getAttribute(
-          "data-placeholder-" + selectedLang
+
+        button.classList.toggle(
+          "active",
+          isActive
         );
 
-      if (placeholder) {
-        searchInput.placeholder = placeholder;
+
+        button.setAttribute(
+          "aria-pressed",
+          isActive
+            ? "true"
+            : "false"
+        );
+
       }
+    );
+
+
+    const searchInput =
+      document.getElementById(
+        "projectSearch"
+      );
+
+
+    if (searchInput) {
+
+      const placeholder =
+        searchInput.getAttribute(
+          "data-placeholder-" +
+          selectedLang
+        );
+
+
+      if (placeholder) {
+
+        searchInput.placeholder =
+          placeholder;
+
+      }
+
 
       searchInput.setAttribute(
         "aria-label",
@@ -1547,99 +3047,176 @@ footer{
           ? "Search projects"
           : "Buscar proyectos"
       );
+
     }
+
 
     try {
-      localStorage.setItem("lukson-language", selectedLang);
+
+      localStorage.setItem(
+        "lukson-language",
+        selectedLang
+      );
+
     } catch (error) {
-      // localStorage puede estar bloqueado; no afecta la web.
+
+      // Sin efecto sobre la web.
+
     }
+
   }
 
-  langButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      setLanguage(button.dataset.lang);
-    });
-  });
 
-  let initialLanguage = "es";
+  langButtons.forEach(
+    function (button) {
+
+      button.addEventListener(
+        "click",
+        function () {
+
+          setLanguage(
+            button.dataset.lang
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+  let initialLanguage =
+    "es";
+
 
   try {
-    const savedLanguage = localStorage.getItem("lukson-language");
 
-    if (savedLanguage === "en" || savedLanguage === "es") {
-      initialLanguage = savedLanguage;
+    const savedLanguage =
+      localStorage.getItem(
+        "lukson-language"
+      );
+
+
+    if (
+      savedLanguage === "en" ||
+      savedLanguage === "es"
+    ) {
+
+      initialLanguage =
+        savedLanguage;
+
     }
+
   } catch (error) {
-    // Ignorado intencionalmente.
+
+    // Sin efecto sobre la web.
+
   }
 
-  setLanguage(initialLanguage);
 
-  /*
-   * =========================================================
-   * PROJECT SEARCH
-   * =========================================================
-   */
+  setLanguage(
+    initialLanguage
+  );
 
-  const searchInput = document.getElementById("projectSearch");
-  const projects = document.querySelectorAll("[data-project]");
+
+  /* =======================================================
+     PROJECT SEARCH
+     ======================================================= */
+
+  const searchInput =
+    document.getElementById(
+      "projectSearch"
+    );
+
+
+  const projects =
+    document.querySelectorAll(
+      "[data-project]"
+    );
+
 
   if (searchInput) {
-    searchInput.addEventListener("input", function () {
-      const query = searchInput.value
-        .trim()
-        .toLowerCase();
 
-      projects.forEach(function (project) {
-        const searchableText = project.textContent
-          .toLowerCase();
+    searchInput.addEventListener(
+      "input",
+      function () {
 
-        const matches = searchableText.includes(query);
+        const query =
+          searchInput.value
+            .trim()
+            .toLowerCase();
 
-        project.classList.toggle(
-          "hidden-by-search",
-          !matches
+
+        projects.forEach(
+          function (project) {
+
+            const searchableText =
+              project.textContent
+                .toLowerCase();
+
+
+            const matches =
+              searchableText.includes(
+                query
+              );
+
+
+            project.classList.toggle(
+              "hidden-by-search",
+              !matches
+            );
+
+          }
         );
-      });
-    });
+
+      }
+    );
+
   }
 
-  /*
-   * =========================================================
-   * BRAND → TOP
-   * =========================================================
-   */
 
-  const brand = document.querySelector(".brand");
+  /* =======================================================
+     BRAND → TOP
+     ======================================================= */
+
+  const brand =
+    document.querySelector(
+      ".brand"
+    );
+
 
   if (brand) {
-    brand.addEventListener("click", function (event) {
-      event.preventDefault();
 
-      window.scrollTo({
-        top: 0,
-        behavior:
+    brand.addEventListener(
+      "click",
+      function (event) {
+
+        event.preventDefault();
+
+
+        const reducedMotion =
           window.matchMedia &&
-          window.matchMedia("(prefers-reduced-motion: reduce)").matches
-            ? "auto"
-            : "smooth"
-      });
-    });
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches;
+
+
+        window.scrollTo({
+
+          top:0,
+
+          behavior:
+            reducedMotion
+              ? "auto"
+              : "smooth"
+
+        });
+
+      }
+    );
+
   }
 
-  /*
-   * =========================================================
-   * VERCEL ANALYTICS
-   * =========================================================
-   *
-   * El script oficial ya está cargado arriba mediante:
-   *
-   * /_vercel/insights/script.js
-   *
-   * No usamos import(), módulos ESM ni dependemos de Analytics
-   * para iniciar el sitio.
-   */
 
 })();
 </script>
