@@ -22,24 +22,57 @@
   rel="stylesheet"
 >
 
-<link rel="preload" as="image" href="/icono/lukson.arts.png">
+<link
+  rel="preload"
+  as="image"
+  href="/icono/lukson.arts.png"
+>
 
 <style>
+
+/* =========================================================
+   ROOT
+   ========================================================= */
+
 :root {
+
   --bg:#050507;
   --panel:#0b0b10;
+
   --paper:#f3f1ec;
   --muted:#898c98;
+
   --line:rgba(243,241,236,.085);
   --line-strong:rgba(243,241,236,.16);
+
   --sans:'Space Grotesk',system-ui,sans-serif;
   --mono:'Space Mono',monospace;
   --serif:'Fraunces',Georgia,serif;
+
   --pink:#f472b6;
   --violet:#a78bfa;
   --blue:#60a5fa;
-  --container:1280px;
+
+  /*
+   * Antes: 840px
+   *
+   * Ahora el contenido aprovecha mejor las pantallas grandes,
+   * sin convertirse en una página interminable horizontalmente.
+   */
+  --container:1180px;
+
+  /*
+   * Altura aproximada del header para el auto-scroll.
+   */
+  --header-offset:108px;
+
 }
+
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
 *,
 *::before,
 *::after{
@@ -49,16 +82,35 @@
 }
 
 html{
+
   background:var(--bg);
+
   scroll-behavior:smooth;
-  scroll-padding-top:80px;
+
+  scroll-padding-top:
+    var(--header-offset);
+
+  /*
+   * En desktop aumentamos la escala tipográfica de forma
+   * proporcional al tamaño de pantalla.
+   *
+   * Esto consigue el efecto de "175% de zoom", pero integrado
+   * correctamente al diseño.
+   */
+  font-size:16px;
+
 }
 
 body{
+
   min-height:100vh;
+
   overflow-x:hidden;
+
   color:var(--paper);
+
   font-family:var(--sans);
+
   background:
     radial-gradient(
       circle at 50% -14%,
@@ -66,16 +118,50 @@ body{
       transparent 28rem
     ),
     var(--bg);
+
   -webkit-font-smoothing:antialiased;
+
   text-rendering:optimizeLegibility;
+
 }
 
+
+/*
+ * Desktop visual scale.
+ *
+ * En pantallas grandes:
+ * 1366px ≈ 18px base
+ * 1600px ≈ 20px base
+ * 1920px ≈ 22px base
+ *
+ * Nunca pasa de 22px.
+ */
+@media (min-width:900px){
+
+  html{
+    font-size:
+      clamp(
+        17px,
+        1.15vw,
+        22px
+      );
+  }
+
+}
+
+
 body::before{
+
   content:"";
+
   position:fixed;
+
   inset:0;
+
   pointer-events:none;
+
   z-index:-1;
+
   opacity:.24;
 
   background:
@@ -91,17 +177,20 @@ body::before{
 
   background-size:48px 48px;
 
-  mask-image:linear-gradient(
-    to bottom,
-    black,
-    transparent 72%
-  );
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black,
+      transparent 72%
+    );
 
-  -webkit-mask-image:linear-gradient(
-    to bottom,
-    black,
-    transparent 72%
-  );
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      black,
+      transparent 72%
+    );
+
 }
 
 a,
@@ -113,21 +202,28 @@ button{
   font:inherit;
 }
 
+
 /* =========================================================
    SVG FLAGS
-   No dependemos de emojis ni de fuentes del sistema.
    ========================================================= */
 
 .flag-icon{
+
   display:block;
+
   width:20px;
   height:14px;
+
   flex:0 0 auto;
+
   overflow:hidden;
+
   border-radius:2px;
+
   box-shadow:
     0 0 0 1px rgba(255,255,255,.10),
     0 1px 3px rgba(0,0,0,.35);
+
 }
 
 .header-flag{
@@ -136,36 +232,53 @@ button{
 }
 
 .project-flags{
+
   display:flex;
+
   align-items:center;
   justify-content:center;
+
   gap:.28rem;
+
   min-width:48px;
+
   white-space:nowrap;
+
 }
 
 .game-flag{
+
   display:inline-flex;
+
   align-items:center;
   justify-content:center;
+
   line-height:1;
+
 }
 
 .game-flag .flag-icon{
+
   width:19px;
   height:13px;
+
 }
+
 
 /* =========================================================
    LOADER
    ========================================================= */
 
 .loader{
+
   position:fixed;
+
   inset:0;
+
   z-index:1000;
 
   display:grid;
+
   place-items:center;
 
   background:var(--bg);
@@ -173,152 +286,192 @@ button{
   transition:
     opacity .4s ease,
     visibility .4s ease;
+
 }
 
 .loader.hidden{
+
   opacity:0;
+
   visibility:hidden;
+
   pointer-events:none;
+
 }
 
 .loader-inner{
+
   display:grid;
+
   justify-items:center;
+
   gap:.7rem;
+
 }
 
 .loader-logo{
+
   width:68px;
   height:68px;
+
   object-fit:contain;
 
-  animation:float 2.4s ease-in-out infinite;
+  animation:
+    float 2.4s ease-in-out infinite;
 
   filter:
     drop-shadow(
       0 0 18px rgba(167,139,250,.2)
     );
+
 }
 
 .loader-status{
-  font:400 .54rem/1 var(--mono);
+
+  font:
+    400 .54rem/1
+    var(--mono);
+
   letter-spacing:.2em;
+
   color:var(--muted);
+
 }
 
 @keyframes float{
+
   0%,100%{
-    transform:translateY(0)
+    transform:translateY(0);
   }
 
   50%{
-    transform:translateY(-4px)
+    transform:translateY(-4px);
   }
+
 }
+
 
 /* =========================================================
    HEADER
    ========================================================= */
 
 header{
+
   position:sticky;
+
   top:0;
+
   z-index:100;
 
-  border-bottom:1px solid var(--line);
+  border-bottom:
+    1px solid var(--line);
 
-  background:rgba(5,5,7,.78);
+  background:
+    rgba(5,5,7,.78);
 
-  backdrop-filter:blur(18px) saturate(130%);
-  -webkit-backdrop-filter:blur(18px) saturate(130%);
+  backdrop-filter:
+    blur(18px)
+    saturate(130%);
+
+  -webkit-backdrop-filter:
+    blur(18px)
+    saturate(130%);
+
 }
 
 .header-inner{
-  width:min(
-    var(--container),
-    calc(100% - 1.5rem)
-  );
+
+  width:
+    min(
+      var(--container),
+      calc(100% - 2rem)
+    );
 
   min-height:72px;
 
   margin:0 auto;
 
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
 
   gap:1rem;
+
 }
 
 .brand{
+
   display:flex;
+
   align-items:center;
+
   gap:.8rem;
 
   text-decoration:none;
 
   min-width:0;
+
 }
 
 .brand-logo{
+
   width:144px;
   height:144px;
 
   display:grid;
+
   place-items:center;
 
-  border:1px solid rgba(255,255,255,.08);
+  border:
+    1px solid rgba(255,255,255,.08);
+
   border-radius:14px;
 
   overflow:hidden;
 
-  background:rgba(255,255,255,.025);
+  background:
+    rgba(255,255,255,.025);
+
 }
 
 .brand-logo img{
+
   width:100%;
   height:100%;
 
   object-fit:contain;
 
   transform:scale(1.08);
+
 }
-
-.brand-name{
-  font:600 .8rem/1 var(--sans);
-  letter-spacing:.22em;
-}
-
-.brand-tagline{
-  margin-top:.22rem;
-
-  font:400 .54rem/1.2 var(--mono);
-  letter-spacing:.06em;
-
-  color:var(--muted);
-}
-
-/* =========================================================
-   LANGUAGE SWITCH
-   ========================================================= */
 
 .lang-switches{
+
   display:flex;
+
   align-items:center;
+
   gap:.35rem;
+
 }
 
 .lang-switch{
+
   width:40px;
   height:34px;
 
   padding:0;
 
   display:flex;
+
   align-items:center;
   justify-content:center;
 
-  border:1px solid transparent;
+  border:
+    1px solid transparent;
+
   border-radius:999px;
 
   background:transparent;
@@ -332,70 +485,99 @@ header{
     background .2s ease,
     border-color .2s ease,
     transform .2s ease;
+
 }
 
 .lang-switch:hover{
+
   opacity:.9;
 
-  background:rgba(255,255,255,.04);
+  background:
+    rgba(255,255,255,.04);
 
-  border-color:var(--line);
+  border-color:
+    var(--line);
 
-  transform:translateY(-1px);
+  transform:
+    translateY(-1px);
+
 }
 
 .lang-switch.active{
+
   opacity:1;
 
-  background:rgba(255,255,255,.055);
+  background:
+    rgba(255,255,255,.055);
 
-  border-color:rgba(243,241,236,.14);
+  border-color:
+    rgba(243,241,236,.14);
 
   box-shadow:
     0 0 0 1px rgba(167,139,250,.05),
     0 4px 18px rgba(0,0,0,.18);
+
 }
 
 .lang-switch:focus-visible{
-  outline:1px solid var(--violet);
+
+  outline:
+    1px solid var(--violet);
+
   outline-offset:2px;
+
 }
+
 
 /* =========================================================
    MAIN
    ========================================================= */
 
 main{
-  width:min(
-    var(--container),
-    calc(100% - 1.5rem)
-  );
+
+  width:
+    min(
+      var(--container),
+      calc(100% - 2rem)
+    );
 
   margin:0 auto;
+
 }
 
 .hero{
-  padding:4rem 0 2.2rem;
+
+  padding:
+    4.2rem
+    0
+    2.4rem;
+
 }
 
 .hero-kicker{
+
   display:flex;
+
   align-items:center;
 
   gap:.55rem;
 
   color:var(--muted);
 
-  font:400 .54rem/1 var(--mono);
+  font:
+    400 .60rem/1
+    var(--mono);
 
   letter-spacing:.18em;
 
   text-transform:uppercase;
+
 }
 
 .hero-dot{
-  width:5px;
-  height:5px;
+
+  width:6px;
+  height:6px;
 
   flex:0 0 auto;
 
@@ -410,34 +592,47 @@ main{
     );
 
   box-shadow:
-    0 0 10px rgba(167,139,250,.4);
+    0 0 10px
+    rgba(167,139,250,.4);
+
 }
 
 .hero h1{
+
   margin-top:1rem;
 
   font:
-    500 clamp(2rem,5vw,3.4rem)/1
+    500 clamp(
+      2.3rem,
+      4.6vw,
+      4.6rem
+    )/1
     var(--serif);
 
-  letter-spacing:-.02em;
+  letter-spacing:-.025em;
+
 }
 
 .hero-sub{
-  margin-top:.9rem;
 
-  max-width:680px;
+  margin-top:1rem;
+
+  max-width:760px;
 
   color:var(--muted);
 
-  font-size:.86rem;
-  line-height:1.6;
+  font-size:.95rem;
+
+  line-height:1.65;
+
 }
 
 .hero-line{
-  margin-top:1.35rem;
 
-  width:160px;
+  margin-top:1.5rem;
+
+  width:180px;
+
   height:1px;
 
   background:
@@ -447,33 +642,50 @@ main{
       var(--violet),
       var(--blue)
     );
+
 }
+
 
 /* =========================================================
    SEARCH
    ========================================================= */
 
 .project-search{
+
   position:relative;
-  margin:0 0 1.2rem;
+
+  margin:
+    0
+    0
+    1.35rem;
+
 }
 
 .project-search input{
+
   width:100%;
-  height:34px;
 
-  padding:0 .7rem;
+  height:42px;
 
-  border:1px solid var(--line);
+  padding:
+    0
+    .9rem;
+
+  border:
+    1px solid var(--line);
+
   border-radius:999px;
 
   outline:none;
 
-  background:rgba(255,255,255,.018);
+  background:
+    rgba(255,255,255,.018);
 
   color:var(--paper);
 
-  font:400 .58rem/1 var(--mono);
+  font:
+    400 .62rem/1
+    var(--mono);
 
   letter-spacing:.08em;
 
@@ -481,47 +693,68 @@ main{
     border-color .2s ease,
     background .2s ease,
     box-shadow .2s ease;
+
 }
 
 .project-search input::placeholder{
-  color:rgba(150,153,168,.52);
+
+  color:
+    rgba(150,153,168,.52);
+
 }
 
 .project-search input:focus{
-  border-color:var(--line-strong);
 
-  background:rgba(255,255,255,.028);
+  border-color:
+    var(--line-strong);
+
+  background:
+    rgba(255,255,255,.028);
 
   box-shadow:
-    0 0 0 3px rgba(167,139,250,.035);
+    0 0 0 3px
+    rgba(167,139,250,.035);
+
 }
 
+
 /* =========================================================
-   SECTION LABEL
+   SECTION
    ========================================================= */
 
 .section-label{
+
   display:flex;
+
   align-items:center;
 
   gap:.7rem;
 
-  margin:1.25rem 0 .6rem;
-  padding:.5rem 0;
+  margin:
+    1.45rem
+    0
+    .7rem;
+
+  padding:.55rem 0;
 
   color:var(--muted);
 
-  font:400 .55rem/1 var(--mono);
+  font:
+    400 .58rem/1
+    var(--mono);
 
   letter-spacing:.20em;
 
   text-transform:uppercase;
+
 }
 
 .section-label::after{
+
   content:"";
 
-  width:60px;
+  width:80px;
+
   height:1px;
 
   background:
@@ -530,20 +763,36 @@ main{
       var(--line-strong),
       transparent
     );
+
 }
+
 
 /* =========================================================
    PROJECTS
    ========================================================= */
 
 .project{
+
   --accent:var(--violet);
 
-  border-top:1px solid var(--line);
+  border-top:
+    1px solid var(--line);
+
+  /*
+   * Esto es lo que permite al navegador llevar un proyecto
+   * abierto a una posición correcta, sin esconderlo debajo
+   * del header sticky.
+   */
+  scroll-margin-top:
+    var(--header-offset);
+
 }
 
 .project:last-child{
-  border-bottom:1px solid var(--line);
+
+  border-bottom:
+    1px solid var(--line);
+
 }
 
 .project.hidden-by-search{
@@ -551,12 +800,18 @@ main{
 }
 
 .project-toggle{
+
   position:relative;
 
   width:100%;
-  min-height:78px;
 
-  padding:0 .75rem 0 2.2rem;
+  min-height:88px;
+
+  padding:
+    0
+    1rem
+    0
+    3rem;
 
   border:0;
 
@@ -574,33 +829,44 @@ main{
 
   align-items:center;
 
-  gap:.8rem;
+  gap:1rem;
 
   text-align:left;
 
   cursor:pointer;
+
 }
 
 .project-toggle:hover,
 .project-toggle:focus-visible{
-  background:rgba(255,255,255,.018);
+
+  background:
+    rgba(255,255,255,.018);
+
 }
 
 .project-toggle:focus-visible{
-  outline:1px solid var(--line-strong);
+
+  outline:
+    1px solid var(--line-strong);
+
   outline-offset:-1px;
+
 }
 
 .project-node{
+
   position:absolute;
 
-  left:5px;
+  left:8px;
+
   top:50%;
 
-  transform:translateY(-50%);
+  transform:
+    translateY(-50%);
 
-  width:6px;
-  height:6px;
+  width:7px;
+  height:7px;
 
   border-radius:50%;
 
@@ -613,55 +879,69 @@ main{
       var(--accent) 55%,
       transparent
     );
+
 }
 
 .project-icon{
-  width:42px;
-  height:42px;
+
+  width:48px;
+  height:48px;
 
   display:grid;
+
   place-items:center;
 
   overflow:hidden;
 
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:12px;
+  border:
+    1px solid rgba(255,255,255,.07);
 
-  background:rgba(255,255,255,.018);
+  border-radius:13px;
+
+  background:
+    rgba(255,255,255,.018);
+
 }
 
 .project-icon img{
+
   width:100%;
   height:100%;
 
   object-fit:contain;
 
   padding:.3rem;
+
 }
 
 .text-icon{
+
   text-align:center;
 
   font:
-    700 .42rem/1.05
+    700 .45rem/1.05
     var(--mono);
 
   letter-spacing:.05em;
 
   color:var(--paper);
+
 }
 
 .project-title{
+
   font:
-    500 1rem/1.1
+    500 1.15rem/1.1
     var(--serif);
 
   letter-spacing:.01em;
+
 }
 
 .project-chevron{
+
   font:
-    400 1rem/1
+    400 1.05rem/1
     var(--mono);
 
   color:var(--muted);
@@ -669,22 +949,40 @@ main{
   transition:
     transform .25s ease,
     color .25s ease;
+
 }
 
 .project-toggle[aria-expanded="true"]
 .project-chevron{
-  transform:rotate(180deg);
+
+  transform:
+    rotate(180deg);
+
   color:var(--paper);
+
 }
 
+
+/* =========================================================
+   DETAIL
+   ========================================================= */
+
 .project-detail{
+
   display:grid;
 
-  grid-template-columns:1fr;
+  grid-template-columns:
+    minmax(0,1.28fr)
+    minmax(0,.72fr);
 
-  gap:.8rem;
+  gap:1.4rem;
 
-  padding:0 .75rem 1rem 2.2rem;
+  padding:
+    0
+    1rem
+    1.35rem
+    3rem;
+
 }
 
 .project-detail[hidden]{
@@ -692,21 +990,26 @@ main{
 }
 
 .project-preview{
+
   position:relative;
 
   min-width:0;
 
-  aspect-ratio:16/7;
+  aspect-ratio:16/8.3;
 
   overflow:hidden;
 
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:14px;
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  border-radius:16px;
 
   background:#08080c;
+
 }
 
 .project-preview img{
+
   display:block;
 
   width:100%;
@@ -715,50 +1018,71 @@ main{
   object-fit:contain;
 
   background:#08080c;
+
 }
 
 .preview-label{
+
   position:absolute;
 
-  top:.5rem;
-  left:.5rem;
+  top:.65rem;
+  left:.65rem;
 
   z-index:2;
 
-  padding:.28rem .4rem;
+  padding:
+    .32rem
+    .5rem;
 
-  border:1px solid rgba(255,255,255,.08);
+  border:
+    1px solid rgba(255,255,255,.08);
+
   border-radius:999px;
 
-  background:rgba(5,5,7,.6);
+  background:
+    rgba(5,5,7,.65);
 
-  color:rgba(243,241,236,.62);
+  color:
+    rgba(243,241,236,.62);
 
   font:
-    400 .43rem/1
+    400 .45rem/1
     var(--mono);
 
   letter-spacing:.13em;
+
 }
 
 .project-info{
+
   display:flex;
+
   flex-direction:column;
+
   justify-content:center;
 
   min-width:0;
+
+  padding:
+    .15rem
+    0
+    .35rem;
+
 }
 
 .project-desc{
+
   color:var(--muted);
 
-  font-size:.78rem;
+  font-size:.84rem;
 
-  line-height:1.68;
+  line-height:1.72;
+
 }
 
 .project-meta{
-  margin-top:.7rem;
+
+  margin-top:.8rem;
 
   color:
     color-mix(
@@ -768,15 +1092,17 @@ main{
     );
 
   font:
-    400 .52rem/1.3
+    400 .57rem/1.35
     var(--mono);
 
   letter-spacing:.08em;
 
   text-transform:uppercase;
+
 }
 
 .play-button{
+
   display:inline-flex;
 
   align-items:center;
@@ -786,9 +1112,11 @@ main{
 
   align-self:flex-start;
 
-  margin-top:1rem;
+  margin-top:1.1rem;
 
-  padding:.65rem .9rem;
+  padding:
+    .72rem
+    1rem;
 
   border:
     1px solid
@@ -807,7 +1135,7 @@ main{
   text-decoration:none;
 
   font:
-    500 .56rem/1
+    500 .60rem/1
     var(--mono);
 
   letter-spacing:.12em;
@@ -816,9 +1144,11 @@ main{
     background .2s ease,
     border-color .2s ease,
     transform .2s ease;
+
 }
 
 .play-button:hover{
+
   background:
     color-mix(
       in srgb,
@@ -833,81 +1163,109 @@ main{
       var(--line-strong)
     );
 
-  transform:translateY(-1px);
+  transform:
+    translateY(-1px);
+
 }
+
 
 /* =========================================================
    FOOTER
    ========================================================= */
 
 footer{
-  border-top:1px solid var(--line);
 
-  margin-top:2rem;
+  border-top:
+    1px solid var(--line);
+
+  margin-top:3rem;
+
 }
 
 .footer-inner{
-  width:min(
-    var(--container),
-    calc(100% - 1.5rem)
-  );
+
+  width:
+    min(
+      var(--container),
+      calc(100% - 2rem)
+    );
 
   margin:0 auto;
 
-  padding:2.2rem 0 2.8rem;
+  padding:
+    2.4rem
+    0
+    3.2rem;
 
   text-align:center;
+
 }
 
 .footer-brand{
+
   font:
-    600 .76rem/1
+    600 .82rem/1
     var(--sans);
 
   letter-spacing:.2em;
+
 }
 
 .footer-tagline{
-  margin-top:.65rem;
+
+  margin-top:.7rem;
 
   color:var(--paper);
 
   font:
-    400 .66rem/1.4
+    400 .70rem/1.4
     var(--mono);
 
-  letter-spacing:.09em;
+  letter-spacing:.08em;
+
 }
 
 .footer-tagline a{
+
   color:var(--paper);
+
   text-decoration:none;
 
-  border-bottom:1px solid rgba(167,139,250,.5);
+  border-bottom:
+    1px solid
+    rgba(167,139,250,.5);
 
   transition:
     color .2s ease,
     border-color .2s ease;
+
 }
 
 .footer-tagline a:hover{
+
   color:var(--violet);
 
-  border-color:var(--violet);
+  border-color:
+    var(--violet);
+
 }
 
 .footer-links{
+
   display:flex;
 
   justify-content:center;
+
   align-items:center;
 
-  gap:1.2rem;
+  gap:1.4rem;
 
-  margin-top:1.15rem;
+  margin-top:1.2rem;
+
 }
 
 .footer-icon-link{
+
   display:inline-flex;
 
   align-items:center;
@@ -919,69 +1277,95 @@ footer{
   text-decoration:none;
 
   font:
-    400 .56rem/1
+    400 .60rem/1
     var(--mono);
 
   letter-spacing:.08em;
 
-  border-bottom:1px solid transparent;
+  border-bottom:
+    1px solid transparent;
 
   transition:
     color .2s ease,
     border-color .2s ease,
     transform .2s ease;
+
 }
 
 .footer-icon-link:hover{
+
   color:var(--paper);
 
-  border-color:var(--violet);
+  border-color:
+    var(--violet);
 
-  transform:translateY(-1px);
+  transform:
+    translateY(-1px);
+
 }
 
 .footer-link-mark{
+
   font-size:.78rem;
+
   opacity:.9;
+
 }
 
 .footer-small{
+
   margin-top:1rem;
 
   color:var(--muted);
 
   font:
-    400 .53rem/1.4
+    400 .54rem/1.4
     var(--mono);
 
   letter-spacing:.08em;
+
 }
 
 .footer-year{
+
   margin-top:.45rem;
 
-  color:rgba(137,140,152,.5);
+  color:
+    rgba(137,140,152,.5);
 
   font:
-    400 .5rem/1
+    400 .51rem/1
     var(--mono);
 
   letter-spacing:.13em;
+
 }
+
 
 /* =========================================================
    MOBILE
    ========================================================= */
 
-@media (max-width:700px){
+@media (max-width:900px){
+
+  html{
+    font-size:16px;
+  }
+
+  :root{
+    --header-offset:96px;
+  }
 
   .header-inner,
   main,
   .footer-inner{
-    width:min(
-      var(--container),
-      calc(100% - 1rem)
-    );
+
+    width:
+      min(
+        var(--container),
+        calc(100% - 1rem)
+      );
+
   }
 
   .header-inner{
@@ -989,92 +1373,100 @@ footer{
   }
 
   .brand-logo{
+
     width:132px;
     height:132px;
-  }
 
-  .brand-tagline{
-    display:none;
   }
 
   .hero{
-    padding:3.1rem 0 1.8rem;
+
+    padding:
+      3.1rem
+      0
+      1.8rem;
+
   }
 
   .hero h1{
+
     font-size:
       clamp(
-        1.85rem,
+        2rem,
         9vw,
-        2.8rem
+        3rem
       );
+
   }
 
   .hero-sub{
-    font-size:.8rem;
-  }
-
-  .project-preview{
-    aspect-ratio:16/9;
+    font-size:.82rem;
   }
 
   .project-toggle{
-    min-height:70px;
 
-    padding-left:2rem;
+    min-height:74px;
 
-    grid-template-columns:
-      auto
-      1fr
-      auto
-      auto;
+    padding:
+      0
+      .65rem
+      0
+      2.1rem;
 
     gap:.65rem;
+
   }
 
   .project-icon{
-    width:38px;
-    height:38px;
+
+    width:40px;
+    height:40px;
 
     border-radius:11px;
+
   }
 
   .project-title{
-    font-size:.94rem;
+    font-size:1rem;
   }
 
   .project-flags{
+
     min-width:44px;
+
     gap:.2rem;
+
   }
 
   .game-flag .flag-icon{
+
     width:18px;
     height:12px;
+
   }
 
   .project-detail{
+
     grid-template-columns:1fr;
 
     padding:
       0
       .55rem
-      .8rem
-      2rem;
+      .9rem
+      2.1rem;
 
-    gap:.8rem;
+    gap:.9rem;
+
   }
 
   .project-preview{
-    aspect-ratio:4/3;
-  }
 
-  .project-info{
-    padding-bottom:.15rem;
+    aspect-ratio:4/3;
+
   }
 
   .project-desc{
-    font-size:.74rem;
+    font-size:.76rem;
   }
 
   .play-button{
@@ -1082,10 +1474,15 @@ footer{
   }
 
   .footer-links{
+
     gap:.9rem;
+
     flex-wrap:wrap;
+
   }
+
 }
+
 
 /* =========================================================
    REDUCED MOTION
@@ -1100,20 +1497,36 @@ footer{
   *,
   *::before,
   *::after{
+
     animation:none!important;
-    transition-duration:.01ms!important;
+
+    transition-duration:
+      .01ms!important;
+
   }
+
 }
+
 </style>
+
 
 <!-- =========================================================
      VERCEL WEB ANALYTICS
      ========================================================= -->
 
 <script>
-  window.va = window.va || function () {
-    (window.vaq = window.vaq || []).push(arguments);
+
+window.va =
+  window.va ||
+  function () {
+
+    (window.vaq =
+      window.vaq ||
+      []
+    ).push(arguments);
+
   };
+
 </script>
 
 <script
@@ -1123,34 +1536,41 @@ footer{
 
 </head>
 
+
 <body class="is-loading">
+
 
 <!-- =========================================================
      SVG SYMBOLS
-     Banderas embebidas: no dependen de emojis ni de fuentes.
      ========================================================= -->
 
 <svg
   aria-hidden="true"
   width="0"
   height="0"
-  style="position:absolute;overflow:hidden"
+  style="
+    position:absolute;
+    overflow:hidden;
+  "
 >
+
   <defs>
 
+
     <!-- ARGENTINA -->
-    <symbol id="flag-ar" viewBox="0 0 24 16">
+
+    <symbol
+      id="flag-ar"
+      viewBox="0 0 24 16"
+    >
 
       <rect
-        x="0"
-        y="0"
         width="24"
         height="16"
         fill="#74ACDF"
       />
 
       <rect
-        x="0"
         y="5.333"
         width="24"
         height="5.334"
@@ -1176,10 +1596,34 @@ footer{
         stroke-width=".38"
         stroke-linecap="round"
       >
-        <line x1="12" y1="4.85" x2="12" y2="3.9"/>
-        <line x1="12" y1="11.15" x2="12" y2="12.1"/>
-        <line x1="8.85" y1="8" x2="7.9" y2="8"/>
-        <line x1="15.15" y1="8" x2="16.1" y2="8"/>
+
+        <line
+          x1="12"
+          y1="4.85"
+          x2="12"
+          y2="3.9"
+        />
+
+        <line
+          x1="12"
+          y1="11.15"
+          x2="12"
+          y2="12.1"
+        />
+
+        <line
+          x1="8.85"
+          y1="8"
+          x2="7.9"
+          y2="8"
+        />
+
+        <line
+          x1="15.15"
+          y1="8"
+          x2="16.1"
+          y2="8"
+        />
 
         <line
           x1="9.78"
@@ -1208,32 +1652,75 @@ footer{
           x2="14.9"
           y2="10.9"
         />
+
       </g>
 
     </symbol>
 
+
     <!-- UNITED STATES -->
-    <symbol id="flag-us" viewBox="0 0 24 16">
+
+    <symbol
+      id="flag-us"
+      viewBox="0 0 24 16"
+    >
 
       <rect
-        x="0"
-        y="0"
         width="24"
         height="16"
         fill="#FFFFFF"
       />
 
-      <rect x="0" y="0" width="24" height="1.23" fill="#B22234"/>
-      <rect x="0" y="2.46" width="24" height="1.23" fill="#B22234"/>
-      <rect x="0" y="4.92" width="24" height="1.23" fill="#B22234"/>
-      <rect x="0" y="7.38" width="24" height="1.23" fill="#B22234"/>
-      <rect x="0" y="9.84" width="24" height="1.23" fill="#B22234"/>
-      <rect x="0" y="12.30" width="24" height="1.23" fill="#B22234"/>
-      <rect x="0" y="14.76" width="24" height="1.24" fill="#B22234"/>
+      <rect
+        y="0"
+        width="24"
+        height="1.23"
+        fill="#B22234"
+      />
 
       <rect
-        x="0"
-        y="0"
+        y="2.46"
+        width="24"
+        height="1.23"
+        fill="#B22234"
+      />
+
+      <rect
+        y="4.92"
+        width="24"
+        height="1.23"
+        fill="#B22234"
+      />
+
+      <rect
+        y="7.38"
+        width="24"
+        height="1.23"
+        fill="#B22234"
+      />
+
+      <rect
+        y="9.84"
+        width="24"
+        height="1.23"
+        fill="#B22234"
+      />
+
+      <rect
+        y="12.30"
+        width="24"
+        height="1.23"
+        fill="#B22234"
+      />
+
+      <rect
+        y="14.76"
+        width="24"
+        height="1.24"
+        fill="#B22234"
+      />
+
+      <rect
         width="10.5"
         height="8.65"
         fill="#3C3B6E"
@@ -1282,6 +1769,7 @@ footer{
     </symbol>
 
   </defs>
+
 </svg>
 
 
@@ -1294,6 +1782,7 @@ footer{
   id="loader"
   aria-hidden="true"
 >
+
   <div class="loader-inner">
 
     <img
@@ -1310,6 +1799,7 @@ footer{
     </div>
 
   </div>
+
 </div>
 
 
@@ -1321,6 +1811,7 @@ footer{
 
   <div class="header-inner">
 
+
     <a
       class="brand"
       href="#"
@@ -1331,10 +1822,12 @@ footer{
         class="brand-logo"
         aria-hidden="true"
       >
+
         <img
           src="/icono/lukson.arts.png"
           alt=""
         >
+
       </span>
 
     </a>
@@ -1398,7 +1891,9 @@ footer{
 
 <main>
 
+
   <section class="hero">
+
 
     <div class="hero-kicker">
 
@@ -1439,6 +1934,7 @@ footer{
       aria-hidden="true"
     ></div>
 
+
   </section>
 
 
@@ -1465,7 +1961,6 @@ footer{
 
     <!-- =====================================================
          APPS · PRODUCTOS
-         ALFABÉTICO
          ===================================================== -->
 
     <div class="section-label">
@@ -1480,7 +1975,9 @@ footer{
     </div>
 
 
-    <!-- AMAN -->
+    <!-- =====================================================
+         AMAN
+         ===================================================== -->
 
     <article
       class="project"
@@ -1529,6 +2026,7 @@ footer{
             class="game-flag"
             title="Español"
           >
+
             <svg
               class="flag-icon"
               viewBox="0 0 24 16"
@@ -1536,12 +2034,15 @@ footer{
             >
               <use href="#flag-ar"></use>
             </svg>
+
           </span>
+
 
           <span
             class="game-flag"
             title="English"
           >
+
             <svg
               class="flag-icon"
               viewBox="0 0 24 16"
@@ -1549,6 +2050,7 @@ footer{
             >
               <use href="#flag-us"></use>
             </svg>
+
           </span>
 
         </span>
@@ -1634,7 +2136,9 @@ footer{
     </article>
 
 
-    <!-- SENDERO -->
+    <!-- =====================================================
+         SENDERO
+         ===================================================== -->
 
     <article
       class="project"
@@ -1777,7 +2281,9 @@ footer{
     </article>
 
 
-    <!-- UMBRAL -->
+    <!-- =====================================================
+         UMBRAL
+         ===================================================== -->
 
     <article
       class="project"
@@ -1938,7 +2444,6 @@ footer{
 
     <!-- =====================================================
          JUEGOS
-         ALFABÉTICO
          ===================================================== -->
 
     <div class="section-label">
@@ -1953,7 +2458,9 @@ footer{
     </div>
 
 
-    <!-- CORPORITY -->
+    <!-- =====================================================
+         CORPORITY
+         ===================================================== -->
 
     <article
       class="project"
@@ -2112,7 +2619,9 @@ footer{
     </article>
 
 
-    <!-- EL BUCLE -->
+    <!-- =====================================================
+         EL BUCLE
+         ===================================================== -->
 
     <article
       class="project"
@@ -2255,7 +2764,9 @@ footer{
     </article>
 
 
-    <!-- EL ORIGEN -->
+    <!-- =====================================================
+         EL ORIGEN
+         ===================================================== -->
 
     <article
       class="project"
@@ -2395,7 +2906,9 @@ footer{
     </article>
 
 
-    <!-- MANDÍBULA -->
+    <!-- =====================================================
+         MANDÍBULA
+         ===================================================== -->
 
     <article
       class="project"
@@ -2538,7 +3051,9 @@ footer{
     </article>
 
 
-    <!-- MI MANDATO -->
+    <!-- =====================================================
+         MI MANDATO
+         ===================================================== -->
 
     <article
       class="project"
@@ -2680,6 +3195,7 @@ footer{
 
     </article>
 
+
   </section>
 
 </main>
@@ -2693,6 +3209,7 @@ footer{
 
   <div class="footer-inner">
 
+
     <div class="footer-brand">
       lukson.arts
     </div>
@@ -2701,6 +3218,7 @@ footer{
     <div class="footer-tagline">
 
       Creado con IA por
+
       <a
         href="https://www.linkedin.com/in/lucas-correa-3300211a6/"
         target="_blank"
@@ -2714,6 +3232,7 @@ footer{
 
 
     <div class="footer-links">
+
 
       <a
         class="footer-icon-link"
@@ -2754,6 +3273,7 @@ footer{
 
       </a>
 
+
     </div>
 
 
@@ -2766,6 +3286,7 @@ footer{
       © 2026 LUKSON.ARTS
     </div>
 
+
   </div>
 
 </footer>
@@ -2776,6 +3297,7 @@ footer{
      ========================================================= -->
 
 <script>
+
 (function () {
 
   "use strict";
@@ -2786,10 +3308,14 @@ footer{
      ======================================================= */
 
   const loader =
-    document.getElementById("loader");
+    document.getElementById(
+      "loader"
+    );
 
   const loaderStatus =
-    document.getElementById("loaderStatus");
+    document.getElementById(
+      "loaderStatus"
+    );
 
 
   function hideLoader() {
@@ -2798,7 +3324,9 @@ footer{
       return;
     }
 
-    loader.classList.add("hidden");
+    loader.classList.add(
+      "hidden"
+    );
 
     document.body.classList.remove(
       "is-loading"
@@ -2829,13 +3357,15 @@ footer{
     }
 
 
-    requestAnimationFrame(function () {
+    requestAnimationFrame(
+      function () {
 
-      requestAnimationFrame(
-        hideLoader
-      );
+        requestAnimationFrame(
+          hideLoader
+        );
 
-    });
+      }
+    );
 
   }
 
@@ -2870,6 +3400,140 @@ footer{
     );
 
 
+  /*
+   * Hace que el proyecto abierto quede realmente enfocado.
+   *
+   * Primera etapa:
+   *   lleva el proyecto cerca del comienzo de la pantalla.
+   *
+   * Segunda etapa:
+   *   comprueba si el contenido recién abierto quedó
+   *   parcialmente fuera de la pantalla y hace un pequeño
+   *   ajuste adicional.
+   */
+
+  function focusOpenedProject(
+    project,
+    detail
+  ) {
+
+    if (!project || !detail) {
+      return;
+    }
+
+
+    const reduceMotion =
+      window.matchMedia &&
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+
+    const behavior =
+      reduceMotion
+        ? "auto"
+        : "smooth";
+
+
+    /*
+     * Primero llevamos el encabezado del proyecto
+     * a una posición cómoda.
+     */
+    project.scrollIntoView({
+
+      behavior:behavior,
+
+      block:"start",
+
+      inline:"nearest"
+
+    });
+
+
+    /*
+     * Esperamos al siguiente frame para que el browser
+     * haya aplicado el nuevo layout del acordeón.
+     */
+    window.setTimeout(
+      function () {
+
+        const rect =
+          detail.getBoundingClientRect();
+
+
+        /*
+         * Margen visual inferior.
+         */
+        const bottomMargin = 36;
+
+
+        /*
+         * Si el detalle recién abierto queda por debajo
+         * de la pantalla, desplazamos sólo lo necesario.
+         */
+        if (
+          rect.bottom >
+          window.innerHeight -
+          bottomMargin
+        ) {
+
+          const amount =
+            rect.bottom -
+            (
+              window.innerHeight -
+              bottomMargin
+            );
+
+
+          window.scrollBy({
+
+            top:amount,
+
+            left:0,
+
+            behavior:behavior
+
+          });
+
+        }
+
+
+        /*
+         * Si por alguna razón la parte superior del
+         * contenido queda demasiado cerca del header,
+         * lo corregimos también.
+         */
+        else if (
+          rect.top <
+          110
+        ) {
+
+          const amount =
+            rect.top -
+            110;
+
+
+          window.scrollBy({
+
+            top:amount,
+
+            left:0,
+
+            behavior:behavior
+
+          });
+
+        }
+
+      },
+      reduceMotion
+        ? 0
+        : 180
+    );
+
+  }
+
+
   projectToggles.forEach(
     function (toggle) {
 
@@ -2877,11 +3541,23 @@ footer{
         "click",
         function () {
 
+          const project =
+            toggle.closest(
+              ".project"
+            );
+
+
           const detail =
             toggle.nextElementSibling;
 
-          if (!detail) {
+
+          if (
+            !detail ||
+            !project
+          ) {
+
             return;
+
           }
 
 
@@ -2891,13 +3567,20 @@ footer{
             ) === "true";
 
 
+          /*
+           * Cerrar cualquier otro proyecto.
+           */
+
           projectToggles.forEach(
             function (otherToggle) {
 
               if (
-                otherToggle === toggle
+                otherToggle ===
+                toggle
               ) {
+
                 return;
+
               }
 
 
@@ -2922,16 +3605,38 @@ footer{
           );
 
 
+          /*
+           * Abrir / cerrar el actual.
+           */
+
+          const open =
+            !wasOpen;
+
+
           toggle.setAttribute(
             "aria-expanded",
-            wasOpen
-              ? "false"
-              : "true"
+            open
+              ? "true"
+              : "false"
           );
 
 
           detail.hidden =
-            wasOpen;
+            !open;
+
+
+          /*
+           * Sólo enfocamos cuando realmente
+           * acabamos de abrirlo.
+           */
+          if (open) {
+
+            focusOpenedProject(
+              project,
+              detail
+            );
+
+          }
 
         }
       );
@@ -2956,7 +3661,9 @@ footer{
     );
 
 
-  function setLanguage(lang) {
+  function setLanguage(
+    lang
+  ) {
 
     const selectedLang =
       lang === "en"
@@ -2973,11 +3680,14 @@ footer{
 
         const value =
           element.getAttribute(
-            "data-" + selectedLang
+            "data-" +
+            selectedLang
           );
 
 
-        if (value !== null) {
+        if (
+          value !== null
+        ) {
 
           element.textContent =
             value;
@@ -3055,7 +3765,10 @@ footer{
 
     } catch (error) {
 
-      // Sin efecto sobre la web.
+      /*
+       * localStorage puede estar bloqueado.
+       * No afecta al funcionamiento.
+       */
 
     }
 
@@ -3104,7 +3817,9 @@ footer{
 
   } catch (error) {
 
-    // Sin efecto sobre la web.
+    /*
+     * Sin efecto.
+     */
 
   }
 
@@ -3115,7 +3830,7 @@ footer{
 
 
   /* =======================================================
-     PROJECT SEARCH
+     SEARCH
      ======================================================= */
 
   const searchInput =
@@ -3214,6 +3929,7 @@ footer{
 
 
 })();
+
 </script>
 
 </body>
