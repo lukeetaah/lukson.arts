@@ -114,6 +114,22 @@
         .lang-switch:hover { opacity: 0.75; filter: grayscale(0.4); }
         .lang-switch.active { opacity: 1; filter: grayscale(0); border-color: var(--accent); }
 
+        /* --- SECTION LABELS --- */
+        .section-label {
+            position: relative;
+            font-family: var(--mono);
+            font-size: 0.66rem;
+            letter-spacing: 0.28em;
+            color: var(--paper-dim);
+            padding: 1.6rem 1.4rem 0.9rem calc(var(--rail-x) + 2.4rem);
+        }
+        .section-label:first-child { padding-top: 0; }
+        .section-label span {
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--line-strong);
+            display: inline-block;
+        }
+
         /* --- PROJECTS --- */
         .projects {
             position: relative;
@@ -168,8 +184,8 @@
 
         .project-icon {
             flex-shrink: 0;
-            width: 68px;
-            height: 68px;
+            width: 84px;
+            height: 84px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -267,8 +283,8 @@
         }
 
         .project:hover .project-icon {
-            width: 100px;
-            height: 100px;
+            width: 124px;
+            height: 124px;
             opacity: 1;
         }
 
@@ -352,7 +368,7 @@
                 padding-bottom: 1.3rem;
             }
 
-            .project-icon { width: 54px; height: 54px; opacity: 0.95; }
+            .project-icon { width: 68px; height: 68px; opacity: 0.95; }
             .project-name { opacity: 0.92; font-size: 0.95rem; }
 
             /* Always show desc on mobile */
@@ -412,6 +428,8 @@
 
     <nav class="projects" aria-label="Proyectos">
 
+        <div class="section-label"><span data-es="APPS · PRODUCTOS" data-en="APPS · PRODUCTS">APPS · PRODUCTOS</span></div>
+
         <a class="project" style="--accent:#a78bfa" href="https://aman.free.je/?i=1" target="_blank" rel="noopener">
             <div class="project-node"></div>
             <div class="project-icon"><img src="icono/AMAN.png" alt="AMAN"></div>
@@ -439,6 +457,22 @@
             </div>
             <span class="project-arrow">→</span>
         </a>
+
+        <a class="project" style="--accent:#7dd3fc" href="https://umbral-gules.vercel.app/en" target="_blank" rel="noopener">
+            <div class="project-node"></div>
+            <div class="project-icon"><img src="icono/UMBRAL.png" alt="Umbral"></div>
+            <div class="project-text">
+                <div class="project-name">UMBRAL</div>
+                <div class="project-desc" data-es="Investigación abierta que corre entera en tu navegador. Escuchás sonidos breves y contás qué te evocan: un color, una forma, una sensación. El sistema aprende de tus propias respuestas, las compara contra controles y contra otras personas, y puede concluir con honestidad que no encontró nada. Sin cuenta, sin micrófono, sin promesas de leer tu mente." data-en="An open research experiment that runs entirely in your browser. You listen to short sounds and describe what they evoke — a color, a shape, a feeling. The system learns from your own responses, checks them against controls and other people, and can honestly conclude it found nothing. No account, no microphone, no claims about reading your mind.">Investigación abierta que corre entera en tu navegador. Escuchás sonidos breves y contás qué te evocan: un color, una forma, una sensación. El sistema aprende de tus propias respuestas, las compara contra controles y contra otras personas, y puede concluir con honestidad que no encontró nada. Sin cuenta, sin micrófono, sin promesas de leer tu mente.</div>
+                <div class="project-meta">
+                    <span data-es="INVESTIGACIÓN · CIENCIA COGNITIVA" data-en="RESEARCH · COGNITIVE SCIENCE">INVESTIGACIÓN · CIENCIA COGNITIVA</span>
+                    <span>ES · EN</span>
+                </div>
+            </div>
+            <span class="project-arrow">→</span>
+        </a>
+
+        <div class="section-label"><span data-es="JUEGOS" data-en="GAMES">JUEGOS</span></div>
 
         <a class="project" style="--accent:#f5b860" href="https://mi-mandato.vercel.app/" target="_blank" rel="noopener">
             <div class="project-node"></div>
