@@ -3,46 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUKSON ARTS</title>
-    <meta name="description" content="Lukson Arts — Creative Technology, AI, Products & Interactive Systems by Lucas Correa.">
+    <title>LUKSON ARTS — Ideas become systems</title>
+    <meta name="description" content="Lukson Arts — Interactive systems, experimental games, languages & simulations by Lucas Correa.">
     <meta property="og:title" content="LUKSON ARTS">
     <meta property="og:description" content="Ideas become systems. Products, games, languages, simulations & experimental systems.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #050507;
-            --bg-card: #0c0c10;
-            --bg-hover: #111118;
-            --tx: #e8e8ec;
-            --tx-muted: #6a6a78;
-            --tx-dim: #3a3a48;
-            --border: rgba(255,255,255,0.05);
-            --border-hover: rgba(255,255,255,0.1);
-            --grad-1: #a855f7;
+            --bg: #050508;
+            --bg-card: #0b0c14;
+            --bg-card-hover: #10121d;
+            --tx-title: #ffffff;
+            --tx-summary: #a0a6ba;
+            --tx-desc: #8a8f9f;
+            --tx-muted: #626779;
+            --tx-dim: #3e4252;
+            --border: rgba(255, 255, 255, 0.07);
+            --border-hover: rgba(255, 255, 255, 0.15);
+            --grad-1: #c084fc;
             --grad-2: #6366f1;
             --grad-3: #22d3ee;
-            --sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+            --body: 'Inter', system-ui, -apple-system, sans-serif;
             --mono: 'Space Mono', monospace;
+            --container: 1060px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         ::selection {
-            background: var(--grad-2);
+            background: rgba(99, 102, 241, 0.4);
             color: #fff;
         }
 
         html {
+            background: var(--bg);
             scroll-behavior: smooth;
+            scroll-padding-top: 96px;
         }
 
         body {
-            background: var(--bg);
-            color: var(--tx);
-            font-family: var(--sans);
+            background: radial-gradient(circle at 50% -8%, rgba(99, 102, 241, 0.08) 0%, transparent 60%), var(--bg);
+            color: var(--tx-title);
+            font-family: var(--body);
             min-height: 100vh;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
@@ -51,55 +57,38 @@
 
         /* ===== HERO ===== */
         .hero {
-            min-height: 100vh;
+            min-height: 75vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            animation: breathe 8s ease-in-out infinite;
-        }
-
-        @keyframes breathe {
-            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+            padding: 4rem 1.5rem 2rem;
+            text-align: center;
         }
 
         .hero-logo {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 200;
-            letter-spacing: 0.3em;
+            font-family: var(--sans);
+            font-size: clamp(2.6rem, 8vw, 5.4rem);
+            font-weight: 300;
+            letter-spacing: 0.26em;
             background: linear-gradient(135deg, var(--grad-1), var(--grad-2), var(--grad-3));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 1.2rem;
-            position: relative;
+            margin-right: -0.26em;
         }
 
         .hero-tagline {
-            font-size: 0.7rem;
-            letter-spacing: 0.4em;
+            font-size: 0.72rem;
+            letter-spacing: 0.35em;
             color: var(--tx-muted);
-            font-weight: 300;
+            font-family: var(--mono);
             text-transform: uppercase;
             display: flex;
             align-items: center;
-            gap: 0.7rem;
+            gap: 0.75rem;
         }
 
         .hero-tagline .dot {
@@ -107,387 +96,606 @@
             height: 6px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--grad-1), var(--grad-3));
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.7);
             display: inline-block;
             animation: pulse-dot 3s ease-in-out infinite;
         }
 
         @keyframes pulse-dot {
-            0%, 100% { opacity: 0.6; box-shadow: 0 0 4px rgba(99,102,241,0.3); }
-            50% { opacity: 1; box-shadow: 0 0 12px rgba(99,102,241,0.6); }
+            0%, 100% { opacity: 0.5; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.25); }
         }
 
         .hero-scroll {
             position: absolute;
-            bottom: 2.5rem;
+            bottom: 2rem;
             font-size: 0.55rem;
             letter-spacing: 0.3em;
+            font-family: var(--mono);
             color: var(--tx-dim);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.5rem;
             animation: float-down 2.5s ease-in-out infinite;
         }
 
         .hero-scroll .line {
             width: 1px;
-            height: 24px;
+            height: 20px;
             background: linear-gradient(to bottom, var(--tx-dim), transparent);
         }
 
         @keyframes float-down {
-            0%, 100% { transform: translateY(0); opacity: 0.5; }
-            50% { transform: translateY(6px); opacity: 1; }
+            0%, 100% { transform: translateY(0); opacity: 0.4; }
+            50% { transform: translateY(5px); opacity: 0.9; }
         }
 
-        /* ===== HEADER ===== */
+        /* ===== STICKY HEADER ===== */
         .header {
             position: fixed;
             top: 0; left: 0; width: 100%;
-            padding: 1rem 2rem;
+            padding: 0.85rem 2rem;
             z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(5,5,7,0.85);
+            background: rgba(5, 5, 8, 0.88);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             transform: translateY(-100%);
-            transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+            transition: transform 0.35s cubic-bezier(0.33, 1, 0.68, 1);
         }
 
         .header.visible { transform: translateY(0); }
 
         .header-brand {
-            font-size: 0.65rem;
-            letter-spacing: 0.35em;
-            font-weight: 300;
+            font-family: var(--sans);
+            font-size: 0.75rem;
+            letter-spacing: 0.28em;
+            font-weight: 600;
             background: linear-gradient(135deg, var(--grad-1), var(--grad-3));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-decoration: none;
+            cursor: pointer;
         }
 
         .lang-group {
             display: flex;
-            gap: 0.15rem;
-            background: rgba(255,255,255,0.03);
-            border-radius: 4px;
+            gap: 0.2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 6px;
             padding: 2px;
         }
 
         .lang-btn {
-            font-size: 0.6rem;
-            letter-spacing: 0.1em;
+            font-size: 0.62rem;
+            letter-spacing: 0.08em;
             font-family: var(--mono);
             cursor: pointer;
             border: none;
             background: none;
-            color: var(--tx-dim);
+            color: var(--tx-muted);
             padding: 0.25rem 0.55rem;
-            border-radius: 3px;
-            transition: all 0.25s ease;
+            border-radius: 4px;
+            transition: all 0.2s ease;
         }
-        .lang-btn:hover { color: var(--tx-muted); }
+        .lang-btn:hover { color: var(--tx-title); }
         .lang-btn.active {
-            color: var(--tx);
-            background: rgba(255,255,255,0.06);
+            color: #fff;
+            background: rgba(255, 255, 255, 0.09);
         }
 
-        /* ===== PROJECTS ===== */
+        /* ===== CONTROLS & FILTER BAR ===== */
+        .controls-wrapper {
+            max-width: var(--container);
+            margin: 0 auto 1.8rem;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.6rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--tx-title);
+            font-family: var(--body);
+            font-size: 0.82rem;
+            transition: all 0.25s ease;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: rgba(99, 102, 241, 0.5);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
+        }
+
+        .search-input::placeholder {
+            color: var(--tx-muted);
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.05em;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.95rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.85rem;
+            color: var(--tx-muted);
+            pointer-events: none;
+        }
+
+        .category-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            align-items: center;
+        }
+
+        .filter-btn {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--tx-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            color: var(--tx-title);
+            border-color: var(--border-hover);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .filter-btn.active {
+            background: rgba(255, 255, 255, 0.09);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.22);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+        }
+
+        /* ===== PROJECTS CONTAINER ===== */
         .projects-section {
-            padding: 0 0 4rem 0;
+            padding: 0 0 6rem 0;
         }
 
         .section-label {
-            font-size: 0.55rem;
-            letter-spacing: 0.5em;
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.45em;
             color: var(--tx-dim);
             text-align: center;
-            padding: 3rem 2rem 2rem;
+            padding: 1rem 2rem 1.8rem;
             font-weight: 400;
+            text-transform: uppercase;
         }
 
         .projects {
-            max-width: 900px;
+            max-width: var(--container);
             margin: 0 auto;
             padding: 0 1.5rem;
             display: flex;
             flex-direction: column;
-            gap: 1px;
+            gap: 10px;
         }
 
-        .project {
+        /* ===== PROJECT CARD ACCORDION ===== */
+        .project-card {
             position: relative;
-            display: flex;
-            align-items: flex-start;
-            padding: 1.8rem 2rem;
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--tx);
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            margin-bottom: 6px;
-            gap: 1.8rem;
-            transition: all 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+            border-radius: 12px;
+            transition: border-color 0.3s ease, background 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
             overflow: hidden;
         }
 
-        .project::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 8px;
-            padding: 1px;
-            background: linear-gradient(135deg, transparent, transparent);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-        }
-
-        .project:hover {
-            background: var(--bg-hover);
+        .project-card:hover {
+            background: var(--bg-card-hover);
             border-color: var(--border-hover);
             transform: translateY(-1px);
         }
 
-        .project:hover::before {
-            background: linear-gradient(135deg, var(--grad-1), var(--grad-2), var(--grad-3));
-            opacity: 0.4;
+        .project-card.active {
+            border-color: color-mix(in srgb, var(--accent, #6366f1) 45%, rgba(255, 255, 255, 0.15));
+            background: var(--bg-card-hover);
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45), 0 0 1px var(--accent, #6366f1);
+            transform: none;
         }
 
-        .project:focus-visible {
-            outline: 1px solid var(--grad-2);
-            outline-offset: 2px;
+        .project-card.hidden-by-filter {
+            display: none !important;
         }
 
-        .project-icon {
+        /* Header row button */
+        .project-toggle {
+            width: 100%;
+            display: grid;
+            grid-template-columns: auto auto auto 1fr auto auto;
+            align-items: center;
+            gap: 1.1rem;
+            padding: 1.15rem 1.4rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            color: var(--tx-title);
+            position: relative;
+        }
+
+        .project-toggle:focus-visible {
+            outline: 1px solid var(--accent, var(--grad-2));
+            outline-offset: -1px;
+        }
+
+        /* Left Dot Indicator */
+        .project-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent, #6366f1);
+            box-shadow: 0 0 8px color-mix(in srgb, var(--accent, #6366f1) 75%, transparent);
             flex-shrink: 0;
-            width: 44px;
-            height: 44px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover .project-dot,
+        .project-card.active .project-dot {
+            transform: scale(1.4);
+            box-shadow: 0 0 14px var(--accent, #6366f1);
+        }
+
+        /* Icon Container */
+        .project-icon {
+            width: 42px;
+            height: 42px;
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0.7;
-            transition: all 0.4s ease;
-            margin-top: 2px;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 9px;
+            padding: 5px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
-        .project:hover .project-icon {
-            opacity: 1;
-            transform: scale(1.08);
+        .project-card:hover .project-icon {
+            transform: scale(1.06);
+            border-color: rgba(255, 255, 255, 0.16);
         }
 
         .project-icon img {
-            max-height: 32px;
-            max-width: 110px;
-            width: auto;
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
-            filter: brightness(1.1);
+            filter: brightness(1.06);
         }
 
-        .project-text { flex: 1; min-width: 0; }
-
-        .project-name {
-            font-size: 0.8rem;
-            letter-spacing: 0.22em;
-            font-weight: 500;
-            margin-bottom: 0.45rem;
-            transition: all 0.3s ease;
+        .text-icon-badge {
+            font-family: var(--mono);
+            font-size: 0.46rem;
+            font-weight: 700;
+            color: var(--accent, var(--tx-title));
+            letter-spacing: 0.05em;
+            text-align: center;
+            line-height: 1.1;
         }
 
-        .project:hover .project-name {
-            background: linear-gradient(135deg, var(--grad-1), var(--grad-3));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .project-desc {
-            font-size: 0.78rem;
-            line-height: 1.65;
-            color: var(--tx-muted);
-            font-weight: 300;
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1),
-                        opacity 0.4s ease 0.08s,
-                        margin 0.4s ease;
-        }
-
-        .project:hover .project-desc {
-            max-height: 150px;
-            opacity: 1;
-            margin-bottom: 0.6rem;
-        }
-
-        .project-meta {
+        /* Project Titles & Category Badges */
+        .project-title-group {
             display: flex;
-            gap: 1rem;
-            max-height: 0;
+            align-items: center;
+            gap: 0.75rem;
+            white-space: nowrap;
+        }
+
+        .project-title {
+            font-family: var(--sans);
+            font-size: 0.98rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: #fff;
+        }
+
+        .category-pill {
+            font-family: var(--mono);
+            font-size: 0.52rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.18rem 0.45rem;
+            border-radius: 4px;
+            color: var(--accent, #6366f1);
+            background: color-mix(in srgb, var(--accent, #6366f1) 12%, transparent);
+            border: 1px solid color-mix(in srgb, var(--accent, #6366f1) 25%, transparent);
+        }
+
+        /* Summary in the previously empty space (subtle high-contrast readability) */
+        .project-summary {
+            font-size: 0.82rem;
+            font-weight: 400;
+            line-height: 1.45;
+            color: var(--tx-summary);
+            letter-spacing: 0.01em;
+            padding-left: 0.8rem;
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
             overflow: hidden;
-            opacity: 0;
-            transition: max-height 0.4s ease, opacity 0.3s ease 0.12s;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            transition: color 0.25s ease;
         }
 
-        .project:hover .project-meta {
-            max-height: 28px;
-            opacity: 1;
+        .project-card:hover .project-summary {
+            color: #d6d9e4;
         }
 
-        .project-tag {
-            font-size: 0.55rem;
-            letter-spacing: 0.15em;
+        .project-card.active .project-summary {
+            color: color-mix(in srgb, var(--accent, #fff) 28%, #e2e8f0);
+        }
+
+        /* Language tag */
+        .project-lang {
             font-family: var(--mono);
-            color: var(--tx-dim);
-            padding: 0.2rem 0.5rem;
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 3px;
-        }
-
-        .project-arrow {
+            font-size: 0.56rem;
+            letter-spacing: 0.08em;
+            color: var(--tx-muted);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 4px;
+            padding: 0.2rem 0.55rem;
+            white-space: nowrap;
             flex-shrink: 0;
-            opacity: 0;
-            transition: all 0.35s ease;
-            transform: translateX(-6px);
-            font-size: 1.1rem;
-            font-weight: 200;
-            color: var(--tx-dim);
-            margin-top: 2px;
         }
 
-        .project:hover .project-arrow {
-            opacity: 1;
-            transform: translateX(0);
-            color: var(--grad-3);
-        }
-
-        /* ===== HORROR VARIANT (EL ORIGEN) ===== */
-        .project.horror {
-            background: #08070a;
-            border-color: rgba(200,184,154,0.06);
-        }
-        .project.horror:hover {
-            background: #0d0c0f;
-            border-color: rgba(200,184,154,0.12);
-        }
-        .project.horror:hover::before {
-            background: linear-gradient(135deg, #c8b89a33, #4a443833);
-            opacity: 0.5;
-        }
-        .project.horror .project-name { color: #c8b89a; }
-        .project.horror:hover .project-name {
-            background: linear-gradient(135deg, #c8b89a, #8a7a6a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .project.horror .project-desc { color: #6a6058; }
-        .project.horror .project-tag { color: #4a4438; border-color: rgba(200,184,154,0.08); }
-        .project.horror .project-arrow { color: #4a4438; }
-        .project.horror:hover .project-arrow { color: #c8b89a; }
-
-        .text-icon {
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
-            font-weight: 300;
+        /* Chevron */
+        .project-chevron {
             font-family: var(--mono);
-            color: #c8b89a;
+            font-size: 0.88rem;
+            color: var(--tx-muted);
+            transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1), color 0.3s ease;
+            flex-shrink: 0;
+            width: 18px;
+            text-align: center;
+        }
+
+        .project-card.active .project-chevron {
+            transform: rotate(180deg);
+            color: var(--accent, #fff);
+        }
+
+        /* ===== EXPANDED DETAIL VIEW ===== */
+        .project-detail {
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
+            gap: 1.8rem;
+            padding: 0.4rem 1.4rem 1.6rem 1.4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 0.2rem;
+            animation: fadeInDetail 0.35s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+        }
+
+        .project-detail[hidden] {
+            display: none !important;
+        }
+
+        @keyframes fadeInDetail {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Preview Screenshot Box */
+        .project-preview {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #08080d;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            aspect-ratio: 16/9;
+            box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.7);
+        }
+
+        .project-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.45s ease;
+        }
+
+        .project-preview:hover img {
+            transform: scale(1.025);
+        }
+
+        .preview-badge {
+            position: absolute;
+            top: 0.7rem;
+            left: 0.7rem;
+            font-family: var(--mono);
+            font-size: 0.48rem;
+            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.75);
+            background: rgba(5, 5, 8, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.28rem 0.6rem;
+            border-radius: 999px;
+            text-transform: uppercase;
+        }
+
+        /* Detailed Info & Actions */
+        .project-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            gap: 1.3rem;
+        }
+
+        .project-desc-full {
+            font-size: 0.85rem;
+            line-height: 1.72;
+            color: var(--tx-desc);
+            font-weight: 300;
+        }
+
+        .project-meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .meta-tag {
+            font-family: var(--mono);
+            font-size: 0.55rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent, var(--grad-3));
+            background: color-mix(in srgb, var(--accent, #6366f1) 10%, transparent);
+            border: 1px solid color-mix(in srgb, var(--accent, #6366f1) 25%, transparent);
+            padding: 0.28rem 0.65rem;
+            border-radius: 5px;
+        }
+
+        .play-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            align-self: flex-start;
+            padding: 0.68rem 1.3rem;
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--accent, #6366f1) 14%, rgba(255, 255, 255, 0.03));
+            border: 1px solid color-mix(in srgb, var(--accent, #6366f1) 45%, rgba(255, 255, 255, 0.12));
+            color: #fff;
+            text-decoration: none;
+            font-family: var(--mono);
+            font-size: 0.64rem;
+            letter-spacing: 0.12em;
+            font-weight: 500;
+            transition: all 0.25s ease;
+        }
+
+        .play-btn:hover {
+            background: var(--accent, var(--grad-2));
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 0 20px color-mix(in srgb, var(--accent, #6366f1) 55%, transparent);
+            transform: translateY(-1px);
+        }
+
+        .play-btn .arrow {
+            transition: transform 0.2s ease;
+        }
+
+        .play-btn:hover .arrow {
+            transform: translate(2px, -2px);
+        }
+
+        /* ===== NO RESULTS STATE ===== */
+        .no-results {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--tx-muted);
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            display: none;
         }
 
         /* ===== FOOTER ===== */
         footer {
-            padding: 3rem 2rem;
+            padding: 3.5rem 2rem;
             text-align: center;
             border-top: 1px solid var(--border);
         }
 
         .footer-line {
-            font-size: 0.55rem;
-            letter-spacing: 0.25em;
-            color: var(--tx-dim);
-            font-weight: 300;
+            font-size: 0.58rem;
+            letter-spacing: 0.22em;
+            color: var(--tx-muted);
+            font-family: var(--mono);
         }
 
         .footer-line a {
-            color: var(--tx-muted);
+            color: var(--tx-title);
             text-decoration: none;
             transition: color 0.2s;
         }
+
         .footer-line a:hover {
             background: linear-gradient(135deg, var(--grad-1), var(--grad-3));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .footer-sub {
-            font-size: 0.5rem;
+            font-size: 0.52rem;
             letter-spacing: 0.15em;
+            font-family: var(--mono);
             color: var(--tx-dim);
             margin-top: 0.8rem;
-            font-weight: 300;
-            opacity: 0.5;
         }
 
-        /* ===== MOBILE ===== */
-        @media (max-width: 700px) {
-            .hero-logo { letter-spacing: 0.2em; }
-            .hero-tagline { font-size: 0.6rem; letter-spacing: 0.25em; }
-
-            .header { padding: 0.8rem 1.2rem; }
-
-            .projects { padding: 0 0.8rem; }
-
-            .project {
-                padding: 1.4rem 1.2rem;
-                gap: 1.2rem;
-                flex-direction: column;
-                align-items: stretch;
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .project-toggle {
+                grid-template-columns: auto auto 1fr auto;
+                gap: 0.85rem;
+                padding: 1.1rem;
             }
 
-            .project-icon {
-                opacity: 0.8;
-                width: auto;
-                height: auto;
-                justify-content: flex-start;
+            .project-title-group {
+                flex-wrap: wrap;
+                gap: 0.4rem;
             }
 
-            .project-desc {
-                max-height: 120px;
-                opacity: 1;
-                margin-bottom: 0.5rem;
+            .project-summary {
+                grid-column: 1 / -1;
+                padding-left: 0;
+                border-left: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+                padding-top: 0.6rem;
+                font-size: 0.78rem;
+                white-space: normal;
             }
 
-            .project-meta {
-                max-height: 28px;
-                opacity: 1;
+            .project-detail {
+                grid-template-columns: 1fr;
+                gap: 1.3rem;
+                padding: 0.3rem 1.1rem 1.4rem 1.1rem;
             }
 
-            .project-arrow {
-                position: absolute;
-                top: 1.4rem;
-                right: 1.2rem;
-                opacity: 0.3;
-                transform: translateX(0);
+            .play-btn {
+                width: 100%;
             }
+        }
 
-            .project:hover .project-icon { transform: none; }
-            .project:hover .project-name {
-                background: none;
-                -webkit-text-fill-color: currentColor;
-            }
-            .project.horror:hover .project-name {
-                background: none;
-                -webkit-text-fill-color: #c8b89a;
-            }
+        @media (max-width: 600px) {
+            .hero-logo { letter-spacing: 0.18em; }
+            .hero-tagline { font-size: 0.58rem; letter-spacing: 0.18em; }
+            .header { padding: 0.75rem 1.2rem; }
+            .controls-wrapper { padding: 0 1rem; }
+            .projects { padding: 0 1rem; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -509,105 +717,405 @@
             <span data-es="TUS IDEAS SE VUELVEN SISTEMAS" data-en="YOUR IDEAS BECOME SYSTEMS">TUS IDEAS SE VUELVEN SISTEMAS</span>
         </p>
         <div class="hero-scroll">
-            <span data-es="PROYECTOS" data-en="PROJECTS">PROYECTOS</span>
+            <span data-es="EXPLORAR SISTEMAS" data-en="EXPLORE SYSTEMS">EXPLORAR SISTEMAS</span>
             <div class="line"></div>
         </div>
     </section>
 
     <!-- STICKY HEADER -->
     <header class="header" id="header">
-        <span class="header-brand">LUKSON ARTS</span>
+        <a class="header-brand" href="#hero">LUKSON ARTS</a>
         <div class="lang-group">
-            <button class="lang-btn active" onclick="setLang('es')">ES</button>
-            <button class="lang-btn" onclick="setLang('en')">EN</button>
+            <button class="lang-btn active" onclick="setLang('es')" id="btn-es">ES</button>
+            <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
         </div>
     </header>
 
-    <!-- PROJECTS -->
+    <!-- CONTROLS & CATEGORY FILTERS -->
+    <div class="controls-wrapper">
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text"
+                   id="search-input"
+                   class="search-input"
+                   placeholder="BUSCAR PROYECTO O CATEGORÍA..."
+                   data-placeholder-es="BUSCAR PROYECTO O CATEGORÍA..."
+                   data-placeholder-en="SEARCH PROJECT OR CATEGORY..."
+                   aria-label="Buscar proyectos">
+        </div>
+
+        <div class="category-filters" role="tablist">
+            <button class="filter-btn active" data-category="all" data-es="TODOS" data-en="ALL">TODOS</button>
+            <button class="filter-btn" data-category="games" data-es="JUEGOS & SIMULACIONES" data-en="GAMES & SIMS">JUEGOS & SIMULACIONES</button>
+            <button class="filter-btn" data-category="systems" data-es="LENGUAJES & SISTEMAS" data-en="LANGUAGES & SYSTEMS">LENGUAJES & SISTEMAS</button>
+            <button class="filter-btn" data-category="growth" data-es="BIENESTAR" data-en="WELLBEING">BIENESTAR</button>
+            <button class="filter-btn" data-category="research" data-es="INVESTIGACIÓN" data-en="RESEARCH">INVESTIGACIÓN</button>
+        </div>
+    </div>
+
+    <!-- PROJECTS LIST -->
     <section class="projects-section">
-        <div class="section-label" data-es="PROYECTOS" data-en="PROJECTS">PROYECTOS</div>
+        <div class="section-label" data-es="PROYECTOS & JUEGOS EXPERIMENTALES" data-en="PROJECTS & EXPERIMENTAL GAMES">PROYECTOS & JUEGOS EXPERIMENTALES</div>
 
-        <nav class="projects" aria-label="Proyectos">
+        <div class="projects" id="projects-container">
 
-            <a class="project" href="https://aman.free.je/?i=1" target="_blank" rel="noopener">
-                <div class="project-icon"><img src="icono/AMAN.png" alt="AMAN"></div>
-                <div class="project-text">
-                    <div class="project-name">AMAN</div>
-                    <div class="project-desc" data-es="Un lenguaje ideográfico experimental. No empieza con miles de palabras arbitrarias: propone 67 primitivos conceptuales que se combinan para expresar ideas cada vez más complejas. En vez de memorizar «doctor», construís PERSONA + DAR + SALUD." data-en="An experimental ideographic language. Instead of thousands of arbitrary words, it proposes 67 conceptual primitives that combine to express increasingly complex ideas. Instead of memorizing 'doctor', you build PERSON + GIVE + HEALTH.">Un lenguaje ideográfico experimental. No empieza con miles de palabras arbitrarias: propone 67 primitivos conceptuales que se combinan para expresar ideas cada vez más complejas. En vez de memorizar «doctor», construís PERSONA + DAR + SALUD.</div>
-                    <div class="project-meta">
-                        <span class="project-tag" data-es="LENGUAJE EXPERIMENTAL" data-en="EXPERIMENTAL LANGUAGE">LENGUAJE EXPERIMENTAL</span>
-                        <span class="project-tag">ES · EN</span>
+            <!-- 1. RASTRO -->
+            <article class="project-card" data-category="games" style="--accent: #e05638;">
+                <button class="project-toggle" type="button" aria-expanded="false">
+                    <span class="project-dot" aria-hidden="true"></span>
+                    <span class="project-icon"><img src="icono/RASTRO.png" alt="RASTRO"></span>
+                    <div class="project-title-group">
+                        <span class="project-title">RASTRO</span>
+                        <span class="category-pill" data-es="1V1 TRIVIA & DEDUCCIÓN" data-en="1V1 TRIVIA & DEDUCTION">1V1 TRIVIA & DEDUCCIÓN</span>
+                    </div>
+                    <span class="project-summary"
+                          data-es="Investigación histórica competitiva 1v1 · Duelo por evidencia fotográfica real"
+                          data-en="1v1 competitive historical deduction · Duel over real archival evidence">
+                        Investigación histórica competitiva 1v1 · Duelo por evidencia fotográfica real
+                    </span>
+                    <span class="project-lang">ES · EN</span>
+                    <span class="project-chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div class="project-detail" hidden>
+                    <div class="project-preview">
+                        <span class="preview-badge">PREVIEW</span>
+                        <img src="icono/RASTRO_SS_1.png" alt="RASTRO preview" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <p class="project-desc-full"
+                           data-es="Motor de investigación histórica competitiva 1 vs 1. Dos jugadores reciben simultáneamente evidencia documental y fotográfica real en alta resolución de archivos públicos (AGN, LoC, Europeana). Inspeccioná detalles, zoom profundo, arquitectura y vestimentas históricas, y deducí época y coordenadas contra el reloj antes de que tu rival selle su hipótesis."
+                           data-en="1v1 competitive historical investigation game. Two players simultaneously analyze real high-res archival documents and photos (AGN, LoC, Europeana). Inspect architectural details, period clothing, and signage, and deduce the year and location against the clock before your rival seals their hypothesis.">
+                            Motor de investigación histórica competitiva 1 vs 1. Dos jugadores reciben simultáneamente evidencia documental y fotográfica real en alta resolución de archivos públicos (AGN, LoC, Europeana). Inspeccioná detalles, zoom profundo, arquitectura y vestimentas históricas, y deducí época y coordenadas contra el reloj antes de que tu rival selle su hipótesis.
+                        </p>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag" data-es="COMPETITIVO 1V1 · INVESTIGACIÓN HISTÓRICA" data-en="1V1 COMPETITIVE · HISTORICAL INVESTIGATION">COMPETITIVO 1V1 · INVESTIGACIÓN HISTÓRICA</span>
+                        </div>
+                        <a class="play-btn" href="https://rastro-sigma.vercel.app/" target="_blank" rel="noopener noreferrer">
+                            <span data-es="IR AL JUEGO" data-en="OPEN PROJECT">IR AL JUEGO</span>
+                            <span class="arrow">↗</span>
+                        </a>
                     </div>
                 </div>
-                <span class="project-arrow">→</span>
-            </a>
+            </article>
 
-            <a class="project" href="https://planet-club.vercel.app/sendero" target="_blank" rel="noopener">
-                <div class="project-icon"><img src="icono/Sendero.png" alt="Sendero"></div>
-                <div class="project-text">
-                    <div class="project-name">SENDERO</div>
-                    <div class="project-desc" data-es="Desarrollo personal en 12 semanas. No necesitás transformar tu vida de la noche a la mañana. Podés aprender a caminarla mejor. Hábitos adaptables, actividades reales, reflexión y encuentros humanos. Menos optimización. Más intención." data-en="A 12-week personal development journey. You don't need to transform your life overnight. You can learn to walk it better. Adaptable habits, real activities, reflection and human encounters. Less optimization. More intention.">Desarrollo personal en 12 semanas. No necesitás transformar tu vida de la noche a la mañana. Podés aprender a caminarla mejor. Hábitos adaptables, actividades reales, reflexión y encuentros humanos. Menos optimización. Más intención.</div>
-                    <div class="project-meta">
-                        <span class="project-tag" data-es="BIENESTAR · PRODUCTO" data-en="WELLBEING · PRODUCT">BIENESTAR · PRODUCTO</span>
-                        <span class="project-tag">ES</span>
+            <!-- 2. AMAN -->
+            <article class="project-card" data-category="systems" style="--accent: #a855f7;">
+                <button class="project-toggle" type="button" aria-expanded="false">
+                    <span class="project-dot" aria-hidden="true"></span>
+                    <span class="project-icon"><img src="icono/AMAN.png" alt="AMAN"></span>
+                    <div class="project-title-group">
+                        <span class="project-title">AMAN</span>
+                        <span class="category-pill" data-es="LENGUAJE CONCEPTUAL" data-en="CONCEPTUAL LANGUAGE">LENGUAJE CONCEPTUAL</span>
+                    </div>
+                    <span class="project-summary"
+                          data-es="Lenguaje ideográfico experimental · 67 primitivos conceptuales combinables"
+                          data-en="Experimental ideographic language · 67 combinable conceptual primitives">
+                        Lenguaje ideográfico experimental · 67 primitivos conceptuales combinables
+                    </span>
+                    <span class="project-lang">ES · EN</span>
+                    <span class="project-chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div class="project-detail" hidden>
+                    <div class="project-preview">
+                        <span class="preview-badge">PREVIEW</span>
+                        <img src="icono/AMAN_SS_1.png" alt="AMAN preview" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <p class="project-desc-full"
+                           data-es="Un lenguaje ideográfico experimental. No empieza con miles de palabras arbitrarias: propone 67 primitivos conceptuales que se combinan para expresar ideas cada vez más complejas. En vez de memorizar «doctor», construís PERSONA + DAR + SALUD."
+                           data-en="An experimental ideographic language. Instead of thousands of arbitrary words, it proposes 67 conceptual primitives that combine to express increasingly complex ideas. Instead of memorizing 'doctor', you build PERSON + GIVE + HEALTH.">
+                            Un lenguaje ideográfico experimental. No empieza con miles de palabras arbitrarias: propone 67 primitivos conceptuales que se combinan para expresar ideas cada vez más complejas. En vez de memorizar «doctor», construís PERSONA + DAR + SALUD.
+                        </p>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag" data-es="LENGUAJE EXPERIMENTAL · SISTEMA" data-en="EXPERIMENTAL LANGUAGE · SYSTEM">LENGUAJE EXPERIMENTAL · SISTEMA</span>
+                        </div>
+                        <a class="play-btn" href="https://aman.free.je/?i=1" target="_blank" rel="noopener noreferrer">
+                            <span data-es="IR A LA APP" data-en="OPEN APP">IR A LA APP</span>
+                            <span class="arrow">↗</span>
+                        </a>
                     </div>
                 </div>
-                <span class="project-arrow">→</span>
-            </a>
+            </article>
 
-            <a class="project" href="https://mi-mandato.vercel.app/" target="_blank" rel="noopener">
-                <div class="project-icon"><img src="icono/mi mandato.png" alt="Mi Mandato"></div>
-                <div class="project-text">
-                    <div class="project-name">MI MANDATO</div>
-                    <div class="project-desc" data-es="Simulación política narrativa. Asumís la presidencia de la República del Sur, 2032. Finanzas frágiles, inflación, sindicatos, medios, gobernadores, ciudadanos. Cada decisión tiene consecuencias. Algunas vuelven meses después de formas inesperadas." data-en="Narrative political simulation. You assume the presidency of the República del Sur, 2032. Fragile finances, inflation, unions, media, governors, citizens. Every decision has consequences. Some return months later in unexpected forms.">Simulación política narrativa. Asumís la presidencia de la República del Sur, 2032. Finanzas frágiles, inflación, sindicatos, medios, gobernadores, ciudadanos. Cada decisión tiene consecuencias. Algunas vuelven meses después de formas inesperadas.</div>
-                    <div class="project-meta">
-                        <span class="project-tag" data-es="SIMULACIÓN · JUEGO NARRATIVO" data-en="SIMULATION · NARRATIVE GAME">SIMULACIÓN · JUEGO NARRATIVO</span>
-                        <span class="project-tag">ES</span>
+            <!-- 3. SENDERO -->
+            <article class="project-card" data-category="growth" style="--accent: #38bdf8;">
+                <button class="project-toggle" type="button" aria-expanded="false">
+                    <span class="project-dot" aria-hidden="true"></span>
+                    <span class="project-icon"><img src="icono/Sendero.png" alt="Sendero"></span>
+                    <div class="project-title-group">
+                        <span class="project-title">SENDERO</span>
+                        <span class="category-pill" data-es="DESARROLLO PERSONAL" data-en="PERSONAL GROWTH">DESARROLLO PERSONAL</span>
+                    </div>
+                    <span class="project-summary"
+                          data-es="Desarrollo personal en 12 semanas · Hábitos adaptables y encuentros reales"
+                          data-en="12-week personal development · Adaptable habits & intentional growth">
+                        Desarrollo personal en 12 semanas · Hábitos adaptables y encuentros reales
+                    </span>
+                    <span class="project-lang">ES</span>
+                    <span class="project-chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div class="project-detail" hidden>
+                    <div class="project-preview">
+                        <span class="preview-badge">PREVIEW</span>
+                        <img src="icono/Sendero_SS_1.png" alt="Sendero preview" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <p class="project-desc-full"
+                           data-es="Desarrollo personal en 12 semanas. No necesitás transformar tu vida de la noche a la mañana. Podés aprender a caminarla mejor. Hábitos adaptables, actividades reales, reflexión y encuentros humanos. Menos optimización. Más intención."
+                           data-en="A 12-week personal development journey. You don't need to transform your life overnight. You can learn to walk it better. Adaptable habits, real activities, reflection and human encounters. Less optimization. More intention.">
+                            Desarrollo personal en 12 semanas. No necesitás transformar tu vida de la noche a la mañana. Podés aprender a caminarla mejor. Hábitos adaptables, actividades reales, reflexión y encuentros humanos. Menos optimización. Más intención.
+                        </p>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag" data-es="BIENESTAR · PRODUCTO INTERACTIVO" data-en="WELLBEING · INTERACTIVE PRODUCT">BIENESTAR · PRODUCTO INTERACTIVO</span>
+                        </div>
+                        <a class="play-btn" href="https://planet-club.vercel.app/sendero" target="_blank" rel="noopener noreferrer">
+                            <span data-es="IR AL PROGRAMA" data-en="OPEN PROGRAM">IR AL PROGRAMA</span>
+                            <span class="arrow">↗</span>
+                        </a>
                     </div>
                 </div>
-                <span class="project-arrow">→</span>
-            </a>
+            </article>
 
-            <a class="project" href="https://corpority.vercel.app/" target="_blank" rel="noopener">
-                <div class="project-icon"><img src="icono/Corpority.png" alt="Corpority"></div>
-                <div class="project-text">
-                    <div class="project-name">CORPORITY</div>
-                    <div class="project-desc" data-es="Simulación de supervivencia corporativa. Empezás una carrera y tratás de sobrevivir los años de trabajo. Jefes, política de oficina, eventos inesperados, burnout, absurdo organizacional. El objetivo: llegar al final con suficiente plata y suficiente cordura." data-en="Corporate survival simulation. Start a career and try to survive years of work. Bosses, office politics, unexpected events, burnout, organizational absurdity. The goal: reach the end with enough money and enough sanity.">Simulación de supervivencia corporativa. Empezás una carrera y tratás de sobrevivir los años de trabajo. Jefes, política de oficina, eventos inesperados, burnout, absurdo organizacional. El objetivo: llegar al final con suficiente plata y suficiente cordura.</div>
-                    <div class="project-meta">
-                        <span class="project-tag" data-es="SIMULACIÓN · SÁTIRA" data-en="SIMULATION · SATIRE">SIMULACIÓN · SÁTIRA</span>
-                        <span class="project-tag">ES</span>
+            <!-- 4. MI MANDATO -->
+            <article class="project-card" data-category="games" style="--accent: #f5b860;">
+                <button class="project-toggle" type="button" aria-expanded="false">
+                    <span class="project-dot" aria-hidden="true"></span>
+                    <span class="project-icon"><img src="icono/mi mandato.png" alt="Mi Mandato"></span>
+                    <div class="project-title-group">
+                        <span class="project-title">MI MANDATO</span>
+                        <span class="category-pill" data-es="SIMULACIÓN POLÍTICA" data-en="POLITICAL SIM">SIMULACIÓN POLÍTICA</span>
+                    </div>
+                    <span class="project-summary"
+                          data-es="Simulación política narrativa · Presidencia de la República del Sur 2032"
+                          data-en="Narrative political simulation · South Republic Presidency 2032">
+                        Simulación política narrativa · Presidencia de la República del Sur 2032
+                    </span>
+                    <span class="project-lang">ES</span>
+                    <span class="project-chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div class="project-detail" hidden>
+                    <div class="project-preview">
+                        <span class="preview-badge">PREVIEW</span>
+                        <img src="icono/mi mandato_SS_1.png" alt="Mi Mandato preview" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <p class="project-desc-full"
+                           data-es="Simulación política narrativa. Asumís la presidencia de la República del Sur en 2032. Finanzas frágiles, inflación persistente, sindicatos, medios, gobernadores y ciudadanos. Cada decisión tiene consecuencias duraderas que regresan meses después."
+                           data-en="Narrative political simulation. You assume the presidency of the República del Sur in 2032. Fragile finances, inflation, unions, media, and governors. Every decision carries lasting consequences that return months later in unexpected forms.">
+                            Simulación política narrativa. Asumís la presidencia de la República del Sur en 2032. Finanzas frágiles, inflación persistente, sindicatos, medios, gobernadores y ciudadanos. Cada decisión tiene consecuencias duraderas que regresan meses después.
+                        </p>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag" data-es="SIMULACIÓN POLÍTICA · NARRATIVA" data-en="POLITICAL SIMULATION · NARRATIVE">SIMULACIÓN POLÍTICA · NARRATIVA</span>
+                        </div>
+                        <a class="play-btn" href="https://mi-mandato.vercel.app/" target="_blank" rel="noopener noreferrer">
+                            <span data-es="IR AL JUEGO" data-en="OPEN PROJECT">IR AL JUEGO</span>
+                            <span class="arrow">↗</span>
+                        </a>
                     </div>
                 </div>
-                <span class="project-arrow">→</span>
-            </a>
+            </article>
 
-            <a class="project" href="https://ruptura.free.nf/?i=1" target="_blank" rel="noopener">
-                <div class="project-icon"><img src="icono/RUPTURA.png" alt="Ruptura"></div>
-                <div class="project-text">
-                    <div class="project-name">RUPTURA</div>
-                    <div class="project-desc" data-es="Cómic web interactivo y narrativa ramificada. No leés la historia: la influís. Las elecciones cambian la ruta y te convierten en participante activo. Lo interesante es el formato híbrido: un cómic que se comporta como un juego." data-en="Interactive web comic and branching narrative. You don't read the story: you influence it. Choices change the route and turn you into an active participant. The interesting part is the hybrid format: a web comic that behaves like a game.">Cómic web interactivo y narrativa ramificada. No leés la historia: la influís. Las elecciones cambian la ruta y te convierten en participante activo. Lo interesante es el formato híbrido: un cómic que se comporta como un juego.</div>
-                    <div class="project-meta">
-                        <span class="project-tag" data-es="CÓMIC INTERACTIVO · FICCIÓN" data-en="INTERACTIVE COMIC · FICTION">CÓMIC INTERACTIVO · FICCIÓN</span>
-                        <span class="project-tag">ES</span>
+            <!-- 5. MANDÍBULA -->
+            <article class="project-card" data-category="games" style="--accent: #84cc16;">
+                <button class="project-toggle" type="button" aria-expanded="false">
+                    <span class="project-dot" aria-hidden="true"></span>
+                    <span class="project-icon"><img src="icono/MANDIBULA.png" alt="Mandíbula"></span>
+                    <div class="project-title-group">
+                        <span class="project-title">MANDÍBULA</span>
+                        <span class="category-pill" data-es="ESTRATEGIA ASIMÉTRICA" data-en="ASYMMETRIC STRATEGY">ESTRATEGIA ASIMÉTRICA</span>
+                    </div>
+                    <span class="project-summary"
+                          data-es="Estrategia asimétrica viva · Colonia de hormigas en la estepa patagónica"
+                          data-en="Living asymmetric strategy · Patagonian ant colony simulation">
+                        Estrategia asimétrica viva · Colonia de hormigas en la estepa patagónica
+                    </span>
+                    <span class="project-lang">ES</span>
+                    <span class="project-chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div class="project-detail" hidden>
+                    <div class="project-preview">
+                        <span class="preview-badge">PREVIEW</span>
+                        <img src="icono/MANDIBULA_SS_1.png" alt="MANDÍBULA preview" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <p class="project-desc-full"
+                           data-es="Estrategia asimétrica viva. Gobernás una colonia de Acromyrmex lobicornis en la estepa patagónica. Un ecosistema sistémico pensado para distraerte: administrás recursos, reaccionás al entorno y tomás decisiones mientras la colonia sigue su propia lógica."
+                           data-en="A living asymmetric strategy game. You govern a colony of Acromyrmex lobicornis in the Patagonian steppe. Manage resources, react to the environment, and make decisions while the colony follows its own systemic logic.">
+                            Estrategia asimétrica viva. Gobernás una colonia de Acromyrmex lobicornis en la estepa patagónica. Un ecosistema sistémico pensado para distraerte: administrás recursos, reaccionás al entorno y tomás decisiones mientras la colonia sigue su propia lógica.
+                        </p>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag" data-es="ECOSISTEMA PATAGÓNICO · SIMULACIÓN" data-en="PATAGONIAN ECOSYSTEM · SIMULATION">ECOSISTEMA PATAGÓNICO · SIMULACIÓN</span>
+                        </div>
+                        <a class="play-btn" href="https://mandibula-six.vercel.app/" target="_blank" rel="noopener noreferrer">
+                            <span data-es="IR AL JUEGO" data-en="OPEN PROJECT">IR AL JUEGO</span>
+                            <span class="arrow">↗</span>
+                        </a>
                     </div>
                 </div>
-                <span class="project-arrow">→</span>
-            </a>
+            </article>
 
-            <a class="project horror" href="https://origin-game.vercel.app/" target="_blank" rel="noopener">
-                <div class="project-icon"><span class="text-icon">EL ORIGEN</span></div>
-                <div class="project-text">
-                    <div class="project-name">EL ORIGEN</div>
-                    <div class="project-desc" data-es="Horror psicológico. Entrás al departamento de tu abuela para una tasación. Los objetos no son decoración: son pistas. Documentos, fotos, notas, evidencia física. El horror viene de entender. No hay monstruos. Hay comprensión." data-en="Psychological horror. You enter your grandmother's apartment for an appraisal. Objects aren't decoration: they're clues. Documents, photos, notes, physical evidence. The horror comes from understanding. No monsters. Just comprehension.">Horror psicológico. Entrás al departamento de tu abuela para una tasación. Los objetos no son decoración: son pistas. Documentos, fotos, notas, evidencia física. El horror viene de entender. No hay monstruos. Hay comprensión.</div>
-                    <div class="project-meta">
-                        <span class="project-tag" data-es="HORROR · JUEGO · BETA" data-en="HORROR · GAME · BETA">HORROR · JUEGO · BETA</span>
-                        <span class="project-tag">ES</span>
+            <!-- 6. CORPORITY -->
+            <article class="project-card" data-category="games" style="--accent: #eab308;">
+                <button class="project-toggle" type="button" aria-expanded="false">
+                    <span class="project-dot" aria-hidden="true"></span>
+                    <span class="project-icon"><img src="icono/Corpority.png" alt="Corpority"></span>
+                    <div class="project-title-group">
+                        <span class="project-title">CORPORITY</span>
+                        <span class="category-pill" data-es="SÁTIRA LABORAL" data-en="OFFICE SATIRE">SÁTIRA LABORAL</span>
+                    </div>
+                    <span class="project-summary"
+                          data-es="Simulación de supervivencia corporativa · Política de oficina y burnout"
+                          data-en="Satirical corporate survival · Office politics, burnout & sanity">
+                        Simulación de supervivencia corporativa · Política de oficina y burnout
+                    </span>
+                    <span class="project-lang">ES</span>
+                    <span class="project-chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div class="project-detail" hidden>
+                    <div class="project-preview">
+                        <span class="preview-badge">PREVIEW</span>
+                        <img src="icono/Corpority_SS_1.png" alt="Corpority preview" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <p class="project-desc-full"
+                           data-es="Simulación de supervivencia corporativa. Empezás una carrera y tratás de sobrevivir los años de trabajo. Jefes impredecibles, política de oficina, eventos inesperados, burnout y absurdo organizacional. El objetivo: llegar al final con suficiente plata y suficiente cordura."
+                           data-en="Corporate survival simulation. Start a career and try to survive years of work. Unpredictable bosses, office politics, unexpected events, burnout, and organizational absurdity. The goal: reach retirement with enough cash and sanity.">
+                            Simulación de supervivencia corporativa. Empezás una carrera y tratás de sobrevivir los años de trabajo. Jefes impredecibles, política de oficina, eventos inesperados, burnout y absurdo organizacional. El objetivo: llegar al final con suficiente plata y suficiente cordura.
+                        </p>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag" data-es="SIMULACIÓN · SÁTIRA LABORAL" data-en="SIMULATION · CORPORATE SATIRE">SIMULACIÓN · SÁTIRA LABORAL</span>
+                        </div>
+                        <a class="play-btn" href="https://corpority.vercel.app/" target="_blank" rel="noopener noreferrer">
+                            <span data-es="IR AL JUEGO" data-en="OPEN PROJECT">IR AL JUEGO</span>
+                            <span class="arrow">↗</span>
+                        </a>
                     </div>
                 </div>
-                <span class="project-arrow">→</span>
-            </a>
+            </article>
 
-        </nav>
+            <!-- 7. EL ORIGEN -->
+            <article class="project-card" data-category="games" style="--accent: #c8b89a;">
+                <button class="project-toggle" type="button" aria-expanded="false">
+                    <span class="project-dot" aria-hidden="true"></span>
+                    <span class="project-icon"><span class="text-icon-badge">EL<br>ORIGEN</span></span>
+                    <div class="project-title-group">
+                        <span class="project-title">EL ORIGEN</span>
+                        <span class="category-pill" data-es="HORROR DEDUCTIVO" data-en="DEDUCTIVE HORROR">HORROR DEDUCTIVO</span>
+                    </div>
+                    <span class="project-summary"
+                          data-es="Horror psicológico deductivo · El departamento de tu abuela guarda pistas"
+                          data-en="Deductive psychological horror · Grandmother's apartment holds clues">
+                        Horror psicológico deductivo · El departamento de tu abuela guarda pistas
+                    </span>
+                    <span class="project-lang">ES</span>
+                    <span class="project-chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div class="project-detail" hidden>
+                    <div class="project-preview">
+                        <span class="preview-badge">PREVIEW</span>
+                        <img src="icono/el-origen_SS_1.png" alt="El Origen preview" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <p class="project-desc-full"
+                           data-es="Horror psicológico e investigación. Entrás al departamento de tu abuela para una tasación. Los objetos no son decoración: son pistas documentales, fotos familiares y notas. El horror viene de comprender. No hay monstruos. Hay comprensión."
+                           data-en="Psychological horror and investigation. Enter your grandmother's apartment for an appraisal. Objects aren't decoration: they are clues, documents, family photos, and notes. The horror comes from understanding. No monsters. Just comprehension.">
+                            Horror psicológico e investigación. Entrás al departamento de tu abuela para una tasación. Los objetos no son decoración: son pistas documentales, fotos familiares y notas. El horror viene de comprender. No hay monstruos. Hay comprensión.
+                        </p>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag" data-es="HORROR PSICOLÓGICO · INVESTIGACIÓN" data-en="PSYCHOLOGICAL HORROR · INVESTIGATION">HORROR PSICOLÓGICO · INVESTIGACIÓN</span>
+                        </div>
+                        <a class="play-btn" href="https://origin-game.vercel.app/" target="_blank" rel="noopener noreferrer">
+                            <span data-es="IR AL JUEGO" data-en="OPEN PROJECT">IR AL JUEGO</span>
+                            <span class="arrow">↗</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 8. EL BUCLE / RUPTURA -->
+            <article class="project-card" data-category="games" style="--accent: #e879f9;">
+                <button class="project-toggle" type="button" aria-expanded="false">
+                    <span class="project-dot" aria-hidden="true"></span>
+                    <span class="project-icon"><img src="icono/EL BUCLE.png" alt="El Bucle"></span>
+                    <div class="project-title-group">
+                        <span class="project-title">EL BUCLE</span>
+                        <span class="category-pill" data-es="CÓMIC INTERACTIVO" data-en="INTERACTIVE COMIC">CÓMIC INTERACTIVO</span>
+                    </div>
+                    <span class="project-summary"
+                          data-es="Cómic interactivo y narrativa ramificada · Universo RUPTURA"
+                          data-en="Interactive web comic & branching narrative · RUPTURA universe">
+                        Cómic interactivo y narrativa ramificada · Universo RUPTURA
+                    </span>
+                    <span class="project-lang">ES</span>
+                    <span class="project-chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div class="project-detail" hidden>
+                    <div class="project-preview">
+                        <span class="preview-badge">PREVIEW</span>
+                        <img src="icono/EL BUCLE_SS_1.png" alt="El Bucle preview" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <p class="project-desc-full"
+                           data-es="Una experiencia narrativa interactiva nacida del universo RUPTURA. Un relato que no se limita a ser leído: las decisiones alteran la ruta y convierten al jugador en parte de la historia. El proyecto explora qué ocurre cuando un cómic, un juego y una narrativa ramificada comparten el mismo espacio."
+                           data-en="An interactive narrative experience born from the RUPTURA universe. A story that isn't simply read: choices alter the route and turn the player into part of the story. The project explores what happens when a comic, game, and branching narrative merge.">
+                            Una experiencia narrativa interactiva nacida del universo RUPTURA. Un relato que no se limita a ser leído: las decisiones alteran la ruta y convierten al jugador en parte de la historia. El proyecto explora qué ocurre cuando un cómic, un juego y una narrativa ramificada comparten el mismo espacio.
+                        </p>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag" data-es="CÓMIC INTERACTIVO · NARRATIVA" data-en="INTERACTIVE COMIC · NARRATIVE">CÓMIC INTERACTIVO · NARRATIVA</span>
+                        </div>
+                        <a class="play-btn" href="https://ruptura.free.nf/?i=1" target="_blank" rel="noopener noreferrer">
+                            <span data-es="IR AL JUEGO" data-en="OPEN PROJECT">IR AL JUEGO</span>
+                            <span class="arrow">↗</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 9. UMBRAL -->
+            <article class="project-card" data-category="research" style="--accent: #7dd3fc;">
+                <button class="project-toggle" type="button" aria-expanded="false">
+                    <span class="project-dot" aria-hidden="true"></span>
+                    <span class="project-icon"><img src="icono/UMBRAL.png" alt="Umbral"></span>
+                    <div class="project-title-group">
+                        <span class="project-title">UMBRAL</span>
+                        <span class="category-pill" data-es="INVESTIGACIÓN COGNITIVA" data-en="COGNITIVE RESEARCH">INVESTIGACIÓN COGNITIVA</span>
+                    </div>
+                    <span class="project-summary"
+                          data-es="Investigación de percepción sinestésica · Respuestas sonoras en el navegador"
+                          data-en="Synesthetic perception research · Browser sound evocative responses">
+                        Investigación de percepción sinestésica · Respuestas sonoras en el navegador
+                    </span>
+                    <span class="project-lang">ES · EN</span>
+                    <span class="project-chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div class="project-detail" hidden>
+                    <div class="project-preview">
+                        <span class="preview-badge">PREVIEW</span>
+                        <img src="icono/UMBRAL_SS_1.png" alt="Umbral preview" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <p class="project-desc-full"
+                           data-es="Investigación abierta que corre entera en tu navegador. Escuchás sonidos breves y contás qué te evocan: un color, una forma, una sensación. El sistema aprende de tus respuestas, las compara contra controles y otras personas, y puede concluir con honestidad si encontró patrones. Sin cuenta ni micrófono."
+                           data-en="An open research experiment that runs entirely in your browser. You listen to short sounds and describe what they evoke — a color, shape, or feeling. The system learns from your responses, checks them against controls and other people, with no account or microphone needed.">
+                            Investigación abierta que corre entera en tu navegador. Escuchás sonidos breves y contás qué te evocan: un color, una forma, una sensación. El sistema aprende de tus respuestas, las compara contra controles y otras personas, y puede concluir con honestidad si encontró patrones. Sin cuenta ni micrófono.
+                        </p>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag" data-es="INVESTIGACIÓN · EXPERIMENTO COGNITIVO" data-en="RESEARCH · COGNITIVE EXPERIMENT">INVESTIGACIÓN · EXPERIMENTO COGNITIVO</span>
+                        </div>
+                        <a class="play-btn" href="https://umbral-gules.vercel.app/en" target="_blank" rel="noopener noreferrer">
+                            <span data-es="IR A LA APP" data-en="OPEN APP">IR A LA APP</span>
+                            <span class="arrow">↗</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- No results notice -->
+            <div id="no-results" class="no-results" data-es="No se encontraron proyectos con ese criterio." data-en="No projects found matching that criteria.">
+                No se encontraron proyectos con ese criterio.
+            </div>
+
+        </div>
     </section>
 
     <!-- FOOTER -->
@@ -617,32 +1125,149 @@
             &nbsp;·&nbsp;
             <span data-es="ASISTIDO POR IA · DIRIGIDO POR HUMANOS" data-en="AI-ASSISTED · HUMAN-DIRECTED">ASISTIDO POR IA · DIRIGIDO POR HUMANOS</span>
             &nbsp;·&nbsp;
-            <a href="https://github.com/lukeetaah/lukson.arts" target="_blank" rel="noopener">GITHUB</a>
+            <a href="https://github.com/lukeetaah/lukson.arts" target="_blank" rel="noopener noreferrer">GITHUB</a>
         </div>
         <div class="footer-sub">luksonarts.vercel.app</div>
     </footer>
 
     <script>
-        // --- Language switch ---
+        // --- State Management ---
+        let currentLang = 'es';
+        let currentCategory = 'all';
+        let currentSearchQuery = '';
+
+        // --- Language Toggle ---
         function setLang(lang) {
+            currentLang = lang;
             document.querySelectorAll('.lang-btn').forEach(b =>
-                b.classList.toggle('active', b.textContent.trim() === lang.toUpperCase())
+                b.classList.toggle('active', b.textContent.trim().toLowerCase() === lang.toLowerCase())
             );
             document.documentElement.lang = lang;
-            document.querySelectorAll('[data-' + lang + ']').forEach(el =>
-                el.textContent = el.getAttribute('data-' + lang)
-            );
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) el.textContent = text;
+            });
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                const placeholder = searchInput.getAttribute('data-placeholder-' + lang);
+                if (placeholder) searchInput.placeholder = placeholder;
+            }
+            try {
+                localStorage.setItem('lukson-language', lang);
+            } catch(e) {}
         }
 
-        // --- Sticky header on scroll past hero ---
+        // Load saved language
+        try {
+            const savedLang = localStorage.getItem('lukson-language');
+            if (savedLang === 'en' || savedLang === 'es') {
+                setLang(savedLang);
+            }
+        } catch(e) {}
+
+        // --- Sticky Header Observer ---
         const header = document.getElementById('header');
         const hero = document.getElementById('hero');
+        if (header && hero) {
+            const obs = new IntersectionObserver(([entry]) => {
+                header.classList.toggle('visible', !entry.isIntersecting);
+            }, { threshold: 0.1 });
+            obs.observe(hero);
+        }
 
-        const obs = new IntersectionObserver(([entry]) => {
-            header.classList.toggle('visible', !entry.isIntersecting);
-        }, { threshold: 0.1 });
+        // --- Filtering & Search ---
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const searchInput = document.getElementById('search-input');
+        const cards = document.querySelectorAll('.project-card');
+        const noResults = document.getElementById('no-results');
 
-        obs.observe(hero);
+        function applyFilters() {
+            let visibleCount = 0;
+            const q = currentSearchQuery.trim().toLowerCase();
+
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                const categoryMatch = (currentCategory === 'all' || cardCategory === currentCategory);
+
+                const cardText = card.textContent.toLowerCase();
+                const searchMatch = !q || cardText.includes(q);
+
+                if (categoryMatch && searchMatch) {
+                    card.classList.remove('hidden-by-filter');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden-by-filter');
+                    if (card.classList.contains('active')) {
+                        card.classList.remove('active');
+                        const toggle = card.querySelector('.project-toggle');
+                        const detail = card.querySelector('.project-detail');
+                        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                        if (detail) detail.hidden = true;
+                    }
+                }
+            });
+
+            if (noResults) {
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            }
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCategory = btn.getAttribute('data-category') || 'all';
+                applyFilters();
+            });
+        });
+
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                currentSearchQuery = e.target.value;
+                applyFilters();
+            });
+        }
+
+        // --- Accordion Logic with smooth focus ---
+        cards.forEach(card => {
+            const toggle = card.querySelector('.project-toggle');
+            const detail = card.querySelector('.project-detail');
+            if (!toggle || !detail) return;
+
+            toggle.addEventListener('click', () => {
+                const isCurrentlyActive = card.classList.contains('active');
+
+                // Close any other open project cards
+                cards.forEach(otherCard => {
+                    if (otherCard !== card) {
+                        otherCard.classList.remove('active');
+                        const otherToggle = otherCard.querySelector('.project-toggle');
+                        const otherDetail = otherCard.querySelector('.project-detail');
+                        if (otherToggle) otherToggle.setAttribute('aria-expanded', 'false');
+                        if (otherDetail) otherDetail.hidden = true;
+                    }
+                });
+
+                // Toggle current card
+                if (isCurrentlyActive) {
+                    card.classList.remove('active');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    detail.hidden = true;
+                } else {
+                    card.classList.add('active');
+                    toggle.setAttribute('aria-expanded', 'true');
+                    detail.hidden = false;
+
+                    // Smoothly ensure the card is in a comfortable reading view
+                    setTimeout(() => {
+                        const rect = card.getBoundingClientRect();
+                        if (rect.top < 85 || rect.bottom > window.innerHeight) {
+                            card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        }
+                    }, 80);
+                }
+            });
+        });
     </script>
 </body>
 </html>
