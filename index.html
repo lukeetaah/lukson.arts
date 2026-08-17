@@ -15,27 +15,27 @@
         :root {
             --bg: #050508;
             --bg-card: #0b0c14;
-            --bg-card-hover: #10121d;
+            --bg-card-hover: #111320;
             --tx-title: #ffffff;
-            --tx-summary: #a0a6ba;
-            --tx-desc: #8a8f9f;
-            --tx-muted: #626779;
-            --tx-dim: #3e4252;
-            --border: rgba(255, 255, 255, 0.07);
-            --border-hover: rgba(255, 255, 255, 0.15);
+            --tx-summary: #a4abbf;
+            --tx-desc: #8d93a6;
+            --tx-muted: #64697d;
+            --tx-dim: #3e4254;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.18);
             --grad-1: #c084fc;
             --grad-2: #6366f1;
             --grad-3: #22d3ee;
             --sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
             --body: 'Inter', system-ui, -apple-system, sans-serif;
             --mono: 'Space Mono', monospace;
-            --container: 1060px;
+            --container: 1080px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         ::selection {
-            background: rgba(99, 102, 241, 0.4);
+            background: rgba(99, 102, 241, 0.45);
             color: #fff;
         }
 
@@ -46,7 +46,7 @@
         }
 
         body {
-            background: radial-gradient(circle at 50% -8%, rgba(99, 102, 241, 0.08) 0%, transparent 60%), var(--bg);
+            background: radial-gradient(circle at 50% -10%, rgba(99, 102, 241, 0.1) 0%, transparent 60%), var(--bg);
             color: var(--tx-title);
             font-family: var(--body);
             min-height: 100vh;
@@ -55,92 +55,122 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ===== HERO ===== */
+        /* ===== HERO SECTION ===== */
         .hero {
-            min-height: 75vh;
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 4rem 1.5rem 2rem;
+            padding: 4.5rem 1.5rem 2.5rem;
             text-align: center;
         }
 
-        .hero-logo {
-            font-family: var(--sans);
-            font-size: clamp(2.6rem, 8vw, 5.4rem);
-            font-weight: 300;
-            letter-spacing: 0.26em;
-            background: linear-gradient(135deg, var(--grad-1), var(--grad-2), var(--grad-3));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1.2rem;
-            margin-right: -0.26em;
+        .hero-brand-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.8rem;
+            position: relative;
+        }
+
+        .hero-brand-wrap::before {
+            content: '';
+            position: absolute;
+            width: clamp(260px, 45vw, 450px);
+            height: clamp(260px, 45vw, 450px);
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, transparent 70%);
+            pointer-events: none;
+            animation: pulse-glow 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            100% { transform: scale(1.15); opacity: 1; }
+        }
+
+        .hero-main-logo {
+            width: clamp(240px, 36vw, 400px);
+            height: auto;
+            max-width: 90vw;
+            object-fit: contain;
+            border-radius: 24px;
+            filter: drop-shadow(0 0 35px rgba(99, 102, 241, 0.4)) brightness(1.08);
+            transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1), filter 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-main-logo:hover {
+            transform: scale(1.035);
+            filter: drop-shadow(0 0 50px rgba(192, 132, 252, 0.6)) brightness(1.15);
         }
 
         .hero-tagline {
-            font-size: 0.72rem;
-            letter-spacing: 0.35em;
+            font-size: 0.76rem;
+            letter-spacing: 0.38em;
             color: var(--tx-muted);
             font-family: var(--mono);
             text-transform: uppercase;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.8rem;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-tagline .dot {
-            width: 6px;
-            height: 6px;
+            width: 7px;
+            height: 7px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--grad-1), var(--grad-3));
-            box-shadow: 0 0 10px rgba(99, 102, 241, 0.7);
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.8);
             display: inline-block;
             animation: pulse-dot 3s ease-in-out infinite;
         }
 
         @keyframes pulse-dot {
-            0%, 100% { opacity: 0.5; transform: scale(0.9); }
-            50% { opacity: 1; transform: scale(1.25); }
+            0%, 100% { opacity: 0.5; transform: scale(0.85); }
+            50% { opacity: 1; transform: scale(1.3); }
         }
 
         .hero-scroll {
             position: absolute;
             bottom: 2rem;
-            font-size: 0.55rem;
-            letter-spacing: 0.3em;
+            font-size: 0.56rem;
+            letter-spacing: 0.32em;
             font-family: var(--mono);
             color: var(--tx-dim);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.55rem;
             animation: float-down 2.5s ease-in-out infinite;
         }
 
         .hero-scroll .line {
             width: 1px;
-            height: 20px;
+            height: 22px;
             background: linear-gradient(to bottom, var(--tx-dim), transparent);
         }
 
         @keyframes float-down {
             0%, 100% { transform: translateY(0); opacity: 0.4; }
-            50% { transform: translateY(5px); opacity: 0.9; }
+            50% { transform: translateY(6px); opacity: 0.95; }
         }
 
         /* ===== STICKY HEADER ===== */
         .header {
             position: fixed;
             top: 0; left: 0; width: 100%;
-            padding: 0.85rem 2rem;
+            padding: 0.8rem 2rem;
             z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(5, 5, 8, 0.88);
+            background: rgba(5, 5, 8, 0.9);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
@@ -150,17 +180,30 @@
 
         .header.visible { transform: translateY(0); }
 
-        .header-brand {
+        .header-brand-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .header-mini-logo {
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            object-fit: contain;
+        }
+
+        .header-brand-text {
             font-family: var(--sans);
-            font-size: 0.75rem;
-            letter-spacing: 0.28em;
+            font-size: 0.78rem;
+            letter-spacing: 0.25em;
             font-weight: 600;
             background: linear-gradient(135deg, var(--grad-1), var(--grad-3));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-decoration: none;
-            cursor: pointer;
         }
 
         .lang-group {
@@ -180,14 +223,14 @@
             border: none;
             background: none;
             color: var(--tx-muted);
-            padding: 0.25rem 0.55rem;
+            padding: 0.25rem 0.6rem;
             border-radius: 4px;
             transition: all 0.2s ease;
         }
         .lang-btn:hover { color: var(--tx-title); }
         .lang-btn.active {
             color: #fff;
-            background: rgba(255, 255, 255, 0.09);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         /* ===== CONTROLS & FILTER BAR ===== */
@@ -207,21 +250,21 @@
 
         .search-input {
             width: 100%;
-            padding: 0.75rem 1rem 0.75rem 2.6rem;
-            background: rgba(255, 255, 255, 0.02);
+            padding: 0.8rem 1rem 0.8rem 2.8rem;
+            background: rgba(255, 255, 255, 0.025);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 12px;
             color: var(--tx-title);
             font-family: var(--body);
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             transition: all 0.25s ease;
             outline: none;
         }
 
         .search-input:focus {
-            border-color: rgba(99, 102, 241, 0.5);
-            background: rgba(255, 255, 255, 0.04);
-            box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.55);
+            background: rgba(255, 255, 255, 0.045);
+            box-shadow: 0 0 18px rgba(99, 102, 241, 0.18);
         }
 
         .search-input::placeholder {
@@ -233,10 +276,10 @@
 
         .search-icon {
             position: absolute;
-            left: 0.95rem;
+            left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--tx-muted);
             pointer-events: none;
         }
@@ -244,17 +287,17 @@
         .category-filters {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.45rem;
+            gap: 0.5rem;
             align-items: center;
         }
 
         .filter-btn {
             font-family: var(--mono);
-            font-size: 0.6rem;
+            font-size: 0.62rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            padding: 0.35rem 0.75rem;
-            border-radius: 6px;
+            padding: 0.4rem 0.85rem;
+            border-radius: 7px;
             border: 1px solid var(--border);
             background: rgba(255, 255, 255, 0.02);
             color: var(--tx-muted);
@@ -265,14 +308,14 @@
         .filter-btn:hover {
             color: var(--tx-title);
             border-color: var(--border-hover);
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .filter-btn.active {
-            background: rgba(255, 255, 255, 0.09);
+            background: rgba(255, 255, 255, 0.1);
             color: #fff;
-            border-color: rgba(255, 255, 255, 0.22);
-            box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.28);
+            box-shadow: 0 0 14px rgba(255, 255, 255, 0.06);
         }
 
         /* ===== PROJECTS CONTAINER ===== */
@@ -282,7 +325,7 @@
 
         .section-label {
             font-family: var(--mono);
-            font-size: 0.58rem;
+            font-size: 0.6rem;
             letter-spacing: 0.45em;
             color: var(--tx-dim);
             text-align: center;
@@ -297,7 +340,7 @@
             padding: 0 1.5rem;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         /* ===== PROJECT CARD ACCORDION ===== */
@@ -305,7 +348,7 @@
             position: relative;
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             transition: border-color 0.3s ease, background 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
             overflow: hidden;
         }
@@ -317,9 +360,9 @@
         }
 
         .project-card.active {
-            border-color: color-mix(in srgb, var(--accent, #6366f1) 45%, rgba(255, 255, 255, 0.15));
+            border-color: color-mix(in srgb, var(--accent, #6366f1) 50%, rgba(255, 255, 255, 0.18));
             background: var(--bg-card-hover);
-            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45), 0 0 1px var(--accent, #6366f1);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 1px var(--accent, #6366f1);
             transform: none;
         }
 
@@ -333,7 +376,7 @@
             display: grid;
             grid-template-columns: auto auto auto 1fr auto auto;
             align-items: center;
-            gap: 1.1rem;
+            gap: 1.25rem;
             padding: 1.15rem 1.4rem;
             background: transparent;
             border: none;
@@ -350,56 +393,47 @@
 
         /* Left Dot Indicator */
         .project-dot {
-            width: 7px;
-            height: 7px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: var(--accent, #6366f1);
-            box-shadow: 0 0 8px color-mix(in srgb, var(--accent, #6366f1) 75%, transparent);
+            box-shadow: 0 0 10px color-mix(in srgb, var(--accent, #6366f1) 80%, transparent);
             flex-shrink: 0;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .project-card:hover .project-dot,
         .project-card.active .project-dot {
-            transform: scale(1.4);
-            box-shadow: 0 0 14px var(--accent, #6366f1);
+            transform: scale(1.45);
+            box-shadow: 0 0 16px var(--accent, #6366f1);
         }
 
-        /* Icon Container */
+        /* Large & Crisp Icon Container */
         .project-icon {
-            width: 42px;
-            height: 42px;
+            width: 106px;
+            height: 52px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.025);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 9px;
-            padding: 5px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 5px 10px;
             flex-shrink: 0;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1), border-color 0.3s ease, background 0.3s ease;
         }
 
         .project-card:hover .project-icon {
-            transform: scale(1.06);
-            border-color: rgba(255, 255, 255, 0.16);
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.22);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .project-icon img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            filter: brightness(1.06);
-        }
-
-        .text-icon-badge {
-            font-family: var(--mono);
-            font-size: 0.46rem;
-            font-weight: 700;
-            color: var(--accent, var(--tx-title));
-            letter-spacing: 0.05em;
-            text-align: center;
-            line-height: 1.1;
+            filter: brightness(1.12);
         }
 
         /* Project Titles & Category Badges */
@@ -412,33 +446,34 @@
 
         .project-title {
             font-family: var(--sans);
-            font-size: 0.98rem;
+            font-size: 1.02rem;
             font-weight: 600;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.08em;
             color: #fff;
         }
 
         .category-pill {
             font-family: var(--mono);
             font-size: 0.52rem;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            padding: 0.18rem 0.45rem;
-            border-radius: 4px;
+            padding: 0.2rem 0.55rem;
+            border-radius: 5px;
             color: var(--accent, #6366f1);
-            background: color-mix(in srgb, var(--accent, #6366f1) 12%, transparent);
-            border: 1px solid color-mix(in srgb, var(--accent, #6366f1) 25%, transparent);
+            background: color-mix(in srgb, var(--accent, #6366f1) 14%, transparent);
+            border: 1px solid color-mix(in srgb, var(--accent, #6366f1) 30%, transparent);
+            font-weight: 500;
         }
 
         /* Summary in the previously empty space (subtle high-contrast readability) */
         .project-summary {
-            font-size: 0.82rem;
+            font-size: 0.83rem;
             font-weight: 400;
             line-height: 1.45;
             color: var(--tx-summary);
             letter-spacing: 0.01em;
-            padding-left: 0.8rem;
-            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            padding-left: 0.85rem;
+            border-left: 1px solid rgba(255, 255, 255, 0.09);
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -446,11 +481,11 @@
         }
 
         .project-card:hover .project-summary {
-            color: #d6d9e4;
+            color: #dbe0ee;
         }
 
         .project-card.active .project-summary {
-            color: color-mix(in srgb, var(--accent, #fff) 28%, #e2e8f0);
+            color: color-mix(in srgb, var(--accent, #fff) 30%, #e2e8f0);
         }
 
         /* Language tag */
@@ -460,9 +495,9 @@
             letter-spacing: 0.08em;
             color: var(--tx-muted);
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.07);
             border-radius: 4px;
-            padding: 0.2rem 0.55rem;
+            padding: 0.22rem 0.55rem;
             white-space: nowrap;
             flex-shrink: 0;
         }
@@ -470,7 +505,7 @@
         /* Chevron */
         .project-chevron {
             font-family: var(--mono);
-            font-size: 0.88rem;
+            font-size: 0.92rem;
             color: var(--tx-muted);
             transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1), color 0.3s ease;
             flex-shrink: 0;
@@ -487,9 +522,9 @@
         .project-detail {
             display: grid;
             grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
-            gap: 1.8rem;
-            padding: 0.4rem 1.4rem 1.6rem 1.4rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            gap: 2rem;
+            padding: 0.6rem 1.4rem 1.65rem 1.4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
             margin-top: 0.2rem;
             animation: fadeInDetail 0.35s cubic-bezier(0.33, 1, 0.68, 1) forwards;
         }
@@ -506,10 +541,10 @@
         /* Preview Screenshot Box */
         .project-preview {
             position: relative;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
             background: #08080d;
-            border: 1px solid rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             aspect-ratio: 16/9;
             box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.7);
         }
@@ -528,16 +563,16 @@
 
         .preview-badge {
             position: absolute;
-            top: 0.7rem;
-            left: 0.7rem;
+            top: 0.75rem;
+            left: 0.75rem;
             font-family: var(--mono);
             font-size: 0.48rem;
             letter-spacing: 0.15em;
-            color: rgba(255, 255, 255, 0.75);
-            background: rgba(5, 5, 8, 0.8);
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(5, 5, 8, 0.82);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 0.28rem 0.6rem;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            padding: 0.3rem 0.65rem;
             border-radius: 999px;
             text-transform: uppercase;
         }
@@ -547,15 +582,20 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 0.3rem 0;
+            padding: 0.2rem 0;
             gap: 1.3rem;
         }
 
         .project-desc-full {
-            font-size: 0.85rem;
-            line-height: 1.72;
+            font-size: 0.86rem;
+            line-height: 1.74;
             color: var(--tx-desc);
             font-weight: 300;
+        }
+
+        .project-desc-full strong {
+            color: var(--tx-title);
+            font-weight: 600;
         }
 
         .project-meta-tags {
@@ -571,9 +611,9 @@
             letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--accent, var(--grad-3));
-            background: color-mix(in srgb, var(--accent, #6366f1) 10%, transparent);
-            border: 1px solid color-mix(in srgb, var(--accent, #6366f1) 25%, transparent);
-            padding: 0.28rem 0.65rem;
+            background: color-mix(in srgb, var(--accent, #6366f1) 12%, transparent);
+            border: 1px solid color-mix(in srgb, var(--accent, #6366f1) 28%, transparent);
+            padding: 0.3rem 0.7rem;
             border-radius: 5px;
         }
 
@@ -583,16 +623,16 @@
             justify-content: center;
             gap: 0.65rem;
             align-self: flex-start;
-            padding: 0.68rem 1.3rem;
+            padding: 0.7rem 1.35rem;
             border-radius: 999px;
-            background: color-mix(in srgb, var(--accent, #6366f1) 14%, rgba(255, 255, 255, 0.03));
-            border: 1px solid color-mix(in srgb, var(--accent, #6366f1) 45%, rgba(255, 255, 255, 0.12));
+            background: color-mix(in srgb, var(--accent, #6366f1) 16%, rgba(255, 255, 255, 0.04));
+            border: 1px solid color-mix(in srgb, var(--accent, #6366f1) 48%, rgba(255, 255, 255, 0.14));
             color: #fff;
             text-decoration: none;
             font-family: var(--mono);
             font-size: 0.64rem;
             letter-spacing: 0.12em;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.25s ease;
         }
 
@@ -600,7 +640,7 @@
             background: var(--accent, var(--grad-2));
             color: #fff;
             border-color: transparent;
-            box-shadow: 0 0 20px color-mix(in srgb, var(--accent, #6366f1) 55%, transparent);
+            box-shadow: 0 0 22px color-mix(in srgb, var(--accent, #6366f1) 60%, transparent);
             transform: translateY(-1px);
         }
 
@@ -664,6 +704,12 @@
                 padding: 1.1rem;
             }
 
+            .project-icon {
+                width: 86px;
+                height: 44px;
+                padding: 4px 6px;
+            }
+
             .project-title-group {
                 flex-wrap: wrap;
                 gap: 0.4rem;
@@ -673,8 +719,8 @@
                 grid-column: 1 / -1;
                 padding-left: 0;
                 border-left: none;
-                border-top: 1px solid rgba(255, 255, 255, 0.05);
-                padding-top: 0.6rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.06);
+                padding-top: 0.65rem;
                 font-size: 0.78rem;
                 white-space: normal;
             }
@@ -691,8 +737,7 @@
         }
 
         @media (max-width: 600px) {
-            .hero-logo { letter-spacing: 0.18em; }
-            .hero-tagline { font-size: 0.58rem; letter-spacing: 0.18em; }
+            .hero-tagline { font-size: 0.62rem; letter-spacing: 0.22em; }
             .header { padding: 0.75rem 1.2rem; }
             .controls-wrapper { padding: 0 1rem; }
             .projects { padding: 0 1rem; }
@@ -711,7 +756,9 @@
 
     <!-- HERO -->
     <section class="hero" id="hero">
-        <h1 class="hero-logo">LUKSON ARTS</h1>
+        <div class="hero-brand-wrap">
+            <img src="icono/lukson.arts.png" alt="LUKSON ARTS" class="hero-main-logo">
+        </div>
         <p class="hero-tagline">
             <span class="dot"></span>
             <span data-es="TUS IDEAS SE VUELVEN SISTEMAS" data-en="YOUR IDEAS BECOME SYSTEMS">TUS IDEAS SE VUELVEN SISTEMAS</span>
@@ -724,7 +771,10 @@
 
     <!-- STICKY HEADER -->
     <header class="header" id="header">
-        <a class="header-brand" href="#hero">LUKSON ARTS</a>
+        <a class="header-brand-group" href="#hero">
+            <img src="icono/lukson.arts.png" alt="" class="header-mini-logo">
+            <span class="header-brand-text">LUKSON ARTS</span>
+        </a>
         <div class="lang-group">
             <button class="lang-btn active" onclick="setLang('es')" id="btn-es">ES</button>
             <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
@@ -747,9 +797,7 @@
         <div class="category-filters" role="tablist">
             <button class="filter-btn active" data-category="all" data-es="TODOS" data-en="ALL">TODOS</button>
             <button class="filter-btn" data-category="games" data-es="JUEGOS & SIMULACIONES" data-en="GAMES & SIMS">JUEGOS & SIMULACIONES</button>
-            <button class="filter-btn" data-category="systems" data-es="LENGUAJES & SISTEMAS" data-en="LANGUAGES & SYSTEMS">LENGUAJES & SISTEMAS</button>
-            <button class="filter-btn" data-category="growth" data-es="BIENESTAR" data-en="WELLBEING">BIENESTAR</button>
-            <button class="filter-btn" data-category="research" data-es="INVESTIGACIÓN" data-en="RESEARCH">INVESTIGACIÓN</button>
+            <button class="filter-btn" data-category="apps" data-es="APPS & EXPERIENCIAS" data-en="APPS & SYSTEMS">APPS & EXPERIENCIAS</button>
         </div>
     </div>
 
@@ -759,124 +807,7 @@
 
         <div class="projects" id="projects-container">
 
-            <!-- 1. RASTRO -->
-            <article class="project-card" data-category="games" style="--accent: #e05638;">
-                <button class="project-toggle" type="button" aria-expanded="false">
-                    <span class="project-dot" aria-hidden="true"></span>
-                    <span class="project-icon"><img src="icono/RASTRO.png" alt="RASTRO"></span>
-                    <div class="project-title-group">
-                        <span class="project-title">RASTRO</span>
-                        <span class="category-pill" data-es="1V1 TRIVIA & DEDUCCIÓN" data-en="1V1 TRIVIA & DEDUCTION">1V1 TRIVIA & DEDUCCIÓN</span>
-                    </div>
-                    <span class="project-summary"
-                          data-es="Investigación histórica competitiva 1v1 · Duelo por evidencia fotográfica real"
-                          data-en="1v1 competitive historical deduction · Duel over real archival evidence">
-                        Investigación histórica competitiva 1v1 · Duelo por evidencia fotográfica real
-                    </span>
-                    <span class="project-lang">ES · EN</span>
-                    <span class="project-chevron" aria-hidden="true">⌄</span>
-                </button>
-                <div class="project-detail" hidden>
-                    <div class="project-preview">
-                        <span class="preview-badge">PREVIEW</span>
-                        <img src="icono/RASTRO_SS_1.png" alt="RASTRO preview" loading="lazy">
-                    </div>
-                    <div class="project-info">
-                        <p class="project-desc-full"
-                           data-es="Motor de investigación histórica competitiva 1 vs 1. Dos jugadores reciben simultáneamente evidencia documental y fotográfica real en alta resolución de archivos públicos (AGN, LoC, Europeana). Inspeccioná detalles, zoom profundo, arquitectura y vestimentas históricas, y deducí época y coordenadas contra el reloj antes de que tu rival selle su hipótesis."
-                           data-en="1v1 competitive historical investigation game. Two players simultaneously analyze real high-res archival documents and photos (AGN, LoC, Europeana). Inspect architectural details, period clothing, and signage, and deduce the year and location against the clock before your rival seals their hypothesis.">
-                            Motor de investigación histórica competitiva 1 vs 1. Dos jugadores reciben simultáneamente evidencia documental y fotográfica real en alta resolución de archivos públicos (AGN, LoC, Europeana). Inspeccioná detalles, zoom profundo, arquitectura y vestimentas históricas, y deducí época y coordenadas contra el reloj antes de que tu rival selle su hipótesis.
-                        </p>
-                        <div class="project-meta-tags">
-                            <span class="meta-tag" data-es="COMPETITIVO 1V1 · INVESTIGACIÓN HISTÓRICA" data-en="1V1 COMPETITIVE · HISTORICAL INVESTIGATION">COMPETITIVO 1V1 · INVESTIGACIÓN HISTÓRICA</span>
-                        </div>
-                        <a class="play-btn" href="https://rastro-sigma.vercel.app/" target="_blank" rel="noopener noreferrer">
-                            <span data-es="IR AL JUEGO" data-en="OPEN PROJECT">IR AL JUEGO</span>
-                            <span class="arrow">↗</span>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- 2. AMAN -->
-            <article class="project-card" data-category="systems" style="--accent: #a855f7;">
-                <button class="project-toggle" type="button" aria-expanded="false">
-                    <span class="project-dot" aria-hidden="true"></span>
-                    <span class="project-icon"><img src="icono/AMAN.png" alt="AMAN"></span>
-                    <div class="project-title-group">
-                        <span class="project-title">AMAN</span>
-                        <span class="category-pill" data-es="LENGUAJE CONCEPTUAL" data-en="CONCEPTUAL LANGUAGE">LENGUAJE CONCEPTUAL</span>
-                    </div>
-                    <span class="project-summary"
-                          data-es="Lenguaje ideográfico experimental · 67 primitivos conceptuales combinables"
-                          data-en="Experimental ideographic language · 67 combinable conceptual primitives">
-                        Lenguaje ideográfico experimental · 67 primitivos conceptuales combinables
-                    </span>
-                    <span class="project-lang">ES · EN</span>
-                    <span class="project-chevron" aria-hidden="true">⌄</span>
-                </button>
-                <div class="project-detail" hidden>
-                    <div class="project-preview">
-                        <span class="preview-badge">PREVIEW</span>
-                        <img src="icono/AMAN_SS_1.png" alt="AMAN preview" loading="lazy">
-                    </div>
-                    <div class="project-info">
-                        <p class="project-desc-full"
-                           data-es="Un lenguaje ideográfico experimental. No empieza con miles de palabras arbitrarias: propone 67 primitivos conceptuales que se combinan para expresar ideas cada vez más complejas. En vez de memorizar «doctor», construís PERSONA + DAR + SALUD."
-                           data-en="An experimental ideographic language. Instead of thousands of arbitrary words, it proposes 67 conceptual primitives that combine to express increasingly complex ideas. Instead of memorizing 'doctor', you build PERSON + GIVE + HEALTH.">
-                            Un lenguaje ideográfico experimental. No empieza con miles de palabras arbitrarias: propone 67 primitivos conceptuales que se combinan para expresar ideas cada vez más complejas. En vez de memorizar «doctor», construís PERSONA + DAR + SALUD.
-                        </p>
-                        <div class="project-meta-tags">
-                            <span class="meta-tag" data-es="LENGUAJE EXPERIMENTAL · SISTEMA" data-en="EXPERIMENTAL LANGUAGE · SYSTEM">LENGUAJE EXPERIMENTAL · SISTEMA</span>
-                        </div>
-                        <a class="play-btn" href="https://aman.free.je/?i=1" target="_blank" rel="noopener noreferrer">
-                            <span data-es="IR A LA APP" data-en="OPEN APP">IR A LA APP</span>
-                            <span class="arrow">↗</span>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- 3. SENDERO -->
-            <article class="project-card" data-category="growth" style="--accent: #38bdf8;">
-                <button class="project-toggle" type="button" aria-expanded="false">
-                    <span class="project-dot" aria-hidden="true"></span>
-                    <span class="project-icon"><img src="icono/Sendero.png" alt="Sendero"></span>
-                    <div class="project-title-group">
-                        <span class="project-title">SENDERO</span>
-                        <span class="category-pill" data-es="DESARROLLO PERSONAL" data-en="PERSONAL GROWTH">DESARROLLO PERSONAL</span>
-                    </div>
-                    <span class="project-summary"
-                          data-es="Desarrollo personal en 12 semanas · Hábitos adaptables y encuentros reales"
-                          data-en="12-week personal development · Adaptable habits & intentional growth">
-                        Desarrollo personal en 12 semanas · Hábitos adaptables y encuentros reales
-                    </span>
-                    <span class="project-lang">ES</span>
-                    <span class="project-chevron" aria-hidden="true">⌄</span>
-                </button>
-                <div class="project-detail" hidden>
-                    <div class="project-preview">
-                        <span class="preview-badge">PREVIEW</span>
-                        <img src="icono/Sendero_SS_1.png" alt="Sendero preview" loading="lazy">
-                    </div>
-                    <div class="project-info">
-                        <p class="project-desc-full"
-                           data-es="Desarrollo personal en 12 semanas. No necesitás transformar tu vida de la noche a la mañana. Podés aprender a caminarla mejor. Hábitos adaptables, actividades reales, reflexión y encuentros humanos. Menos optimización. Más intención."
-                           data-en="A 12-week personal development journey. You don't need to transform your life overnight. You can learn to walk it better. Adaptable habits, real activities, reflection and human encounters. Less optimization. More intention.">
-                            Desarrollo personal en 12 semanas. No necesitás transformar tu vida de la noche a la mañana. Podés aprender a caminarla mejor. Hábitos adaptables, actividades reales, reflexión y encuentros humanos. Menos optimización. Más intención.
-                        </p>
-                        <div class="project-meta-tags">
-                            <span class="meta-tag" data-es="BIENESTAR · PRODUCTO INTERACTIVO" data-en="WELLBEING · INTERACTIVE PRODUCT">BIENESTAR · PRODUCTO INTERACTIVO</span>
-                        </div>
-                        <a class="play-btn" href="https://planet-club.vercel.app/sendero" target="_blank" rel="noopener noreferrer">
-                            <span data-es="IR AL PROGRAMA" data-en="OPEN PROGRAM">IR AL PROGRAMA</span>
-                            <span class="arrow">↗</span>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- 4. MI MANDATO -->
+            <!-- 1. MI MANDATO -->
             <article class="project-card" data-category="games" style="--accent: #f5b860;">
                 <button class="project-toggle" type="button" aria-expanded="false">
                     <span class="project-dot" aria-hidden="true"></span>
@@ -886,9 +817,9 @@
                         <span class="category-pill" data-es="SIMULACIÓN POLÍTICA" data-en="POLITICAL SIM">SIMULACIÓN POLÍTICA</span>
                     </div>
                     <span class="project-summary"
-                          data-es="Simulación política narrativa · Presidencia de la República del Sur 2032"
-                          data-en="Narrative political simulation · South Republic Presidency 2032">
-                        Simulación política narrativa · Presidencia de la República del Sur 2032
+                          data-es="¿Podés gobernar un país al borde del abismo sin que te derroquen? Presidencia 2032"
+                          data-en="Can you govern a country on the brink of collapse without getting ousted? Presidency 2032">
+                        ¿Podés gobernar un país al borde del abismo sin que te derroquen? Presidencia 2032
                     </span>
                     <span class="project-lang">ES</span>
                     <span class="project-chevron" aria-hidden="true">⌄</span>
@@ -900,15 +831,132 @@
                     </div>
                     <div class="project-info">
                         <p class="project-desc-full"
-                           data-es="Simulación política narrativa. Asumís la presidencia de la República del Sur en 2032. Finanzas frágiles, inflación persistente, sindicatos, medios, gobernadores y ciudadanos. Cada decisión tiene consecuencias duraderas que regresan meses después."
-                           data-en="Narrative political simulation. You assume the presidency of the República del Sur in 2032. Fragile finances, inflation, unions, media, and governors. Every decision carries lasting consequences that return months later in unexpected forms.">
-                            Simulación política narrativa. Asumís la presidencia de la República del Sur en 2032. Finanzas frágiles, inflación persistente, sindicatos, medios, gobernadores y ciudadanos. Cada decisión tiene consecuencias duraderas que regresan meses después.
+                           data-es="Asumís la presidencia de la República del Sur en 2032. Finanzas frágiles, hiperinflación latente, sindicatos en las calles, medios hostiles y gobernadores rebeldes. Cada decisión y decreto tiene consecuencias impredecibles que volverán meses después. ¿Llegás al final de tu mandato o te sacan antes?"
+                           data-en="You assume the presidency of the Southern Republic in 2032. Fragile finances, runaway inflation, striking unions, hostile media, and rebel governors. Every decree carries long-term consequences that strike months later. Will you survive your term or get ousted?">
+                            Asumís la presidencia de la República del Sur en 2032. Finanzas frágiles, hiperinflación latente, sindicatos en las calles, medios hostiles y gobernadores rebeldes. Cada decisión y decreto tiene consecuencias impredecibles que volverán meses después. ¿Llegás al final de tu mandato o te sacan antes?
                         </p>
                         <div class="project-meta-tags">
-                            <span class="meta-tag" data-es="SIMULACIÓN POLÍTICA · NARRATIVA" data-en="POLITICAL SIMULATION · NARRATIVE">SIMULACIÓN POLÍTICA · NARRATIVA</span>
+                            <span class="meta-tag" data-es="SIMULACIÓN POLÍTICA · NARRATIVA VIVA" data-en="POLITICAL SIMULATION · LIVING NARRATIVE">SIMULACIÓN POLÍTICA · NARRATIVA VIVA</span>
                         </div>
                         <a class="play-btn" href="https://mi-mandato.vercel.app/" target="_blank" rel="noopener noreferrer">
-                            <span data-es="IR AL JUEGO" data-en="OPEN PROJECT">IR AL JUEGO</span>
+                            <span data-es="JUGAR MI MANDATO" data-en="PLAY MI MANDATO">JUGAR MI MANDATO</span>
+                            <span class="arrow">↗</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 2. EL BUCLE -->
+            <article class="project-card" data-category="games" style="--accent: #e879f9;">
+                <button class="project-toggle" type="button" aria-expanded="false">
+                    <span class="project-dot" aria-hidden="true"></span>
+                    <span class="project-icon"><img src="icono/EL BUCLE.png" alt="El Bucle"></span>
+                    <div class="project-title-group">
+                        <span class="project-title">EL BUCLE</span>
+                        <span class="category-pill" data-es="WEB CÓMIC INTERACTIVO" data-en="INTERACTIVE WEB COMIC">WEB CÓMIC INTERACTIVO</span>
+                    </div>
+                    <span class="project-summary"
+                          data-es="Cómic interactivo donde tus elecciones alteran la historia · 🎧 ¡Usar con auriculares!"
+                          data-en="Interactive web comic where your choices warp the story · 🎧 Headphones required!">
+                        Cómic interactivo donde tus elecciones alteran la historia · 🎧 ¡Usar con auriculares!
+                    </span>
+                    <span class="project-lang">ES</span>
+                    <span class="project-chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div class="project-detail" hidden>
+                    <div class="project-preview">
+                        <span class="preview-badge">PREVIEW</span>
+                        <img src="icono/EL BUCLE_SS_1.png" alt="El Bucle preview" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <p class="project-desc-full"
+                           data-es="Un cómic web interactivo de misterio y saltos temporales nacido del universo RUPTURA. No leés de forma pasiva: tus decisiones ramifican la trama y reescriben las viñetas en tiempo real. <strong>🎧 IMPORTANTE:</strong> Cuenta con una banda sonora reactiva y efectos inmersivos; activá el audio o usá auriculares para experimentar la atmósfera al 100%."
+                           data-en="An interactive web comic of mystery and time loops born from the RUPTURA universe. You don't just read: your choices branch the plot and rewrite panels in real-time. <strong>🎧 NOTE:</strong> Features reactive atmospheric sound design; play with audio/headphones enabled for the full immersive experience.">
+                            Un cómic web interactivo de misterio y saltos temporales nacido del universo RUPTURA. No leés de forma pasiva: tus decisiones ramifican la trama y reescriben las viñetas en tiempo real. <strong>🎧 IMPORTANTE:</strong> Cuenta con una banda sonora reactiva y efectos inmersivos; activá el audio o usá auriculares para experimentar la atmósfera al 100%.
+                        </p>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag" data-es="CÓMIC INTERACTIVO · AUDIO INMERSIVO" data-en="INTERACTIVE COMIC · IMMERSIVE AUDIO">CÓMIC INTERACTIVO · AUDIO INMERSIVO</span>
+                        </div>
+                        <a class="play-btn" href="https://ruptura.free.nf/?i=1" target="_blank" rel="noopener noreferrer">
+                            <span data-es="ENTRAR A LA EXPERIENCIA" data-en="ENTER EXPERIENCE">ENTRAR A LA EXPERIENCIA</span>
+                            <span class="arrow">↗</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 3. CORPORITY -->
+            <article class="project-card" data-category="games" style="--accent: #eab308;">
+                <button class="project-toggle" type="button" aria-expanded="false">
+                    <span class="project-dot" aria-hidden="true"></span>
+                    <span class="project-icon"><img src="icono/Corpority.png" alt="Corpority"></span>
+                    <div class="project-title-group">
+                        <span class="project-title">CORPORITY</span>
+                        <span class="category-pill" data-es="SÁTIRA LABORAL" data-en="OFFICE SATIRE">SÁTIRA LABORAL</span>
+                    </div>
+                    <span class="project-summary"
+                          data-es="El simulador definitivo de oficina: ¿Cuánto sobrevivís al burnout y a los jefes tóxicos?"
+                          data-en="The ultimate corporate survival sim: How long can you endure burnout & toxic bosses?">
+                        El simulador definitivo de oficina: ¿Cuánto sobrevivís al burnout y a los jefes tóxicos?
+                    </span>
+                    <span class="project-lang">ES</span>
+                    <span class="project-chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div class="project-detail" hidden>
+                    <div class="project-preview">
+                        <span class="preview-badge">PREVIEW</span>
+                        <img src="icono/Corpority_SS_1.png" alt="Corpority preview" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <p class="project-desc-full"
+                           data-es="Empezás una carrera en una corporación absurda y tratás de sobrevivir año tras año. Esquivá jefes incompetentes, sorteá reuniones interminables que pudieron ser un mail, negociá aumentos y controlá tu barra de estrés. El único objetivo: jubilarte con suficiente plata y sin haber perdido la cabeza."
+                           data-en="Start a career in an absurd corporate grind and fight to survive year after year. Dodge incompetent bosses, survive meetings that could've been emails, negotiate raises, and manage your stress bar. The goal: retire with enough cash before losing your mind.">
+                            Empezás una carrera en una corporación absurda y tratás de sobrevivir año tras año. Esquivá jefes incompetentes, sorteá reuniones interminables que pudieron ser un mail, negociá aumentos y controlá tu barra de estrés. El único objetivo: jubilarte con suficiente plata y sin haber perdido la cabeza.
+                        </p>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag" data-es="SUPERVIVENCIA CORPORATIVA · SÁTIRA" data-en="CORPORATE SURVIVAL · SATIRE">SUPERVIVENCIA CORPORATIVA · SÁTIRA</span>
+                        </div>
+                        <a class="play-btn" href="https://corpority.vercel.app/" target="_blank" rel="noopener noreferrer">
+                            <span data-es="JUGAR CORPORITY" data-en="PLAY CORPORITY">JUGAR CORPORITY</span>
+                            <span class="arrow">↗</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 4. RASTRO -->
+            <article class="project-card" data-category="games" style="--accent: #e05638;">
+                <button class="project-toggle" type="button" aria-expanded="false">
+                    <span class="project-dot" aria-hidden="true"></span>
+                    <span class="project-icon"><img src="icono/RASTRO.png" alt="RASTRO"></span>
+                    <div class="project-title-group">
+                        <span class="project-title">RASTRO</span>
+                        <span class="category-pill" data-es="1V1 TRIVIA & DEDUCCIÓN" data-en="1V1 TRIVIA & DEDUCTION">1V1 TRIVIA & DEDUCCIÓN</span>
+                    </div>
+                    <span class="project-summary"
+                          data-es="Duelo 1v1 en vivo: ¿Quién deduce el año y lugar exacto de fotos históricas reales?"
+                          data-en="Live 1v1 duel: Who can pinpoint the exact year and location of real archival photos?">
+                        Duelo 1v1 en vivo: ¿Quién deduce el año y lugar exacto de fotos históricas reales?
+                    </span>
+                    <span class="project-lang">ES · EN</span>
+                    <span class="project-chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div class="project-detail" hidden>
+                    <div class="project-preview">
+                        <span class="preview-badge">PREVIEW</span>
+                        <img src="icono/RASTRO_SS_1.png" alt="RASTRO preview" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <p class="project-desc-full"
+                           data-es="Motor de investigación histórica competitiva 1 vs 1 en tiempo real. Vos y tu rival reciben fotos y documentos desclasificados auténticos de archivos públicos (AGN, LoC, Europeana). Hacé zoom profundo en cartelería, modas y arquitectura para clavar el año y las coordenadas exactas antes de que tu rival selle su hipótesis."
+                           data-en="Real-time 1v1 competitive historical investigation engine. You and your opponent get authentic declassified photos and archival records (AGN, LoC, Europeana). Deep zoom into signage, clothing, and architecture to pinpoint exact coordinates and year before your rival locks in their hypothesis.">
+                            Motor de investigación histórica competitiva 1 vs 1 en tiempo real. Vos y tu rival reciben fotos y documentos desclasificados auténticos de archivos públicos (AGN, LoC, Europeana). Hacé zoom profundo en cartelería, modas y arquitectura para clavar el año y las coordenadas exactas antes de que tu rival selle su hipótesis.
+                        </p>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag" data-es="COMPETITIVO 1V1 · INVESTIGACIÓN HISTÓRICA" data-en="1V1 COMPETITIVE · HISTORICAL INVESTIGATION">COMPETITIVO 1V1 · INVESTIGACIÓN HISTÓRICA</span>
+                        </div>
+                        <a class="play-btn" href="https://rastro-sigma.vercel.app/" target="_blank" rel="noopener noreferrer">
+                            <span data-es="DESAFIAR 1V1 EN RASTRO" data-en="PLAY 1V1 DUEL">DESAFIAR 1V1 EN RASTRO</span>
                             <span class="arrow">↗</span>
                         </a>
                     </div>
@@ -922,12 +970,12 @@
                     <span class="project-icon"><img src="icono/MANDIBULA.png" alt="Mandíbula"></span>
                     <div class="project-title-group">
                         <span class="project-title">MANDÍBULA</span>
-                        <span class="category-pill" data-es="ESTRATEGIA ASIMÉTRICA" data-en="ASYMMETRIC STRATEGY">ESTRATEGIA ASIMÉTRICA</span>
+                        <span class="category-pill" data-es="JUEGO DE ESTRATEGIA" data-en="STRATEGY GAME">JUEGO DE ESTRATEGIA</span>
                     </div>
                     <span class="project-summary"
-                          data-es="Estrategia asimétrica viva · Colonia de hormigas en la estepa patagónica"
-                          data-en="Living asymmetric strategy · Patagonian ant colony simulation">
-                        Estrategia asimétrica viva · Colonia de hormigas en la estepa patagónica
+                          data-es="Estrategia viva: Comandá una colonia de hormigas en la salvaje estepa patagónica"
+                          data-en="Living strategy game: Command an ant colony in the wild Patagonian steppe">
+                        Estrategia viva: Comandá una colonia de hormigas en la salvaje estepa patagónica
                     </span>
                     <span class="project-lang">ES</span>
                     <span class="project-chevron" aria-hidden="true">⌄</span>
@@ -939,73 +987,34 @@
                     </div>
                     <div class="project-info">
                         <p class="project-desc-full"
-                           data-es="Estrategia asimétrica viva. Gobernás una colonia de Acromyrmex lobicornis en la estepa patagónica. Un ecosistema sistémico pensado para distraerte: administrás recursos, reaccionás al entorno y tomás decisiones mientras la colonia sigue su propia lógica."
-                           data-en="A living asymmetric strategy game. You govern a colony of Acromyrmex lobicornis in the Patagonian steppe. Manage resources, react to the environment, and make decisions while the colony follows its own systemic logic.">
-                            Estrategia asimétrica viva. Gobernás una colonia de Acromyrmex lobicornis en la estepa patagónica. Un ecosistema sistémico pensado para distraerte: administrás recursos, reaccionás al entorno y tomás decisiones mientras la colonia sigue su propia lógica.
+                           data-es="Tomás el control biológico de una colonia de Acromyrmex lobicornis en la estepa patagónica. Administrá recolectoras, defendé el hormiguero de plagas y clima hostil, y expandí tu territorio en un ecosistema vivo que reacciona a cada una de tus órdenes en partidas tácticas de 15 minutos."
+                           data-en="Take command of an Acromyrmex lobicornis colony in the Patagonian wilderness. Manage foragers, protect the nest from hostile weather and predators, and expand your territory in a reactive living ecosystem in quick 15-minute tactical sessions.">
+                            Tomás el control biológico de una colonia de Acromyrmex lobicornis en la estepa patagónica. Administrá recolectoras, defendé el hormiguero de plagas y clima hostil, y expandí tu territorio en un ecosistema vivo que reacciona a cada una de tus órdenes en partidas tácticas de 15 minutos.
                         </p>
                         <div class="project-meta-tags">
-                            <span class="meta-tag" data-es="ECOSISTEMA PATAGÓNICO · SIMULACIÓN" data-en="PATAGONIAN ECOSYSTEM · SIMULATION">ECOSISTEMA PATAGÓNICO · SIMULACIÓN</span>
+                            <span class="meta-tag" data-es="ESTRATEGIA PATAGÓNICA · ECOSISTEMA VIVO" data-en="PATAGONIAN STRATEGY · LIVING ECOSYSTEM">ESTRATEGIA PATAGÓNICA · ECOSISTEMA VIVO</span>
                         </div>
                         <a class="play-btn" href="https://mandibula-six.vercel.app/" target="_blank" rel="noopener noreferrer">
-                            <span data-es="IR AL JUEGO" data-en="OPEN PROJECT">IR AL JUEGO</span>
+                            <span data-es="JUGAR MANDÍBULA" data-en="PLAY MANDÍBULA">JUGAR MANDÍBULA</span>
                             <span class="arrow">↗</span>
                         </a>
                     </div>
                 </div>
             </article>
 
-            <!-- 6. CORPORITY -->
-            <article class="project-card" data-category="games" style="--accent: #eab308;">
-                <button class="project-toggle" type="button" aria-expanded="false">
-                    <span class="project-dot" aria-hidden="true"></span>
-                    <span class="project-icon"><img src="icono/Corpority.png" alt="Corpority"></span>
-                    <div class="project-title-group">
-                        <span class="project-title">CORPORITY</span>
-                        <span class="category-pill" data-es="SÁTIRA LABORAL" data-en="OFFICE SATIRE">SÁTIRA LABORAL</span>
-                    </div>
-                    <span class="project-summary"
-                          data-es="Simulación de supervivencia corporativa · Política de oficina y burnout"
-                          data-en="Satirical corporate survival · Office politics, burnout & sanity">
-                        Simulación de supervivencia corporativa · Política de oficina y burnout
-                    </span>
-                    <span class="project-lang">ES</span>
-                    <span class="project-chevron" aria-hidden="true">⌄</span>
-                </button>
-                <div class="project-detail" hidden>
-                    <div class="project-preview">
-                        <span class="preview-badge">PREVIEW</span>
-                        <img src="icono/Corpority_SS_1.png" alt="Corpority preview" loading="lazy">
-                    </div>
-                    <div class="project-info">
-                        <p class="project-desc-full"
-                           data-es="Simulación de supervivencia corporativa. Empezás una carrera y tratás de sobrevivir los años de trabajo. Jefes impredecibles, política de oficina, eventos inesperados, burnout y absurdo organizacional. El objetivo: llegar al final con suficiente plata y suficiente cordura."
-                           data-en="Corporate survival simulation. Start a career and try to survive years of work. Unpredictable bosses, office politics, unexpected events, burnout, and organizational absurdity. The goal: reach retirement with enough cash and sanity.">
-                            Simulación de supervivencia corporativa. Empezás una carrera y tratás de sobrevivir los años de trabajo. Jefes impredecibles, política de oficina, eventos inesperados, burnout y absurdo organizacional. El objetivo: llegar al final con suficiente plata y suficiente cordura.
-                        </p>
-                        <div class="project-meta-tags">
-                            <span class="meta-tag" data-es="SIMULACIÓN · SÁTIRA LABORAL" data-en="SIMULATION · CORPORATE SATIRE">SIMULACIÓN · SÁTIRA LABORAL</span>
-                        </div>
-                        <a class="play-btn" href="https://corpority.vercel.app/" target="_blank" rel="noopener noreferrer">
-                            <span data-es="IR AL JUEGO" data-en="OPEN PROJECT">IR AL JUEGO</span>
-                            <span class="arrow">↗</span>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- 7. EL ORIGEN -->
+            <!-- 6. EL ORIGEN -->
             <article class="project-card" data-category="games" style="--accent: #c8b89a;">
                 <button class="project-toggle" type="button" aria-expanded="false">
                     <span class="project-dot" aria-hidden="true"></span>
-                    <span class="project-icon"><span class="text-icon-badge">EL<br>ORIGEN</span></span>
+                    <span class="project-icon"><img src="icono/el-origen.png" alt="El Origen"></span>
                     <div class="project-title-group">
                         <span class="project-title">EL ORIGEN</span>
-                        <span class="category-pill" data-es="HORROR DEDUCTIVO" data-en="DEDUCTIVE HORROR">HORROR DEDUCTIVO</span>
+                        <span class="category-pill" data-es="HORROR PSICOLÓGICO" data-en="PSYCHOLOGICAL HORROR">HORROR PSICOLÓGICO</span>
                     </div>
                     <span class="project-summary"
-                          data-es="Horror psicológico deductivo · El departamento de tu abuela guarda pistas"
-                          data-en="Deductive psychological horror · Grandmother's apartment holds clues">
-                        Horror psicológico deductivo · El departamento de tu abuela guarda pistas
+                          data-es="Horror psicológico puro: Entrás a tasar un departamento y descubrís un secreto perturbador"
+                          data-en="Pure psychological horror: Enter an apartment for appraisal and unearth a dark secret">
+                        Horror psicológico puro: Entrás a tasar un departamento y descubrís un secreto perturbador
                     </span>
                     <span class="project-lang">ES</span>
                     <span class="project-chevron" aria-hidden="true">⌄</span>
@@ -1017,34 +1026,34 @@
                     </div>
                     <div class="project-info">
                         <p class="project-desc-full"
-                           data-es="Horror psicológico e investigación. Entrás al departamento de tu abuela para una tasación. Los objetos no son decoración: son pistas documentales, fotos familiares y notas. El horror viene de comprender. No hay monstruos. Hay comprensión."
-                           data-en="Psychological horror and investigation. Enter your grandmother's apartment for an appraisal. Objects aren't decoration: they are clues, documents, family photos, and notes. The horror comes from understanding. No monsters. Just comprehension.">
-                            Horror psicológico e investigación. Entrás al departamento de tu abuela para una tasación. Los objetos no son decoración: son pistas documentales, fotos familiares y notas. El horror viene de comprender. No hay monstruos. Hay comprensión.
+                           data-es="Entrás al departamento cerrado de tu abuela para una tasación inmobiliaria. Pero nada es decoración: notas familiares, fotografías antiguas y evidencias físicas arman un perturbador rompecabezas. Sin screamers baratos: acá el verdadero terror nace de comprender lo que pasó."
+                           data-en="You enter your late grandmother's locked apartment for an estate appraisal. But nothing is mere decoration: old family photos, hidden notes, and physical clues piece together a disturbing puzzle. No cheap jumpscares: true terror comes from understanding what occurred.">
+                            Entrás al departamento cerrado de tu abuela para una tasación inmobiliaria. Pero nada es decoración: notas familiares, fotografías antiguas y evidencias físicas arman un perturbador rompecabezas. Sin screamers baratos: acá el verdadero terror nace de comprender lo que pasó.
                         </p>
                         <div class="project-meta-tags">
-                            <span class="meta-tag" data-es="HORROR PSICOLÓGICO · INVESTIGACIÓN" data-en="PSYCHOLOGICAL HORROR · INVESTIGATION">HORROR PSICOLÓGICO · INVESTIGACIÓN</span>
+                            <span class="meta-tag" data-es="HORROR DEDUCTIVO · MISTERIO" data-en="DEDUCTIVE HORROR · MYSTERY">HORROR DEDUCTIVO · MISTERIO</span>
                         </div>
                         <a class="play-btn" href="https://origin-game.vercel.app/" target="_blank" rel="noopener noreferrer">
-                            <span data-es="IR AL JUEGO" data-en="OPEN PROJECT">IR AL JUEGO</span>
+                            <span data-es="INVESTIGAR EL ORIGEN" data-en="EXPLORE THE ORIGIN">INVESTIGAR EL ORIGEN</span>
                             <span class="arrow">↗</span>
                         </a>
                     </div>
                 </div>
             </article>
 
-            <!-- 8. EL BUCLE / RUPTURA -->
-            <article class="project-card" data-category="games" style="--accent: #e879f9;">
+            <!-- 7. SENDERO -->
+            <article class="project-card" data-category="apps" style="--accent: #38bdf8;">
                 <button class="project-toggle" type="button" aria-expanded="false">
                     <span class="project-dot" aria-hidden="true"></span>
-                    <span class="project-icon"><img src="icono/EL BUCLE.png" alt="El Bucle"></span>
+                    <span class="project-icon"><img src="icono/Sendero.png" alt="Sendero"></span>
                     <div class="project-title-group">
-                        <span class="project-title">EL BUCLE</span>
-                        <span class="category-pill" data-es="CÓMIC INTERACTIVO" data-en="INTERACTIVE COMIC">CÓMIC INTERACTIVO</span>
+                        <span class="project-title">SENDERO</span>
+                        <span class="category-pill" data-es="DESARROLLO PERSONAL" data-en="PERSONAL GROWTH">DESARROLLO PERSONAL</span>
                     </div>
                     <span class="project-summary"
-                          data-es="Cómic interactivo y narrativa ramificada · Universo RUPTURA"
-                          data-en="Interactive web comic & branching narrative · RUPTURA universe">
-                        Cómic interactivo y narrativa ramificada · Universo RUPTURA
+                          data-es="¿Querés cambiar tus hábitos sin fórmulas mágicas? 12 semanas de desarrollo guiado"
+                          data-en="Transform your lifestyle without magic formulas: 12 weeks of grounded self-growth">
+                        ¿Querés cambiar tus hábitos sin fórmulas mágicas? 12 semanas de desarrollo guiado
                     </span>
                     <span class="project-lang">ES</span>
                     <span class="project-chevron" aria-hidden="true">⌄</span>
@@ -1052,19 +1061,58 @@
                 <div class="project-detail" hidden>
                     <div class="project-preview">
                         <span class="preview-badge">PREVIEW</span>
-                        <img src="icono/EL BUCLE_SS_1.png" alt="El Bucle preview" loading="lazy">
+                        <img src="icono/Sendero_SS_1.png" alt="Sendero preview" loading="lazy">
                     </div>
                     <div class="project-info">
                         <p class="project-desc-full"
-                           data-es="Una experiencia narrativa interactiva nacida del universo RUPTURA. Un relato que no se limita a ser leído: las decisiones alteran la ruta y convierten al jugador en parte de la historia. El proyecto explora qué ocurre cuando un cómic, un juego y una narrativa ramificada comparten el mismo espacio."
-                           data-en="An interactive narrative experience born from the RUPTURA universe. A story that isn't simply read: choices alter the route and turn the player into part of the story. The project explores what happens when a comic, game, and branching narrative merge.">
-                            Una experiencia narrativa interactiva nacida del universo RUPTURA. Un relato que no se limita a ser leído: las decisiones alteran la ruta y convierten al jugador en parte de la historia. El proyecto explora qué ocurre cuando un cómic, un juego y una narrativa ramificada comparten el mismo espacio.
+                           data-es="No necesitás transformar tu vida de la noche a la mañana: podés aprender a caminarla mejor. Un programa de 12 semanas con hábitos adaptables, desafíos reales y reflexión guiada. Menos optimización vacía, más intención y herramientas prácticas para el día a día."
+                           data-en="You don't need to reinvent your life overnight: you can learn to walk it better. A 12-week interactive program with adaptable habits, real challenges, and guided reflection. Less hollow self-help, more intention and practical daily tools.">
+                            No necesitás transformar tu vida de la noche a la mañana: podés aprender a caminarla mejor. Un programa de 12 semanas con hábitos adaptables, desafíos reales y reflexión guiada. Menos optimización vacía, más intención y herramientas prácticas para el día a día.
                         </p>
                         <div class="project-meta-tags">
-                            <span class="meta-tag" data-es="CÓMIC INTERACTIVO · NARRATIVA" data-en="INTERACTIVE COMIC · NARRATIVE">CÓMIC INTERACTIVO · NARRATIVA</span>
+                            <span class="meta-tag" data-es="BIENESTAR · PROGRAMA INTERACTIVO" data-en="WELLBEING · INTERACTIVE PROGRAM">BIENESTAR · PROGRAMA INTERACTIVO</span>
                         </div>
-                        <a class="play-btn" href="https://ruptura.free.nf/?i=1" target="_blank" rel="noopener noreferrer">
-                            <span data-es="IR AL JUEGO" data-en="OPEN PROJECT">IR AL JUEGO</span>
+                        <a class="play-btn" href="https://planet-club.vercel.app/sendero" target="_blank" rel="noopener noreferrer">
+                            <span data-es="EMPEZAR SENDERO" data-en="START SENDERO">EMPEZAR SENDERO</span>
+                            <span class="arrow">↗</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 8. AMAN -->
+            <article class="project-card" data-category="apps" style="--accent: #a855f7;">
+                <button class="project-toggle" type="button" aria-expanded="false">
+                    <span class="project-dot" aria-hidden="true"></span>
+                    <span class="project-icon"><img src="icono/AMAN.png" alt="AMAN"></span>
+                    <div class="project-title-group">
+                        <span class="project-title">AMAN</span>
+                        <span class="category-pill" data-es="LENGUAJE EXPERIMENTAL" data-en="EXPERIMENTAL LANG">LENGUAJE EXPERIMENTAL</span>
+                    </div>
+                    <span class="project-summary"
+                          data-es="Un idioma que no se memoriza, se deduce: 67 primitivos conceptuales infinitos"
+                          data-en="A language you don't memorize, you construct: 67 infinite conceptual primitives">
+                        Un idioma que no se memoriza, se deduce: 67 primitivos conceptuales infinitos
+                    </span>
+                    <span class="project-lang">ES · EN</span>
+                    <span class="project-chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div class="project-detail" hidden>
+                    <div class="project-preview">
+                        <span class="preview-badge">PREVIEW</span>
+                        <img src="icono/AMAN_SS_1.png" alt="AMAN preview" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <p class="project-desc-full"
+                           data-es="¿Por qué memorizar miles de palabras arbitrarias? AMAN propone un lenguaje ideográfico experimental con 67 conceptos universales que se combinan como bloques lógicos para expresar cualquier idea. En vez de aprender «médico», combinás PERSONA + DAR + SALUD."
+                           data-en="Why memorize thousands of arbitrary vocabulary words? AMAN introduces an experimental ideographic system where 67 universal primitives combine like logical building blocks to express any thought. Instead of memorizing 'doctor', you combine PERSON + GIVE + HEALTH.">
+                            ¿Por qué memorizar miles de palabras arbitrarias? AMAN propone un lenguaje ideográfico experimental con 67 conceptos universales que se combinan como bloques lógicos para expresar cualquier idea. En vez de aprender «médico», combinás PERSONA + DAR + SALUD.
+                        </p>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag" data-es="SISTEMA CONCEPTUAL · LINGÜÍSTICA" data-en="CONCEPTUAL SYSTEM · LINGUISTICS">SISTEMA CONCEPTUAL · LINGÜÍSTICA</span>
+                        </div>
+                        <a class="play-btn" href="https://aman.free.je/?i=1" target="_blank" rel="noopener noreferrer">
+                            <span data-es="EXPLORAR AMAN" data-en="EXPLORE AMAN">EXPLORAR AMAN</span>
                             <span class="arrow">↗</span>
                         </a>
                     </div>
@@ -1072,18 +1120,18 @@
             </article>
 
             <!-- 9. UMBRAL -->
-            <article class="project-card" data-category="research" style="--accent: #7dd3fc;">
+            <article class="project-card" data-category="apps" style="--accent: #7dd3fc;">
                 <button class="project-toggle" type="button" aria-expanded="false">
                     <span class="project-dot" aria-hidden="true"></span>
                     <span class="project-icon"><img src="icono/UMBRAL.png" alt="Umbral"></span>
                     <div class="project-title-group">
                         <span class="project-title">UMBRAL</span>
-                        <span class="category-pill" data-es="INVESTIGACIÓN COGNITIVA" data-en="COGNITIVE RESEARCH">INVESTIGACIÓN COGNITIVA</span>
+                        <span class="category-pill" data-es="LAB COGNITIVO" data-en="COGNITIVE LAB">LAB COGNITIVO</span>
                     </div>
                     <span class="project-summary"
-                          data-es="Investigación de percepción sinestésica · Respuestas sonoras en el navegador"
-                          data-en="Synesthetic perception research · Browser sound evocative responses">
-                        Investigación de percepción sinestésica · Respuestas sonoras en el navegador
+                          data-es="Experimento de sinestesia: Escuchá sonidos y descubrí qué colores despiertan en vos"
+                          data-en="Synesthesia experiment: Listen to audio cues and discover what colors your mind sees">
+                        Experimento de sinestesia: Escuchá sonidos y descubrí qué colores despiertan en vos
                     </span>
                     <span class="project-lang">ES · EN</span>
                     <span class="project-chevron" aria-hidden="true">⌄</span>
@@ -1095,15 +1143,15 @@
                     </div>
                     <div class="project-info">
                         <p class="project-desc-full"
-                           data-es="Investigación abierta que corre entera en tu navegador. Escuchás sonidos breves y contás qué te evocan: un color, una forma, una sensación. El sistema aprende de tus respuestas, las compara contra controles y otras personas, y puede concluir con honestidad si encontró patrones. Sin cuenta ni micrófono."
-                           data-en="An open research experiment that runs entirely in your browser. You listen to short sounds and describe what they evoke — a color, shape, or feeling. The system learns from your responses, checks them against controls and other people, with no account or microphone needed.">
-                            Investigación abierta que corre entera en tu navegador. Escuchás sonidos breves y contás qué te evocan: un color, una forma, una sensación. El sistema aprende de tus respuestas, las compara contra controles y otras personas, y puede concluir con honestidad si encontró patrones. Sin cuenta ni micrófono.
+                           data-es="Investigación abierta que corre 100% en tu navegador. Escuchás estímulos sonoros breves y registrás qué colores, formas o emociones te evocan. El sistema contrasta tus respuestas neuronales contra bases de control para determinar patrones sinestésicos reales. Sin cuenta ni micrófono."
+                           data-en="Open research experiment running 100% in your browser. Listen to short audio triggers and record the colors, shapes, and feelings they spark. The engine benchmarks your responses against control datasets to map real synesthetic patterns without requiring an account or microphone.">
+                            Investigación abierta que corre 100% en tu navegador. Escuchás estímulos sonoros breves y registrás qué colores, formas o emociones te evocan. El sistema contrasta tus respuestas neuronales contra bases de control para determinar patrones sinestésicos reales. Sin cuenta ni micrófono.
                         </p>
                         <div class="project-meta-tags">
-                            <span class="meta-tag" data-es="INVESTIGACIÓN · EXPERIMENTO COGNITIVO" data-en="RESEARCH · COGNITIVE EXPERIMENT">INVESTIGACIÓN · EXPERIMENTO COGNITIVO</span>
+                            <span class="meta-tag" data-es="INVESTIGACIÓN COGNITIVA · SINESTESIA" data-en="COGNITIVE RESEARCH · SYNESTHESIA">INVESTIGACIÓN COGNITIVA · SINESTESIA</span>
                         </div>
                         <a class="play-btn" href="https://umbral-gules.vercel.app/en" target="_blank" rel="noopener noreferrer">
-                            <span data-es="IR A LA APP" data-en="OPEN APP">IR A LA APP</span>
+                            <span data-es="ENTRAR AL EXPERIMENTO" data-en="ENTER EXPERIMENT">ENTRAR AL EXPERIMENTO</span>
                             <span class="arrow">↗</span>
                         </a>
                     </div>
@@ -1145,7 +1193,13 @@
             document.documentElement.lang = lang;
             document.querySelectorAll('[data-' + lang + ']').forEach(el => {
                 const text = el.getAttribute('data-' + lang);
-                if (text) el.textContent = text;
+                if (text) {
+                    if (text.includes('<strong>') || text.includes('🎧')) {
+                        el.innerHTML = text;
+                    } else {
+                        el.textContent = text;
+                    }
+                }
             });
             const searchInput = document.getElementById('search-input');
             if (searchInput) {
