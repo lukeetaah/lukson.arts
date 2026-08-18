@@ -1486,7 +1486,7 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-line">
-            <span>LUCAS CORREA</span>
+            <a href="https://www.linkedin.com/in/lucas-correa-3300211a6/" target="_blank" rel="noopener noreferrer">LUCAS CORREA</a>
             &nbsp;·&nbsp;
             <span data-es="ASISTIDO POR IA · DIRIGIDO POR HUMANOS" data-en="AI-ASSISTED · HUMAN-DIRECTED">ASISTIDO POR IA · DIRIGIDO POR HUMANOS</span>
             &nbsp;·&nbsp;
@@ -1666,36 +1666,72 @@
                     }
 
                     const now = audioCtx.currentTime;
-                    const chords = [
-                        [523.25, 659.25, 783.99, 1046.50], // C Maj harmonic
-                        [587.33, 739.99, 880.00, 1174.66], // D Maj harmonic
-                        [659.25, 783.99, 987.77, 1318.51], // E Min harmonic
-                        [698.46, 880.00, 1046.50, 1396.91]  // F Maj harmonic
-                    ];
-                    const freqs = chords[step % chords.length];
 
-                    freqs.forEach((freq, i) => {
+                    // Generative Maj7 system: pick a random root from the chromatic scale,
+                    // build a Maj7 voicing (root, major 3rd, perfect 5th, major 7th),
+                    // then scatter across octaves with micro-detuning so no two clicks
+                    // ever produce the same chord. All Maj7s are consonant with each other.
+                    const roots = [
+                        261.63, 277.18, 293.66, 311.13, 329.63, 349.23,
+                        369.99, 392.00, 415.30, 440.00, 466.16, 493.88
+                    ]; // C4 through B4
+                    const maj7Intervals = [1, 1.2599, 1.4983, 1.8877]; // root, M3, P5, M7
+
+                    // Pick a root that differs from the last one
+                    let rootIdx;
+                    do {
+                        rootIdx = Math.floor(Math.random() * roots.length);
+                    } while (rootIdx === playSynthChord._lastRoot);
+                    playSynthChord._lastRoot = rootIdx;
+
+                    const baseRoot = roots[rootIdx];
+                    // Random octave shift: 0 or +1 octave for variety
+                    const octaveShift = Math.random() > 0.4 ? 1 : 2;
+                    const root = baseRoot * octaveShift;
+
+                    // Build the 4-note Maj7 voicing with random inversions & octave spreading
+                    const rawNotes = maj7Intervals.map(r => root * r);
+                    // Randomly spread some voices up an octave for open voicings
+                    const freqs = rawNotes.map((f, i) => {
+                        if (i > 0 && Math.random() > 0.5) return f * 2;
+                        return f;
+                    });
+                    // Micro-detune each voice ±3 cents for shimmer (never identical)
+                    const detunedFreqs = freqs.map(f =>
+                        f * Math.pow(2, (Math.random() * 6 - 3) / 1200)
+                    );
+
+                    // Random envelope character per click
+                    const attack = 0.02 + Math.random() * 0.04;
+                    const release = 1.0 + Math.random() * 0.8;
+                    const filterStart = 1600 + Math.random() * 1200;
+
+                    detunedFreqs.forEach((freq, i) => {
                         const osc = audioCtx.createOscillator();
                         const gain = audioCtx.createGain();
                         const filter = audioCtx.createBiquadFilter();
 
-                        osc.type = i % 2 === 0 ? 'sine' : 'triangle';
-                        osc.frequency.setValueAtTime(freq, now + i * 0.05);
+                        // Alternate waveforms for richer harmonics
+                        const waves = ['sine', 'triangle', 'sine', 'triangle'];
+                        osc.type = waves[i % waves.length];
+                        const stagger = i * 0.04; // stagger onset slightly
+                        osc.frequency.setValueAtTime(freq, now + stagger);
 
                         filter.type = 'lowpass';
-                        filter.frequency.setValueAtTime(2200, now);
-                        filter.frequency.exponentialRampToValueAtTime(300, now + 1.2);
+                        filter.Q.setValueAtTime(1.5, now);
+                        filter.frequency.setValueAtTime(filterStart, now);
+                        filter.frequency.exponentialRampToValueAtTime(250, now + release);
 
-                        gain.gain.setValueAtTime(0.001, now + i * 0.05);
-                        gain.gain.linearRampToValueAtTime(0.06 / (i + 1), now + i * 0.05 + 0.03);
-                        gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.4);
+                        gain.gain.setValueAtTime(0.001, now + stagger);
+                        gain.gain.linearRampToValueAtTime(0.055 / (i + 1), now + stagger + attack);
+                        gain.gain.exponentialRampToValueAtTime(0.0001, now + release + 0.3);
 
                         osc.connect(filter);
                         filter.connect(gain);
                         gain.connect(audioCtx.destination);
 
-                        osc.start(now + i * 0.05);
-                        osc.stop(now + 1.5);
+                        osc.start(now + stagger);
+                        osc.stop(now + release + 0.4);
                     });
                 } catch(e) {}
             }
