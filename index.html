@@ -374,7 +374,7 @@
         .project-toggle {
             width: 100%;
             display: grid;
-            grid-template-columns: auto auto auto 1fr auto auto;
+            grid-template-columns: auto auto 1fr auto;
             align-items: center;
             gap: 1.25rem;
             padding: 1.15rem 1.4rem;
@@ -410,7 +410,7 @@
 
         /* Large & Crisp Icon Container */
         .project-icon {
-            width: 106px;
+            width: 104px;
             height: 52px;
             display: flex;
             align-items: center;
@@ -436,81 +436,88 @@
             filter: brightness(1.12);
         }
 
-        /* Project Titles & Category Badges */
-        .project-title-group {
+        /* Main center block containing Title Row + Summary */
+        .project-header-main {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            min-width: 0;
+        }
+
+        /* Title + Pill + Lang Tag Row */
+        .project-title-row {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            white-space: nowrap;
+            gap: 0.7rem;
+            flex-wrap: wrap;
         }
 
         .project-title {
             font-family: var(--sans);
-            font-size: 1.02rem;
+            font-size: 1.05rem;
             font-weight: 600;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.07em;
             color: #fff;
         }
 
         .category-pill {
             font-family: var(--mono);
-            font-size: 0.52rem;
+            font-size: 0.53rem;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            padding: 0.2rem 0.55rem;
+            padding: 0.22rem 0.6rem;
             border-radius: 5px;
             color: var(--accent, #6366f1);
             background: color-mix(in srgb, var(--accent, #6366f1) 14%, transparent);
             border: 1px solid color-mix(in srgb, var(--accent, #6366f1) 30%, transparent);
-            font-weight: 500;
+            font-weight: 600;
         }
 
-        /* Summary in the previously empty space (subtle high-contrast readability) */
+        .project-lang {
+            font-family: var(--mono);
+            font-size: 0.52rem;
+            letter-spacing: 0.08em;
+            color: var(--tx-muted);
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            padding: 0.18rem 0.5rem;
+            white-space: nowrap;
+        }
+
+        /* Summary: full visibility, high contrast, elegant reading experience, zero truncation */
         .project-summary {
-            font-size: 0.83rem;
+            font-size: 0.85rem;
             font-weight: 400;
-            line-height: 1.45;
+            line-height: 1.5;
             color: var(--tx-summary);
             letter-spacing: 0.01em;
-            padding-left: 0.85rem;
-            border-left: 1px solid rgba(255, 255, 255, 0.09);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
             transition: color 0.25s ease;
         }
 
         .project-card:hover .project-summary {
-            color: #dbe0ee;
+            color: #e5e9f5;
         }
 
         .project-card.active .project-summary {
-            color: color-mix(in srgb, var(--accent, #fff) 30%, #e2e8f0);
-        }
-
-        /* Language tag */
-        .project-lang {
-            font-family: var(--mono);
-            font-size: 0.56rem;
-            letter-spacing: 0.08em;
-            color: var(--tx-muted);
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 4px;
-            padding: 0.22rem 0.55rem;
-            white-space: nowrap;
-            flex-shrink: 0;
+            color: color-mix(in srgb, var(--accent, #fff) 35%, #f8fafc);
         }
 
         /* Chevron */
         .project-chevron {
             font-family: var(--mono);
-            font-size: 0.92rem;
+            font-size: 0.95rem;
             color: var(--tx-muted);
             transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1), color 0.3s ease;
             flex-shrink: 0;
-            width: 18px;
-            text-align: center;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .project-card.active .project-chevron {
@@ -700,35 +707,29 @@
         @media (max-width: 900px) {
             .project-toggle {
                 grid-template-columns: auto auto 1fr auto;
-                gap: 0.85rem;
+                gap: 1rem;
                 padding: 1.1rem;
             }
 
             .project-icon {
-                width: 86px;
-                height: 44px;
+                width: 88px;
+                height: 46px;
                 padding: 4px 6px;
             }
 
-            .project-title-group {
-                flex-wrap: wrap;
-                gap: 0.4rem;
+            .project-title {
+                font-size: 0.98rem;
             }
 
             .project-summary {
-                grid-column: 1 / -1;
-                padding-left: 0;
-                border-left: none;
-                border-top: 1px solid rgba(255, 255, 255, 0.06);
-                padding-top: 0.65rem;
-                font-size: 0.78rem;
-                white-space: normal;
+                font-size: 0.81rem;
+                line-height: 1.45;
             }
 
             .project-detail {
                 grid-template-columns: 1fr;
-                gap: 1.3rem;
-                padding: 0.3rem 1.1rem 1.4rem 1.1rem;
+                gap: 1.4rem;
+                padding: 0.4rem 1.1rem 1.4rem 1.1rem;
             }
 
             .play-btn {
@@ -741,6 +742,24 @@
             .header { padding: 0.75rem 1.2rem; }
             .controls-wrapper { padding: 0 1rem; }
             .projects { padding: 0 1rem; }
+            .project-toggle {
+                grid-template-columns: auto 1fr auto;
+                gap: 0.8rem;
+                padding: 1rem 0.85rem;
+            }
+            .project-dot {
+                display: none;
+            }
+            .project-icon {
+                width: 72px;
+                height: 40px;
+            }
+            .project-title {
+                font-size: 0.92rem;
+            }
+            .project-summary {
+                font-size: 0.78rem;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -812,16 +831,18 @@
                 <button class="project-toggle" type="button" aria-expanded="false">
                     <span class="project-dot" aria-hidden="true"></span>
                     <span class="project-icon"><img src="icono/mi mandato.png" alt="Mi Mandato"></span>
-                    <div class="project-title-group">
-                        <span class="project-title">MI MANDATO</span>
-                        <span class="category-pill" data-es="SIMULACIÓN POLÍTICA" data-en="POLITICAL SIM">SIMULACIÓN POLÍTICA</span>
+                    <div class="project-header-main">
+                        <div class="project-title-row">
+                            <span class="project-title">MI MANDATO</span>
+                            <span class="category-pill" data-es="SIMULACIÓN POLÍTICA" data-en="POLITICAL SIMULATION">SIMULACIÓN POLÍTICA</span>
+                            <span class="project-lang">ES</span>
+                        </div>
+                        <p class="project-summary"
+                           data-es="El país se desmorona con puntualidad matemática. Goberná el caos antes de que la historia decida olvidarte."
+                           data-en="The nation collapses with mathematical precision. Govern the chaos before history decides to erase you.">
+                            El país se desmorona con puntualidad matemática. Goberná el caos antes de que la historia decida olvidarte.
+                        </p>
                     </div>
-                    <span class="project-summary"
-                          data-es="¿Podés gobernar un país al borde del abismo sin que te derroquen? Presidencia 2032"
-                          data-en="Can you govern a country on the brink of collapse without getting ousted? Presidency 2032">
-                        ¿Podés gobernar un país al borde del abismo sin que te derroquen? Presidencia 2032
-                    </span>
-                    <span class="project-lang">ES</span>
                     <span class="project-chevron" aria-hidden="true">⌄</span>
                 </button>
                 <div class="project-detail" hidden>
@@ -831,15 +852,15 @@
                     </div>
                     <div class="project-info">
                         <p class="project-desc-full"
-                           data-es="Asumís la presidencia de la República del Sur en 2032. Finanzas frágiles, hiperinflación latente, sindicatos en las calles, medios hostiles y gobernadores rebeldes. Cada decisión y decreto tiene consecuencias impredecibles que volverán meses después. ¿Llegás al final de tu mandato o te sacan antes?"
-                           data-en="You assume the presidency of the Southern Republic in 2032. Fragile finances, runaway inflation, striking unions, hostile media, and rebel governors. Every decree carries long-term consequences that strike months later. Will you survive your term or get ousted?">
-                            Asumís la presidencia de la República del Sur en 2032. Finanzas frágiles, hiperinflación latente, sindicatos en las calles, medios hostiles y gobernadores rebeldes. Cada decisión y decreto tiene consecuencias impredecibles que volverán meses después. ¿Llegás al final de tu mandato o te sacan antes?
+                           data-es="Asumís la presidencia de la República del Sur en 2032. Nadie te prometió un desenlace piadoso: hiperinflación latente, sindicatos en las calles, medios hostiles y gobernadores rebeldes. Cada decisión y decreto tiene consecuencias silenciosas que volverán meses después a sellar tu destino. ¿Llegás al final de tu mandato o te derroca el propio sistema?"
+                           data-en="You take the presidency of the Southern Republic in 2032. Nobody promised a forgiving outcome: creeping hyperinflation, union strikes, hostile press, and mutinous governors. Every decision carries delayed consequences that return months later to seal your fate. Will you finish your term or will the system purge you first?">
+                            Asumís la presidencia de la República del Sur en 2032. Nadie te prometió un desenlace piadoso: hiperinflación latente, sindicatos en las calles, medios hostiles y gobernadores rebeldes. Cada decisión y decreto tiene consecuencias silenciosas que volverán meses después a sellar tu destino. ¿Llegás al final de tu mandato o te derroca el propio sistema?
                         </p>
                         <div class="project-meta-tags">
-                            <span class="meta-tag" data-es="SIMULACIÓN POLÍTICA · NARRATIVA VIVA" data-en="POLITICAL SIMULATION · LIVING NARRATIVE">SIMULACIÓN POLÍTICA · NARRATIVA VIVA</span>
+                            <span class="meta-tag" data-es="SIMULACIÓN POLÍTICA · CAOS VIVO" data-en="POLITICAL SIMULATION · LIVING CHAOS">SIMULACIÓN POLÍTICA · CAOS VIVO</span>
                         </div>
                         <a class="play-btn" href="https://mi-mandato.vercel.app/" target="_blank" rel="noopener noreferrer">
-                            <span data-es="JUGAR MI MANDATO" data-en="PLAY MI MANDATO">JUGAR MI MANDATO</span>
+                            <span data-es="ASUMIR EL MANDO" data-en="TAKE OFFICE">ASUMIR EL MANDO</span>
                             <span class="arrow">↗</span>
                         </a>
                     </div>
@@ -851,16 +872,18 @@
                 <button class="project-toggle" type="button" aria-expanded="false">
                     <span class="project-dot" aria-hidden="true"></span>
                     <span class="project-icon"><img src="icono/EL BUCLE.png" alt="El Bucle"></span>
-                    <div class="project-title-group">
-                        <span class="project-title">EL BUCLE</span>
-                        <span class="category-pill" data-es="WEB CÓMIC INTERACTIVO" data-en="INTERACTIVE WEB COMIC">WEB CÓMIC INTERACTIVO</span>
+                    <div class="project-header-main">
+                        <div class="project-title-row">
+                            <span class="project-title">EL BUCLE</span>
+                            <span class="category-pill" data-es="CÓMIC INTERACTIVO" data-en="INTERACTIVE COMIC">CÓMIC INTERACTIVO</span>
+                            <span class="project-lang">ES</span>
+                        </div>
+                        <p class="project-summary"
+                           data-es="El tiempo no avanza: se repite hasta que elijas distinto. Cómic web inmersivo con diseño sonoro binaural."
+                           data-en="Time doesn't move forward: it loops until you choose differently. Immersive web comic with binaural sound.">
+                            El tiempo no avanza: se repite hasta que elijas distinto. Cómic web inmersivo con diseño sonoro binaural.
+                        </p>
                     </div>
-                    <span class="project-summary"
-                          data-es="Cómic interactivo donde tus elecciones alteran la historia · 🎧 ¡Usar con auriculares!"
-                          data-en="Interactive web comic where your choices warp the story · 🎧 Headphones required!">
-                        Cómic interactivo donde tus elecciones alteran la historia · 🎧 ¡Usar con auriculares!
-                    </span>
-                    <span class="project-lang">ES</span>
                     <span class="project-chevron" aria-hidden="true">⌄</span>
                 </button>
                 <div class="project-detail" hidden>
@@ -870,15 +893,15 @@
                     </div>
                     <div class="project-info">
                         <p class="project-desc-full"
-                           data-es="Un cómic web interactivo de misterio y saltos temporales nacido del universo RUPTURA. No leés de forma pasiva: tus decisiones ramifican la trama y reescriben las viñetas en tiempo real. <strong>🎧 IMPORTANTE:</strong> Cuenta con una banda sonora reactiva y efectos inmersivos; activá el audio o usá auriculares para experimentar la atmósfera al 100%."
-                           data-en="An interactive web comic of mystery and time loops born from the RUPTURA universe. You don't just read: your choices branch the plot and rewrite panels in real-time. <strong>🎧 NOTE:</strong> Features reactive atmospheric sound design; play with audio/headphones enabled for the full immersive experience.">
-                            Un cómic web interactivo de misterio y saltos temporales nacido del universo RUPTURA. No leés de forma pasiva: tus decisiones ramifican la trama y reescriben las viñetas en tiempo real. <strong>🎧 IMPORTANTE:</strong> Cuenta con una banda sonora reactiva y efectos inmersivos; activá el audio o usá auriculares para experimentar la atmósfera al 100%.
+                           data-es="Un cómic interactivo donde el libre albedrío es un acertijo temporal nacido del universo RUPTURA. No leés de forma pasiva: cada elección ramifica la trama y reescribe las viñetas en tiempo real. <strong>🎧 EXPERIENCIA DE AUDIO:</strong> Cuenta con una atmósfera acústica reactiva; activá el sonido o usá auriculares para sumergirte en el laberinto."
+                           data-en="An interactive web comic where free will is a temporal puzzle born from the RUPTURA universe. You don't read passively: every choice branches the plot and rewrites the panels in real-time. <strong>🎧 AUDIO EXPERIENCE:</strong> Features reactive atmospheric sound design; play with headphones to step deep inside the labyrinth.">
+                            Un cómic interactivo donde el libre albedrío es un acertijo temporal nacido del universo RUPTURA. No leés de forma pasiva: cada elección ramifica la trama y reescribe las viñetas en tiempo real. <strong>🎧 EXPERIENCIA DE AUDIO:</strong> Cuenta con una atmósfera acústica reactiva; activá el sonido o usá auriculares para sumergirte en el laberinto.
                         </p>
                         <div class="project-meta-tags">
-                            <span class="meta-tag" data-es="CÓMIC INTERACTIVO · AUDIO INMERSIVO" data-en="INTERACTIVE COMIC · IMMERSIVE AUDIO">CÓMIC INTERACTIVO · AUDIO INMERSIVO</span>
+                            <span class="meta-tag" data-es="NARRATIVA TEMPORAL · AUDIO INMERSIVO" data-en="TEMPORAL NARRATIVE · IMMERSIVE AUDIO">NARRATIVA TEMPORAL · AUDIO INMERSIVO</span>
                         </div>
                         <a class="play-btn" href="https://ruptura.free.nf/?i=1" target="_blank" rel="noopener noreferrer">
-                            <span data-es="ENTRAR A LA EXPERIENCIA" data-en="ENTER EXPERIENCE">ENTRAR A LA EXPERIENCIA</span>
+                            <span data-es="ENTRAR AL BUCLE" data-en="ENTER THE LOOP">ENTRAR AL BUCLE</span>
                             <span class="arrow">↗</span>
                         </a>
                     </div>
@@ -890,16 +913,18 @@
                 <button class="project-toggle" type="button" aria-expanded="false">
                     <span class="project-dot" aria-hidden="true"></span>
                     <span class="project-icon"><img src="icono/Corpority.png" alt="Corpority"></span>
-                    <div class="project-title-group">
-                        <span class="project-title">CORPORITY</span>
-                        <span class="category-pill" data-es="SÁTIRA LABORAL" data-en="OFFICE SATIRE">SÁTIRA LABORAL</span>
+                    <div class="project-header-main">
+                        <div class="project-title-row">
+                            <span class="project-title">CORPORITY</span>
+                            <span class="category-pill" data-es="SÁTIRA LABORAL" data-en="WORKPLACE SATIRE">SÁTIRA LABORAL</span>
+                            <span class="project-lang">ES</span>
+                        </div>
+                        <p class="project-summary"
+                           data-es="Cambiá tus mejores años por un sueldo fijo. Sobreviví al absurdo corporativo antes de agotar tu cordura."
+                           data-en="Trade your prime years for a steady salary. Survive corporate absurdity before your sanity runs out.">
+                            Cambiá tus mejores años por un sueldo fijo. Sobreviví al absurdo corporativo antes de agotar tu cordura.
+                        </p>
                     </div>
-                    <span class="project-summary"
-                          data-es="El simulador definitivo de oficina: ¿Cuánto sobrevivís al burnout y a los jefes tóxicos?"
-                          data-en="The ultimate corporate survival sim: How long can you endure burnout & toxic bosses?">
-                        El simulador definitivo de oficina: ¿Cuánto sobrevivís al burnout y a los jefes tóxicos?
-                    </span>
-                    <span class="project-lang">ES</span>
                     <span class="project-chevron" aria-hidden="true">⌄</span>
                 </button>
                 <div class="project-detail" hidden>
@@ -909,15 +934,15 @@
                     </div>
                     <div class="project-info">
                         <p class="project-desc-full"
-                           data-es="Empezás una carrera en una corporación absurda y tratás de sobrevivir año tras año. Esquivá jefes incompetentes, sorteá reuniones interminables que pudieron ser un mail, negociá aumentos y controlá tu barra de estrés. El único objetivo: jubilarte con suficiente plata y sin haber perdido la cabeza."
-                           data-en="Start a career in an absurd corporate grind and fight to survive year after year. Dodge incompetent bosses, survive meetings that could've been emails, negotiate raises, and manage your stress bar. The goal: retire with enough cash before losing your mind.">
-                            Empezás una carrera en una corporación absurda y tratás de sobrevivir año tras año. Esquivá jefes incompetentes, sorteá reuniones interminables que pudieron ser un mail, negociá aumentos y controlá tu barra de estrés. El único objetivo: jubilarte con suficiente plata y sin haber perdido la cabeza.
+                           data-es="Una sátira despiadada y lúcida sobre los engranajes del trabajo moderno. Empezás desde abajo en una empresa delirante tratando de sobrevivir año tras año: esquivá jefes incompetentes, sorteá reuniones que pudieron ser un mail y administrá tu estrés diario. El objetivo no es ganar, es jubilarte con algo de dinero y la mente intacta."
+                           data-en="A sharp, lucid satire on the cogs of modern enterprise. Start from the bottom of an absurd corporation and fight to survive year after year: dodge incompetent managers, endure pointless meetings, and juggle your daily stress bar. The goal isn't triumph—it's retiring with some wealth and your mind intact.">
+                            Una sátira despiadada y lúcida sobre los engranajes del trabajo moderno. Empezás desde abajo en una empresa delirante tratando de sobrevivir año tras año: esquivá jefes incompetentes, sorteá reuniones que pudieron ser un mail y administrá tu estrés diario. El objetivo no es ganar, es jubilarte con algo de dinero y la mente intacta.
                         </p>
                         <div class="project-meta-tags">
                             <span class="meta-tag" data-es="SUPERVIVENCIA CORPORATIVA · SÁTIRA" data-en="CORPORATE SURVIVAL · SATIRE">SUPERVIVENCIA CORPORATIVA · SÁTIRA</span>
                         </div>
                         <a class="play-btn" href="https://corpority.vercel.app/" target="_blank" rel="noopener noreferrer">
-                            <span data-es="JUGAR CORPORITY" data-en="PLAY CORPORITY">JUGAR CORPORITY</span>
+                            <span data-es="FICHAR ENTRADA" data-en="CLOCK IN">FICHAR ENTRADA</span>
                             <span class="arrow">↗</span>
                         </a>
                     </div>
@@ -929,16 +954,18 @@
                 <button class="project-toggle" type="button" aria-expanded="false">
                     <span class="project-dot" aria-hidden="true"></span>
                     <span class="project-icon"><img src="icono/RASTRO.png" alt="RASTRO"></span>
-                    <div class="project-title-group">
-                        <span class="project-title">RASTRO</span>
-                        <span class="category-pill" data-es="1V1 TRIVIA & DEDUCCIÓN" data-en="1V1 TRIVIA & DEDUCTION">1V1 TRIVIA & DEDUCCIÓN</span>
+                    <div class="project-header-main">
+                        <div class="project-title-row">
+                            <span class="project-title">RASTRO</span>
+                            <span class="category-pill" data-es="DUELO 1V1 · DEDUCCIÓN" data-en="1V1 DUEL · DEDUCTION">DUELO 1V1 · DEDUCCIÓN</span>
+                            <span class="project-lang">ES · EN</span>
+                        </div>
+                        <p class="project-summary"
+                           data-es="La historia solo deja fragmentos. Duelo 1v1 en vivo para descifrar el año y lugar de fotografías reales."
+                           data-en="History only leaves fragments behind. Real-time 1v1 duel to pinpoint the exact year and place of archival photos.">
+                            La historia solo deja fragmentos. Duelo 1v1 en vivo para descifrar el año y lugar de fotografías reales.
+                        </p>
                     </div>
-                    <span class="project-summary"
-                          data-es="Duelo 1v1 en vivo: ¿Quién deduce el año y lugar exacto de fotos históricas reales?"
-                          data-en="Live 1v1 duel: Who can pinpoint the exact year and location of real archival photos?">
-                        Duelo 1v1 en vivo: ¿Quién deduce el año y lugar exacto de fotos históricas reales?
-                    </span>
-                    <span class="project-lang">ES · EN</span>
                     <span class="project-chevron" aria-hidden="true">⌄</span>
                 </button>
                 <div class="project-detail" hidden>
@@ -948,15 +975,15 @@
                     </div>
                     <div class="project-info">
                         <p class="project-desc-full"
-                           data-es="Motor de investigación histórica competitiva 1 vs 1 en tiempo real. Vos y tu rival reciben fotos y documentos desclasificados auténticos de archivos públicos (AGN, LoC, Europeana). Hacé zoom profundo en cartelería, modas y arquitectura para clavar el año y las coordenadas exactas antes de que tu rival selle su hipótesis."
-                           data-en="Real-time 1v1 competitive historical investigation engine. You and your opponent get authentic declassified photos and archival records (AGN, LoC, Europeana). Deep zoom into signage, clothing, and architecture to pinpoint exact coordinates and year before your rival locks in their hypothesis.">
-                            Motor de investigación histórica competitiva 1 vs 1 en tiempo real. Vos y tu rival reciben fotos y documentos desclasificados auténticos de archivos públicos (AGN, LoC, Europeana). Hacé zoom profundo en cartelería, modas y arquitectura para clavar el año y las coordenadas exactas antes de que tu rival selle su hipótesis.
+                           data-es="Motor de investigación histórica competitiva 1 contra 1 en tiempo real. Vos y tu oponente reciben fotografías y documentos desclasificados auténticos de archivos públicos (AGN, LoC, Europeana). Hacé zoom profundo en vestimentas, arquitectura y carteles de época para clavar las coordenadas y el año exacto antes de que tu rival selle su hipótesis."
+                           data-en="Real-time 1v1 competitive historical investigation engine. You and your opponent examine authentic declassified photos and archival records (AGN, LoC, Europeana). Deep zoom into vintage clothing, architecture, and forgotten signage to lock in the exact year and coordinates before your rival pieces it together.">
+                            Motor de investigación histórica competitiva 1 contra 1 en tiempo real. Vos y tu oponente reciben fotografías y documentos desclasificados auténticos de archivos públicos (AGN, LoC, Europeana). Hacé zoom profundo en vestimentas, arquitectura y carteles de época para clavar las coordenadas y el año exacto antes de que tu rival selle su hipótesis.
                         </p>
                         <div class="project-meta-tags">
-                            <span class="meta-tag" data-es="COMPETITIVO 1V1 · INVESTIGACIÓN HISTÓRICA" data-en="1V1 COMPETITIVE · HISTORICAL INVESTIGATION">COMPETITIVO 1V1 · INVESTIGACIÓN HISTÓRICA</span>
+                            <span class="meta-tag" data-es="INVESTIGACIÓN HISTÓRICA · TIEMPO REAL" data-en="HISTORICAL INVESTIGATION · REAL-TIME">INVESTIGACIÓN HISTÓRICA · TIEMPO REAL</span>
                         </div>
                         <a class="play-btn" href="https://rastro-sigma.vercel.app/" target="_blank" rel="noopener noreferrer">
-                            <span data-es="DESAFIAR 1V1 EN RASTRO" data-en="PLAY 1V1 DUEL">DESAFIAR 1V1 EN RASTRO</span>
+                            <span data-es="DESAFIAR EN RASTRO" data-en="CHALLENGE 1V1">DESAFIAR EN RASTRO</span>
                             <span class="arrow">↗</span>
                         </a>
                     </div>
@@ -968,16 +995,18 @@
                 <button class="project-toggle" type="button" aria-expanded="false">
                     <span class="project-dot" aria-hidden="true"></span>
                     <span class="project-icon"><img src="icono/MANDIBULA.png" alt="Mandíbula"></span>
-                    <div class="project-title-group">
-                        <span class="project-title">MANDÍBULA</span>
-                        <span class="category-pill" data-es="JUEGO DE ESTRATEGIA" data-en="STRATEGY GAME">JUEGO DE ESTRATEGIA</span>
+                    <div class="project-header-main">
+                        <div class="project-title-row">
+                            <span class="project-title">MANDÍBULA</span>
+                            <span class="category-pill" data-es="ESTRATEGIA BIOLÓGICA" data-en="BIOLOGICAL STRATEGY">ESTRATEGIA BIOLÓGICA</span>
+                            <span class="project-lang">ES</span>
+                        </div>
+                        <p class="project-summary"
+                           data-es="A la naturaleza no le importa tu colonia. Comandá un hormiguero en la estepa hostil de la Patagonia."
+                           data-en="Nature does not care about your colony. Command an ant nest in the unforgiving Patagonian steppe.">
+                            A la naturaleza no le importa tu colonia. Comandá un hormiguero en la estepa hostil de la Patagonia.
+                        </p>
                     </div>
-                    <span class="project-summary"
-                          data-es="Estrategia viva: Comandá una colonia de hormigas en la salvaje estepa patagónica"
-                          data-en="Living strategy game: Command an ant colony in the wild Patagonian steppe">
-                        Estrategia viva: Comandá una colonia de hormigas en la salvaje estepa patagónica
-                    </span>
-                    <span class="project-lang">ES</span>
                     <span class="project-chevron" aria-hidden="true">⌄</span>
                 </button>
                 <div class="project-detail" hidden>
@@ -987,15 +1016,15 @@
                     </div>
                     <div class="project-info">
                         <p class="project-desc-full"
-                           data-es="Tomás el control biológico de una colonia de Acromyrmex lobicornis en la estepa patagónica. Administrá recolectoras, defendé el hormiguero de plagas y clima hostil, y expandí tu territorio en un ecosistema vivo que reacciona a cada una de tus órdenes en partidas tácticas de 15 minutos."
-                           data-en="Take command of an Acromyrmex lobicornis colony in the Patagonian wilderness. Manage foragers, protect the nest from hostile weather and predators, and expand your territory in a reactive living ecosystem in quick 15-minute tactical sessions.">
-                            Tomás el control biológico de una colonia de Acromyrmex lobicornis en la estepa patagónica. Administrá recolectoras, defendé el hormiguero de plagas y clima hostil, y expandí tu territorio en un ecosistema vivo que reacciona a cada una de tus órdenes en partidas tácticas de 15 minutos.
+                           data-es="Tomás el control biológico de una colonia de Acromyrmex lobicornis en la estepa patagónica. Sin piedad ni pausas: coordiná recolectoras, defendé las cámaras subterráneas de plagas y heladas, y expandí tu territorio en un ecosistema vivo que reacciona a cada una de tus órdenes químicas en partidas tácticas de 15 minutos."
+                           data-en="Take biological command of an Acromyrmex lobicornis colony across the Patagonian wilderness. No mercy, no pauses: orchestrate foragers, defend fungal chambers against frost and predators, and expand across a living ecosystem reacting to every chemical order in rapid 15-minute tactical sessions.">
+                            Tomás el control biológico de una colonia de Acromyrmex lobicornis en la estepa patagónica. Sin piedad ni pausas: coordiná recolectoras, defendé las cámaras subterráneas de plagas y heladas, y expandí tu territorio en un ecosistema vivo que reacciona a cada una de tus órdenes químicas en partidas tácticas de 15 minutos.
                         </p>
                         <div class="project-meta-tags">
                             <span class="meta-tag" data-es="ESTRATEGIA PATAGÓNICA · ECOSISTEMA VIVO" data-en="PATAGONIAN STRATEGY · LIVING ECOSYSTEM">ESTRATEGIA PATAGÓNICA · ECOSISTEMA VIVO</span>
                         </div>
                         <a class="play-btn" href="https://mandibula-six.vercel.app/" target="_blank" rel="noopener noreferrer">
-                            <span data-es="JUGAR MANDÍBULA" data-en="PLAY MANDÍBULA">JUGAR MANDÍBULA</span>
+                            <span data-es="COMANDAR COLONIA" data-en="COMMAND COLONY">COMANDAR COLONIA</span>
                             <span class="arrow">↗</span>
                         </a>
                     </div>
@@ -1007,16 +1036,18 @@
                 <button class="project-toggle" type="button" aria-expanded="false">
                     <span class="project-dot" aria-hidden="true"></span>
                     <span class="project-icon"><img src="icono/el-origen.png" alt="El Origen"></span>
-                    <div class="project-title-group">
-                        <span class="project-title">EL ORIGEN</span>
-                        <span class="category-pill" data-es="HORROR PSICOLÓGICO" data-en="PSYCHOLOGICAL HORROR">HORROR PSICOLÓGICO</span>
+                    <div class="project-header-main">
+                        <div class="project-title-row">
+                            <span class="project-title">EL ORIGEN</span>
+                            <span class="category-pill" data-es="HORROR DEDUCTIVO" data-en="DEDUCTIVE HORROR">HORROR DEDUCTIVO</span>
+                            <span class="project-lang">ES</span>
+                        </div>
+                        <p class="project-summary"
+                           data-es="El pasado nunca muere, solo queda bajo llave. Tasá un departamento antiguo y descubrí lo que oculta."
+                           data-en="The past never dies, it just stays under lock and key. Appraise an old apartment and uncover what it hides.">
+                            El pasado nunca muere, solo queda bajo llave. Tasá un departamento antiguo y descubrí lo que oculta.
+                        </p>
                     </div>
-                    <span class="project-summary"
-                          data-es="Horror psicológico puro: Entrás a tasar un departamento y descubrís un secreto perturbador"
-                          data-en="Pure psychological horror: Enter an apartment for appraisal and unearth a dark secret">
-                        Horror psicológico puro: Entrás a tasar un departamento y descubrís un secreto perturbador
-                    </span>
-                    <span class="project-lang">ES</span>
                     <span class="project-chevron" aria-hidden="true">⌄</span>
                 </button>
                 <div class="project-detail" hidden>
@@ -1026,15 +1057,15 @@
                     </div>
                     <div class="project-info">
                         <p class="project-desc-full"
-                           data-es="Entrás al departamento cerrado de tu abuela para una tasación inmobiliaria. Pero nada es decoración: notas familiares, fotografías antiguas y evidencias físicas arman un perturbador rompecabezas. Sin screamers baratos: acá el verdadero terror nace de comprender lo que pasó."
-                           data-en="You enter your late grandmother's locked apartment for an estate appraisal. But nothing is mere decoration: old family photos, hidden notes, and physical clues piece together a disturbing puzzle. No cheap jumpscares: true terror comes from understanding what occurred.">
-                            Entrás al departamento cerrado de tu abuela para una tasación inmobiliaria. Pero nada es decoración: notas familiares, fotografías antiguas y evidencias físicas arman un perturbador rompecabezas. Sin screamers baratos: acá el verdadero terror nace de comprender lo que pasó.
+                           data-es="Entrás al departamento cerrado de tu abuela para una tasación inmobiliaria rutinaria. Nada es un mero adorno: cartas archivadas, fotografías familiares y objetos cotidianos construyen una verdad inquietante. Sin sustos fáciles ni artificios: acá el verdadero escalofrío nace de comprender qué ocurrió en esas cuatro paredes."
+                           data-en="You step inside your late grandmother's locked apartment for a routine estate appraisal. Nothing is merely decorative: archived letters, vintage family photographs, and physical relics assemble a disturbing truth. No cheap jumpscares: true dread here is born from understanding what happened between those four walls.">
+                            Entrás al departamento cerrado de tu abuela para una tasación inmobiliaria rutinaria. Nada es un mero adorno: cartas archivadas, fotografías familiares y objetos cotidianos construyen una verdad inquietante. Sin sustos fáciles ni artificios: acá el verdadero escalofrío nace de comprender qué ocurrió en esas cuatro paredes.
                         </p>
                         <div class="project-meta-tags">
-                            <span class="meta-tag" data-es="HORROR DEDUCTIVO · MISTERIO" data-en="DEDUCTIVE HORROR · MYSTERY">HORROR DEDUCTIVO · MISTERIO</span>
+                            <span class="meta-tag" data-es="MISTERIO PSICOLÓGICO · DEDUCCIÓN PURA" data-en="PSYCHOLOGICAL MYSTERY · PURE DEDUCTION">MISTERIO PSICOLÓGICO · DEDUCCIÓN PURA</span>
                         </div>
                         <a class="play-btn" href="https://origin-game.vercel.app/" target="_blank" rel="noopener noreferrer">
-                            <span data-es="INVESTIGAR EL ORIGEN" data-en="EXPLORE THE ORIGIN">INVESTIGAR EL ORIGEN</span>
+                            <span data-es="INVESTIGAR EL ORIGEN" data-en="INVESTIGATE THE ORIGIN">INVESTIGAR EL ORIGEN</span>
                             <span class="arrow">↗</span>
                         </a>
                     </div>
@@ -1046,16 +1077,18 @@
                 <button class="project-toggle" type="button" aria-expanded="false">
                     <span class="project-dot" aria-hidden="true"></span>
                     <span class="project-icon"><img src="icono/Sendero.png" alt="Sendero"></span>
-                    <div class="project-title-group">
-                        <span class="project-title">SENDERO</span>
-                        <span class="category-pill" data-es="DESARROLLO PERSONAL" data-en="PERSONAL GROWTH">DESARROLLO PERSONAL</span>
+                    <div class="project-header-main">
+                        <div class="project-title-row">
+                            <span class="project-title">SENDERO</span>
+                            <span class="category-pill" data-es="DISEÑO DE HÁBITOS" data-en="HABIT DESIGN">DISEÑO DE HÁBITOS</span>
+                            <span class="project-lang">ES</span>
+                        </div>
+                        <p class="project-summary"
+                           data-es="Sin fórmulas mágicas ni autoayuda vacía: 12 semanas para ordenar tu vida con lucidez y foco real."
+                           data-en="No magic formulas, no hollow self-help: 12 weeks to build your life with clarity and real focus.">
+                            Sin fórmulas mágicas ni autoayuda vacía: 12 semanas para ordenar tu vida con lucidez y foco real.
+                        </p>
                     </div>
-                    <span class="project-summary"
-                          data-es="¿Querés cambiar tus hábitos sin fórmulas mágicas? 12 semanas de desarrollo guiado"
-                          data-en="Transform your lifestyle without magic formulas: 12 weeks of grounded self-growth">
-                        ¿Querés cambiar tus hábitos sin fórmulas mágicas? 12 semanas de desarrollo guiado
-                    </span>
-                    <span class="project-lang">ES</span>
                     <span class="project-chevron" aria-hidden="true">⌄</span>
                 </button>
                 <div class="project-detail" hidden>
@@ -1065,15 +1098,15 @@
                     </div>
                     <div class="project-info">
                         <p class="project-desc-full"
-                           data-es="No necesitás transformar tu vida de la noche a la mañana: podés aprender a caminarla mejor. Un programa de 12 semanas con hábitos adaptables, desafíos reales y reflexión guiada. Menos optimización vacía, más intención y herramientas prácticas para el día a día."
-                           data-en="You don't need to reinvent your life overnight: you can learn to walk it better. A 12-week interactive program with adaptable habits, real challenges, and guided reflection. Less hollow self-help, more intention and practical daily tools.">
-                            No necesitás transformar tu vida de la noche a la mañana: podés aprender a caminarla mejor. Un programa de 12 semanas con hábitos adaptables, desafíos reales y reflexión guiada. Menos optimización vacía, más intención y herramientas prácticas para el día a día.
+                           data-es="No necesitás reinventar tu existencia cada lunes; necesitás aprender a habitarla mejor. Un programa guiado de 12 semanas con hábitos adaptables, desafíos cotidianos y reflexión sin poses. Menos optimización obsesiva, más intención pragmática y herramientas concretas para el día a día."
+                           data-en="You don't need to reinvent your existence every Monday; you need to learn how to navigate it better. A guided 12-week program featuring adaptable habits, everyday challenges, and unpretentious reflection. Less obsessive optimization, more pragmatic intention and grounded tools for daily life.">
+                            No necesitás reinventar tu existencia cada lunes; necesitás aprender a habitarla mejor. Un programa guiado de 12 semanas con hábitos adaptables, desafíos cotidianos y reflexión sin poses. Menos optimización obsesiva, más intención pragmática y herramientas concretas para el día a día.
                         </p>
                         <div class="project-meta-tags">
-                            <span class="meta-tag" data-es="BIENESTAR · PROGRAMA INTERACTIVO" data-en="WELLBEING · INTERACTIVE PROGRAM">BIENESTAR · PROGRAMA INTERACTIVO</span>
+                            <span class="meta-tag" data-es="CLARIDAD MENTAL · CONDUCTA PRAGMÁTICA" data-en="MENTAL CLARITY · PRAGMATIC BEHAVIOR">CLARIDAD MENTAL · CONDUCTA PRAGMÁTICA</span>
                         </div>
                         <a class="play-btn" href="https://planet-club.vercel.app/sendero" target="_blank" rel="noopener noreferrer">
-                            <span data-es="EMPEZAR SENDERO" data-en="START SENDERO">EMPEZAR SENDERO</span>
+                            <span data-es="INICIAR SENDERO" data-en="START SENDERO">INICIAR SENDERO</span>
                             <span class="arrow">↗</span>
                         </a>
                     </div>
@@ -1085,16 +1118,18 @@
                 <button class="project-toggle" type="button" aria-expanded="false">
                     <span class="project-dot" aria-hidden="true"></span>
                     <span class="project-icon"><img src="icono/AMAN.png" alt="AMAN"></span>
-                    <div class="project-title-group">
-                        <span class="project-title">AMAN</span>
-                        <span class="category-pill" data-es="LENGUAJE EXPERIMENTAL" data-en="EXPERIMENTAL LANG">LENGUAJE EXPERIMENTAL</span>
+                    <div class="project-header-main">
+                        <div class="project-title-row">
+                            <span class="project-title">AMAN</span>
+                            <span class="category-pill" data-es="LENGUAJE EXPERIMENTAL" data-en="EXPERIMENTAL LANGUAGE">LENGUAJE EXPERIMENTAL</span>
+                            <span class="project-lang">ES · EN</span>
+                        </div>
+                        <p class="project-summary"
+                           data-es="Las palabras nos condicionan: 67 conceptos primitivos que se combinan para expresar cualquier idea."
+                           data-en="Words condition thought: 67 primal concepts that combine like logic blocks to express any idea.">
+                            Las palabras nos condicionan: 67 conceptos primitivos que se combinan para expresar cualquier idea.
+                        </p>
                     </div>
-                    <span class="project-summary"
-                          data-es="Un idioma que no se memoriza, se deduce: 67 primitivos conceptuales infinitos"
-                          data-en="A language you don't memorize, you construct: 67 infinite conceptual primitives">
-                        Un idioma que no se memoriza, se deduce: 67 primitivos conceptuales infinitos
-                    </span>
-                    <span class="project-lang">ES · EN</span>
                     <span class="project-chevron" aria-hidden="true">⌄</span>
                 </button>
                 <div class="project-detail" hidden>
@@ -1104,12 +1139,12 @@
                     </div>
                     <div class="project-info">
                         <p class="project-desc-full"
-                           data-es="¿Por qué memorizar miles de palabras arbitrarias? AMAN propone un lenguaje ideográfico experimental con 67 conceptos universales que se combinan como bloques lógicos para expresar cualquier idea. En vez de aprender «médico», combinás PERSONA + DAR + SALUD."
-                           data-en="Why memorize thousands of arbitrary vocabulary words? AMAN introduces an experimental ideographic system where 67 universal primitives combine like logical building blocks to express any thought. Instead of memorizing 'doctor', you combine PERSON + GIVE + HEALTH.">
-                            ¿Por qué memorizar miles de palabras arbitrarias? AMAN propone un lenguaje ideográfico experimental con 67 conceptos universales que se combinan como bloques lógicos para expresar cualquier idea. En vez de aprender «médico», combinás PERSONA + DAR + SALUD.
+                           data-es="¿Por qué memorizar miles de palabras arbitrarias cuando el pensamiento puede construirse desde sus átomos esenciales? AMAN propone un lenguaje ideográfico experimental con 67 conceptos universales que funcionan como bloques lógicos. En lugar de aprender «médico», combinás PERSONA + DAR + SALUD para explorar el lenguaje sin las trampas del idioma tradicional."
+                           data-en="Why memorize thousands of arbitrary words when thought can be constructed from its fundamental atoms? AMAN introduces an experimental ideographic system of 67 universal primitives operating like logical building blocks. Instead of memorizing 'doctor', you combine PERSON + GIVE + HEALTH to explore thought free from linguistic constraints.">
+                            ¿Por qué memorizar miles de palabras arbitrarias cuando el pensamiento puede construirse desde sus átomos esenciales? AMAN propone un lenguaje ideográfico experimental con 67 conceptos universales que funcionan como bloques lógicos. En lugar de aprender «médico», combinás PERSONA + DAR + SALUD para explorar el lenguaje sin las trampas del idioma tradicional.
                         </p>
                         <div class="project-meta-tags">
-                            <span class="meta-tag" data-es="SISTEMA CONCEPTUAL · LINGÜÍSTICA" data-en="CONCEPTUAL SYSTEM · LINGUISTICS">SISTEMA CONCEPTUAL · LINGÜÍSTICA</span>
+                            <span class="meta-tag" data-es="SISTEMA CONCEPTUAL · LINGÜÍSTICA PURA" data-en="CONCEPTUAL SYSTEM · PURE LINGUISTICS">SISTEMA CONCEPTUAL · LINGÜÍSTICA PURA</span>
                         </div>
                         <a class="play-btn" href="https://aman.free.je/?i=1" target="_blank" rel="noopener noreferrer">
                             <span data-es="EXPLORAR AMAN" data-en="EXPLORE AMAN">EXPLORAR AMAN</span>
@@ -1124,16 +1159,18 @@
                 <button class="project-toggle" type="button" aria-expanded="false">
                     <span class="project-dot" aria-hidden="true"></span>
                     <span class="project-icon"><img src="icono/UMBRAL.png" alt="Umbral"></span>
-                    <div class="project-title-group">
-                        <span class="project-title">UMBRAL</span>
-                        <span class="category-pill" data-es="LAB COGNITIVO" data-en="COGNITIVE LAB">LAB COGNITIVO</span>
+                    <div class="project-header-main">
+                        <div class="project-title-row">
+                            <span class="project-title">UMBRAL</span>
+                            <span class="category-pill" data-es="LAB COGNITIVO" data-en="COGNITIVE LAB">LAB COGNITIVO</span>
+                            <span class="project-lang">ES · EN</span>
+                        </div>
+                        <p class="project-summary"
+                           data-es="El sonido tiene textura y el silencio tiene color. Escuchá estímulos y descubrí tus patrones de sinestesia."
+                           data-en="Sound has texture and silence has color. Listen to audio cues and discover your synesthetic patterns.">
+                            El sonido tiene textura y el silencio tiene color. Escuchá estímulos y descubrí tus patrones de sinestesia.
+                        </p>
                     </div>
-                    <span class="project-summary"
-                          data-es="Experimento de sinestesia: Escuchá sonidos y descubrí qué colores despiertan en vos"
-                          data-en="Synesthesia experiment: Listen to audio cues and discover what colors your mind sees">
-                        Experimento de sinestesia: Escuchá sonidos y descubrí qué colores despiertan en vos
-                    </span>
-                    <span class="project-lang">ES · EN</span>
                     <span class="project-chevron" aria-hidden="true">⌄</span>
                 </button>
                 <div class="project-detail" hidden>
@@ -1143,15 +1180,15 @@
                     </div>
                     <div class="project-info">
                         <p class="project-desc-full"
-                           data-es="Investigación abierta que corre 100% en tu navegador. Escuchás estímulos sonoros breves y registrás qué colores, formas o emociones te evocan. El sistema contrasta tus respuestas neuronales contra bases de control para determinar patrones sinestésicos reales. Sin cuenta ni micrófono."
-                           data-en="Open research experiment running 100% in your browser. Listen to short audio triggers and record the colors, shapes, and feelings they spark. The engine benchmarks your responses against control datasets to map real synesthetic patterns without requiring an account or microphone.">
-                            Investigación abierta que corre 100% en tu navegador. Escuchás estímulos sonoros breves y registrás qué colores, formas o emociones te evocan. El sistema contrasta tus respuestas neuronales contra bases de control para determinar patrones sinestésicos reales. Sin cuenta ni micrófono.
+                           data-es="Una investigación abierta que corre 100% en tu navegador para cartografiar la arquitectura sensorial oculta de tu mente. Escuchás estímulos sonoros breves y registrás los colores, texturas o emociones que despiertan en vos. El sistema contrasta tus respuestas contra bases de control para revelar tus patrones sinestésicos reales."
+                           data-en="An open research experiment running 100% in your browser to map the hidden sensory architecture of your mind. Listen to short audio triggers and record the colors, textures, or feelings they awaken. The engine benchmarks your responses against control datasets to reveal your genuine synesthetic patterns.">
+                            Una investigación abierta que corre 100% en tu navegador para cartografiar la arquitectura sensorial oculta de tu mente. Escuchás estímulos sonoros breves y registrás los colores, texturas o emociones que despiertan en vos. El sistema contrasta tus respuestas contra bases de control para revelar tus patrones sinestésicos reales.
                         </p>
                         <div class="project-meta-tags">
                             <span class="meta-tag" data-es="INVESTIGACIÓN COGNITIVA · SINESTESIA" data-en="COGNITIVE RESEARCH · SYNESTHESIA">INVESTIGACIÓN COGNITIVA · SINESTESIA</span>
                         </div>
                         <a class="play-btn" href="https://umbral-gules.vercel.app/en" target="_blank" rel="noopener noreferrer">
-                            <span data-es="ENTRAR AL EXPERIMENTO" data-en="ENTER EXPERIMENT">ENTRAR AL EXPERIMENTO</span>
+                            <span data-es="CRUZAR EL UMBRAL" data-en="ENTER EXPERIMENT">CRUZAR EL UMBRAL</span>
                             <span class="arrow">↗</span>
                         </a>
                     </div>
