@@ -107,6 +107,13 @@
             transform: scale(1.035);
             filter: drop-shadow(0 0 50px rgba(192, 132, 252, 0.6)) brightness(1.15);
         }
+        /* Hero top bar for immediate language toggle */
+        .hero-top-bar {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            z-index: 10;
+        }
 
         .hero-tagline {
             font-size: 0.76rem;
@@ -118,7 +125,28 @@
             align-items: center;
             gap: 0.8rem;
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            cursor: pointer;
+            padding: 0.55rem 1.15rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.015);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.35s cubic-bezier(0.33, 1, 0.68, 1);
+            user-select: none;
+        }
+
+        .hero-tagline:hover {
+            color: #fff;
+            border-color: rgba(99, 102, 241, 0.45);
+            background: rgba(99, 102, 241, 0.12);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3), inset 0 0 15px rgba(192, 132, 252, 0.15);
+            transform: scale(1.035);
+        }
+
+        .hero-tagline:active {
+            transform: scale(0.97);
         }
 
         .hero-tagline .dot {
@@ -129,6 +157,28 @@
             box-shadow: 0 0 12px rgba(99, 102, 241, 0.8);
             display: inline-block;
             animation: pulse-dot 3s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        .tagline-hint {
+            font-size: 0.5rem;
+            letter-spacing: 0.18em;
+            color: var(--grad-3);
+            opacity: 0;
+            position: absolute;
+            bottom: -1.35rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            white-space: nowrap;
+            pointer-events: none;
+            text-shadow: 0 0 12px rgba(34, 211, 238, 0.6);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            font-family: var(--mono);
+        }
+
+        .hero-tagline:hover .tagline-hint {
+            opacity: 0.95;
+            transform: translateX(-50%) translateY(0);
         }
 
         @keyframes pulse-dot {
@@ -206,31 +256,135 @@
             background-clip: text;
         }
 
+        /* Language Toggle with Crisp Flag Icons */
         .lang-group {
             display: flex;
-            gap: 0.2rem;
-            background: rgba(255, 255, 255, 0.03);
+            gap: 0.3rem;
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 2px;
+            border-radius: 8px;
+            padding: 3px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .lang-btn {
-            font-size: 0.62rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.42rem;
+            font-size: 0.64rem;
             letter-spacing: 0.08em;
             font-family: var(--mono);
+            font-weight: 600;
             cursor: pointer;
-            border: none;
+            border: 1px solid transparent;
             background: none;
             color: var(--tx-muted);
-            padding: 0.25rem 0.6rem;
-            border-radius: 4px;
+            padding: 0.28rem 0.62rem;
+            border-radius: 6px;
             transition: all 0.2s ease;
+            user-select: none;
         }
-        .lang-btn:hover { color: var(--tx-title); }
+
+        .lang-btn .flag-icon {
+            width: 16px;
+            height: 10.6px;
+            border-radius: 2px;
+            display: inline-block;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+            flex-shrink: 0;
+            vertical-align: middle;
+        }
+
+        .lang-btn:hover {
+            color: var(--tx-title);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
         .lang-btn.active {
             color: #fff;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.13);
+            border-color: rgba(255, 255, 255, 0.22);
+            box-shadow: 0 0 14px rgba(99, 102, 241, 0.25);
+        }
+
+        /* ===== GENERATIVE MATRIX SYSTEM LAYER ===== */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 40;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        #matrix-canvas.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Floating System HUD */
+        .system-hud {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            z-index: 60;
+            background: rgba(5, 5, 8, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(99, 102, 241, 0.3);
+            padding: 0.65rem 1.3rem;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.1em;
+            color: #fff;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+
+        .system-hud.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .system-hud-pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22d3ee;
+            box-shadow: 0 0 10px #22d3ee;
+            animation: pulse-dot 1.5s infinite;
+            flex-shrink: 0;
+        }
+
+        .system-hud-close {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: var(--tx-muted);
+            border-radius: 999px;
+            padding: 0.2rem 0.65rem;
+            font-family: var(--mono);
+            font-size: 0.56rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .system-hud-close:hover {
+            color: #fff;
+            background: rgba(239, 68, 68, 0.35);
+            border-color: rgba(239, 68, 68, 0.6);
         }
 
         /* ===== CONTROLS & FILTER BAR ===== */
@@ -474,15 +628,42 @@
         }
 
         .project-lang {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
             font-family: var(--mono);
-            font-size: 0.52rem;
+            font-size: 0.54rem;
             letter-spacing: 0.08em;
-            color: var(--tx-muted);
-            background: rgba(255, 255, 255, 0.035);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 4px;
-            padding: 0.18rem 0.5rem;
+            color: #d1d5db;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 5px;
+            padding: 0.18rem 0.55rem;
             white-space: nowrap;
+            user-select: none;
+            transition: all 0.2s ease;
+        }
+
+        .card-flag-icon {
+            width: 14px;
+            height: 9.3px;
+            border-radius: 2px;
+            display: inline-block;
+            vertical-align: middle;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+            flex-shrink: 0;
+        }
+
+        .project-lang .flag-sep {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.58rem;
+            margin: 0 0.05rem;
+        }
+
+        .project-card:hover .project-lang {
+            border-color: rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
         }
 
         /* Summary: full visibility, high contrast, elegant reading experience, zero truncation */
@@ -773,15 +954,72 @@
 </head>
 <body>
 
+    <!-- SVG Flag Definitions -->
+    <svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden;">
+        <defs>
+            <!-- ARGENTINA -->
+            <symbol id="flag-ar" viewBox="0 0 24 16">
+                <rect width="24" height="16" fill="#74ACDF"/>
+                <rect y="5.333" width="24" height="5.334" fill="#FFFFFF"/>
+                <circle cx="12" cy="8" r="2.15" fill="#F6B40E"/>
+                <circle cx="12" cy="8" r="1.25" fill="#E6A700"/>
+                <g stroke="#F6B40E" stroke-width=".38" stroke-linecap="round">
+                    <line x1="12" y1="4.85" x2="12" y2="3.9"/>
+                    <line x1="12" y1="11.15" x2="12" y2="12.1"/>
+                    <line x1="8.85" y1="8" x2="7.9" y2="8"/>
+                    <line x1="15.15" y1="8" x2="16.1" y2="8"/>
+                    <line x1="9.78" y1="5.78" x2="9.1" y2="5.1"/>
+                    <line x1="14.22" y1="5.78" x2="14.9" y2="5.1"/>
+                    <line x1="9.78" y1="10.22" x2="9.1" y2="10.9"/>
+                    <line x1="14.22" y1="10.22" x2="14.9" y2="10.9"/>
+                </g>
+            </symbol>
+            <!-- UNITED STATES -->
+            <symbol id="flag-us" viewBox="0 0 24 16">
+                <rect width="24" height="16" fill="#FFFFFF"/>
+                <rect y="0" width="24" height="1.23" fill="#B22234"/>
+                <rect y="2.46" width="24" height="1.23" fill="#B22234"/>
+                <rect y="4.92" width="24" height="1.23" fill="#B22234"/>
+                <rect y="7.38" width="24" height="1.23" fill="#B22234"/>
+                <rect y="9.84" width="24" height="1.23" fill="#B22234"/>
+                <rect y="12.30" width="24" height="1.23" fill="#B22234"/>
+                <rect y="14.76" width="24" height="1.24" fill="#B22234"/>
+                <rect width="10.5" height="8.65" fill="#3C3B6E"/>
+                <g fill="#FFFFFF">
+                    <circle cx="1.35" cy="1.15" r=".38"/><circle cx="3.15" cy="1.15" r=".38"/><circle cx="4.95" cy="1.15" r=".38"/><circle cx="6.75" cy="1.15" r=".38"/><circle cx="8.55" cy="1.15" r=".38"/>
+                    <circle cx="2.25" cy="2.28" r=".38"/><circle cx="4.05" cy="2.28" r=".38"/><circle cx="5.85" cy="2.28" r=".38"/><circle cx="7.65" cy="2.28" r=".38"/><circle cx="9.45" cy="2.28" r=".38"/>
+                    <circle cx="1.35" cy="3.41" r=".38"/><circle cx="3.15" cy="3.41" r=".38"/><circle cx="4.95" cy="3.41" r=".38"/><circle cx="6.75" cy="3.41" r=".38"/><circle cx="8.55" cy="3.41" r=".38"/>
+                    <circle cx="2.25" cy="4.54" r=".38"/><circle cx="4.05" cy="4.54" r=".38"/><circle cx="5.85" cy="4.54" r=".38"/><circle cx="7.65" cy="4.54" r=".38"/><circle cx="9.45" cy="4.54" r=".38"/>
+                    <circle cx="1.35" cy="5.67" r=".38"/><circle cx="3.15" cy="5.67" r=".38"/><circle cx="4.95" cy="5.67" r=".38"/><circle cx="6.75" cy="5.67" r=".38"/><circle cx="8.55" cy="5.67" r=".38"/>
+                    <circle cx="2.25" cy="6.80" r=".38"/><circle cx="4.05" cy="6.80" r=".38"/><circle cx="5.85" cy="6.80" r=".38"/><circle cx="7.65" cy="6.80" r=".38"/><circle cx="9.45" cy="6.80" r=".38"/>
+                </g>
+            </symbol>
+        </defs>
+    </svg>
+
     <!-- HERO -->
     <section class="hero" id="hero">
+        <div class="hero-top-bar">
+            <div class="lang-group" role="group" aria-label="Selector de idioma">
+                <button class="lang-btn active" onclick="setLang('es')" id="hero-btn-es" title="Español" aria-label="Español">
+                    <svg class="flag-icon" viewBox="0 0 24 16" aria-hidden="true"><use href="#flag-ar"></use></svg>
+                    <span>ES</span>
+                </button>
+                <button class="lang-btn" onclick="setLang('en')" id="hero-btn-en" title="English" aria-label="English">
+                    <svg class="flag-icon" viewBox="0 0 24 16" aria-hidden="true"><use href="#flag-us"></use></svg>
+                    <span>EN</span>
+                </button>
+            </div>
+        </div>
+
         <div class="hero-brand-wrap">
             <img src="icono/lukson.arts.png" alt="LUKSON ARTS" class="hero-main-logo">
         </div>
-        <p class="hero-tagline">
+        <div class="hero-tagline" id="hero-tagline" role="button" tabindex="0" title="Click para compilar sistema">
             <span class="dot"></span>
-            <span data-es="TUS IDEAS SE VUELVEN SISTEMAS" data-en="YOUR IDEAS BECOME SYSTEMS">TUS IDEAS SE VUELVEN SISTEMAS</span>
-        </p>
+            <span id="hero-tagline-text" data-es="TUS IDEAS SE VUELVEN SISTEMAS" data-en="YOUR IDEAS BECOME SYSTEMS">TUS IDEAS SE VUELVEN SISTEMAS</span>
+            <span class="tagline-hint" data-es="[ TOCÁ PARA COMPILAR ]" data-en="[ TAP TO COMPILE ]">[ TOCÁ PARA COMPILAR ]</span>
+        </div>
         <div class="hero-scroll">
             <span data-es="EXPLORAR SISTEMAS" data-en="EXPLORE SYSTEMS">EXPLORAR SISTEMAS</span>
             <div class="line"></div>
@@ -794,9 +1032,15 @@
             <img src="icono/lukson.arts.png" alt="" class="header-mini-logo">
             <span class="header-brand-text">LUKSON ARTS</span>
         </a>
-        <div class="lang-group">
-            <button class="lang-btn active" onclick="setLang('es')" id="btn-es">ES</button>
-            <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+        <div class="lang-group" role="group" aria-label="Selector de idioma">
+            <button class="lang-btn active" onclick="setLang('es')" id="hdr-btn-es" title="Español" aria-label="Español">
+                <svg class="flag-icon" viewBox="0 0 24 16" aria-hidden="true"><use href="#flag-ar"></use></svg>
+                <span>ES</span>
+            </button>
+            <button class="lang-btn" onclick="setLang('en')" id="hdr-btn-en" title="English" aria-label="English">
+                <svg class="flag-icon" viewBox="0 0 24 16" aria-hidden="true"><use href="#flag-us"></use></svg>
+                <span>EN</span>
+            </button>
         </div>
     </header>
 
@@ -835,7 +1079,10 @@
                         <div class="project-title-row">
                             <span class="project-title">MI MANDATO</span>
                             <span class="category-pill" data-es="SIMULACIÓN POLÍTICA" data-en="POLITICAL SIMULATION">SIMULACIÓN POLÍTICA</span>
-                            <span class="project-lang">ES</span>
+                            <span class="project-lang" title="Idioma: Español">
+                                <svg class="card-flag-icon" viewBox="0 0 24 16" aria-hidden="true"><use href="#flag-ar"></use></svg>
+                                <span>ES</span>
+                            </span>
                         </div>
                         <p class="project-summary"
                            data-es="El país se desmorona con puntualidad matemática. Goberná el caos antes de que la historia decida olvidarte."
@@ -876,7 +1123,10 @@
                         <div class="project-title-row">
                             <span class="project-title">EL BUCLE</span>
                             <span class="category-pill" data-es="CÓMIC INTERACTIVO" data-en="INTERACTIVE COMIC">CÓMIC INTERACTIVO</span>
-                            <span class="project-lang">ES</span>
+                            <span class="project-lang" title="Idioma: Español">
+                                <svg class="card-flag-icon" viewBox="0 0 24 16" aria-hidden="true"><use href="#flag-ar"></use></svg>
+                                <span>ES</span>
+                            </span>
                         </div>
                         <p class="project-summary"
                            data-es="El tiempo no avanza: se repite hasta que elijas distinto. Cómic web inmersivo con diseño sonoro binaural."
@@ -917,7 +1167,10 @@
                         <div class="project-title-row">
                             <span class="project-title">CORPORITY</span>
                             <span class="category-pill" data-es="SÁTIRA LABORAL" data-en="WORKPLACE SATIRE">SÁTIRA LABORAL</span>
-                            <span class="project-lang">ES</span>
+                            <span class="project-lang" title="Idioma: Español">
+                                <svg class="card-flag-icon" viewBox="0 0 24 16" aria-hidden="true"><use href="#flag-ar"></use></svg>
+                                <span>ES</span>
+                            </span>
                         </div>
                         <p class="project-summary"
                            data-es="Cambiá tus mejores años por un sueldo fijo. Sobreviví al absurdo corporativo antes de agotar tu cordura."
@@ -958,7 +1211,13 @@
                         <div class="project-title-row">
                             <span class="project-title">RASTRO</span>
                             <span class="category-pill" data-es="DUELO 1V1 · DEDUCCIÓN" data-en="1V1 DUEL · DEDUCTION">DUELO 1V1 · DEDUCCIÓN</span>
-                            <span class="project-lang">ES · EN</span>
+                            <span class="project-lang" title="Disponible en Español e Inglés">
+                                <svg class="card-flag-icon" viewBox="0 0 24 16" aria-hidden="true"><use href="#flag-ar"></use></svg>
+                                <span>ES</span>
+                                <span class="flag-sep">·</span>
+                                <svg class="card-flag-icon" viewBox="0 0 24 16" aria-hidden="true"><use href="#flag-us"></use></svg>
+                                <span>EN</span>
+                            </span>
                         </div>
                         <p class="project-summary"
                            data-es="La historia solo deja fragmentos. Duelo 1v1 en vivo para descifrar el año y lugar de fotografías reales."
@@ -999,7 +1258,10 @@
                         <div class="project-title-row">
                             <span class="project-title">MANDÍBULA</span>
                             <span class="category-pill" data-es="ESTRATEGIA BIOLÓGICA" data-en="BIOLOGICAL STRATEGY">ESTRATEGIA BIOLÓGICA</span>
-                            <span class="project-lang">ES</span>
+                            <span class="project-lang" title="Idioma: Español">
+                                <svg class="card-flag-icon" viewBox="0 0 24 16" aria-hidden="true"><use href="#flag-ar"></use></svg>
+                                <span>ES</span>
+                            </span>
                         </div>
                         <p class="project-summary"
                            data-es="A la naturaleza no le importa tu colonia. Comandá un hormiguero en la estepa hostil de la Patagonia."
@@ -1040,7 +1302,10 @@
                         <div class="project-title-row">
                             <span class="project-title">EL ORIGEN</span>
                             <span class="category-pill" data-es="HORROR DEDUCTIVO" data-en="DEDUCTIVE HORROR">HORROR DEDUCTIVO</span>
-                            <span class="project-lang">ES</span>
+                            <span class="project-lang" title="Idioma: Español">
+                                <svg class="card-flag-icon" viewBox="0 0 24 16" aria-hidden="true"><use href="#flag-ar"></use></svg>
+                                <span>ES</span>
+                            </span>
                         </div>
                         <p class="project-summary"
                            data-es="El pasado nunca muere, solo queda bajo llave. Tasá un departamento antiguo y descubrí lo que oculta."
@@ -1081,7 +1346,10 @@
                         <div class="project-title-row">
                             <span class="project-title">SENDERO</span>
                             <span class="category-pill" data-es="DISEÑO DE HÁBITOS" data-en="HABIT DESIGN">DISEÑO DE HÁBITOS</span>
-                            <span class="project-lang">ES</span>
+                            <span class="project-lang" title="Idioma: Español">
+                                <svg class="card-flag-icon" viewBox="0 0 24 16" aria-hidden="true"><use href="#flag-ar"></use></svg>
+                                <span>ES</span>
+                            </span>
                         </div>
                         <p class="project-summary"
                            data-es="Sin fórmulas mágicas ni autoayuda vacía: 12 semanas para ordenar tu vida con lucidez y foco real."
@@ -1122,7 +1390,13 @@
                         <div class="project-title-row">
                             <span class="project-title">AMAN</span>
                             <span class="category-pill" data-es="LENGUAJE EXPERIMENTAL" data-en="EXPERIMENTAL LANGUAGE">LENGUAJE EXPERIMENTAL</span>
-                            <span class="project-lang">ES · EN</span>
+                            <span class="project-lang" title="Disponible en Español e Inglés">
+                                <svg class="card-flag-icon" viewBox="0 0 24 16" aria-hidden="true"><use href="#flag-ar"></use></svg>
+                                <span>ES</span>
+                                <span class="flag-sep">·</span>
+                                <svg class="card-flag-icon" viewBox="0 0 24 16" aria-hidden="true"><use href="#flag-us"></use></svg>
+                                <span>EN</span>
+                            </span>
                         </div>
                         <p class="project-summary"
                            data-es="Las palabras nos condicionan: 67 conceptos primitivos que se combinan para expresar cualquier idea."
@@ -1163,7 +1437,13 @@
                         <div class="project-title-row">
                             <span class="project-title">UMBRAL</span>
                             <span class="category-pill" data-es="LAB COGNITIVO" data-en="COGNITIVE LAB">LAB COGNITIVO</span>
-                            <span class="project-lang">ES · EN</span>
+                            <span class="project-lang" title="Disponible en Español e Inglés">
+                                <svg class="card-flag-icon" viewBox="0 0 24 16" aria-hidden="true"><use href="#flag-ar"></use></svg>
+                                <span>ES</span>
+                                <span class="flag-sep">·</span>
+                                <svg class="card-flag-icon" viewBox="0 0 24 16" aria-hidden="true"><use href="#flag-us"></use></svg>
+                                <span>EN</span>
+                            </span>
                         </div>
                         <p class="project-summary"
                            data-es="El sonido tiene textura y el silencio tiene color. Escuchá estímulos y descubrí tus patrones de sinestesia."
@@ -1215,6 +1495,14 @@
         <div class="footer-sub">luksonarts.vercel.app</div>
     </footer>
 
+    <!-- GENERATIVE SYSTEM MATRIX LAYER & HUD -->
+    <canvas id="matrix-canvas"></canvas>
+    <div id="system-hud" class="system-hud" role="status">
+        <span class="system-hud-pulse"></span>
+        <span data-es="MODO SISTEMA ACTIVO · MOVÉ EL CURSOR" data-en="SYSTEM MODE ACTIVE · MOVE CURSOR">MODO SISTEMA ACTIVO · MOVÉ EL CURSOR</span>
+        <button id="hud-close" class="system-hud-close" data-es="✕ SALIR" data-en="✕ EXIT">✕ SALIR</button>
+    </div>
+
     <script>
         // --- State Management ---
         let currentLang = 'es';
@@ -1224,9 +1512,10 @@
         // --- Language Toggle ---
         function setLang(lang) {
             currentLang = lang;
-            document.querySelectorAll('.lang-btn').forEach(b =>
-                b.classList.toggle('active', b.textContent.trim().toLowerCase() === lang.toLowerCase())
-            );
+            document.querySelectorAll('.lang-btn').forEach(b => {
+                const btnId = b.id || '';
+                b.classList.toggle('active', btnId.endsWith('-' + lang) || b.textContent.toLowerCase().includes(lang));
+            });
             document.documentElement.lang = lang;
             document.querySelectorAll('[data-' + lang + ']').forEach(el => {
                 const text = el.getAttribute('data-' + lang);
@@ -1359,6 +1648,289 @@
                 }
             });
         });
+
+        // --- Slogan System Genesis Interaction (Easter Egg) ---
+        (function initSloganSystem() {
+            const tagline = document.getElementById('hero-tagline');
+            const taglineText = document.getElementById('hero-tagline-text');
+            if (!tagline || !taglineText) return;
+
+            let audioCtx = null;
+            function playSynthChord(step) {
+                try {
+                    if (!audioCtx) {
+                        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    }
+                    if (audioCtx.state === 'suspended') {
+                        audioCtx.resume();
+                    }
+
+                    const now = audioCtx.currentTime;
+                    const chords = [
+                        [523.25, 659.25, 783.99, 1046.50], // C Maj harmonic
+                        [587.33, 739.99, 880.00, 1174.66], // D Maj harmonic
+                        [659.25, 783.99, 987.77, 1318.51], // E Min harmonic
+                        [698.46, 880.00, 1046.50, 1396.91]  // F Maj harmonic
+                    ];
+                    const freqs = chords[step % chords.length];
+
+                    freqs.forEach((freq, i) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        const filter = audioCtx.createBiquadFilter();
+
+                        osc.type = i % 2 === 0 ? 'sine' : 'triangle';
+                        osc.frequency.setValueAtTime(freq, now + i * 0.05);
+
+                        filter.type = 'lowpass';
+                        filter.frequency.setValueAtTime(2200, now);
+                        filter.frequency.exponentialRampToValueAtTime(300, now + 1.2);
+
+                        gain.gain.setValueAtTime(0.001, now + i * 0.05);
+                        gain.gain.linearRampToValueAtTime(0.06 / (i + 1), now + i * 0.05 + 0.03);
+                        gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.4);
+
+                        osc.connect(filter);
+                        filter.connect(gain);
+                        gain.connect(audioCtx.destination);
+
+                        osc.start(now + i * 0.05);
+                        osc.stop(now + 1.5);
+                    });
+                } catch(e) {}
+            }
+
+            // Interactive Matrix Canvas
+            const canvas = document.getElementById('matrix-canvas');
+            const hud = document.getElementById('system-hud');
+            const hudClose = document.getElementById('hud-close');
+            let ctx = null;
+            let animId = null;
+            let particles = [];
+            let isSystemActive = false;
+            let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2, active: false, radius: 160 };
+
+            if (canvas) {
+                ctx = canvas.getContext('2d');
+                function resize() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+                window.addEventListener('resize', resize);
+                resize();
+
+                window.addEventListener('mousemove', (e) => {
+                    mouse.x = e.clientX;
+                    mouse.y = e.clientY;
+                    mouse.active = true;
+                });
+
+                window.addEventListener('touchmove', (e) => {
+                    if (e.touches.length > 0) {
+                        mouse.x = e.touches[0].clientX;
+                        mouse.y = e.touches[0].clientY;
+                        mouse.active = true;
+                    }
+                }, { passive: true });
+
+                canvas.addEventListener('click', (e) => {
+                    if (!isSystemActive) return;
+                    playSynthChord(Math.floor(Math.random() * 4));
+                    // Radial kinetic impulse
+                    particles.forEach(p => {
+                        const dx = p.x - e.clientX;
+                        const dy = p.y - e.clientY;
+                        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+                        const force = Math.min(24, 450 / dist);
+                        p.vx += (dx / dist) * force;
+                        p.vy += (dy / dist) * force;
+                    });
+                });
+            }
+
+            class SystemNode {
+                constructor(x, y) {
+                    this.x = x || Math.random() * canvas.width;
+                    this.y = y || Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 3;
+                    this.vy = (Math.random() - 0.5) * 3;
+                    this.radius = Math.random() * 2.2 + 1.2;
+                    this.color = ['#c084fc', '#6366f1', '#22d3ee', '#f5b860', '#e879f9'][Math.floor(Math.random() * 5)];
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+                    this.vx *= 0.985;
+                    this.vy *= 0.985;
+
+                    if (mouse.active) {
+                        const dx = mouse.x - this.x;
+                        const dy = mouse.y - this.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < mouse.radius && dist > 5) {
+                            const force = (mouse.radius - dist) / mouse.radius;
+                            this.vx += (dx / dist) * force * 0.65 - (dy / dist) * 0.35;
+                            this.vy += (dy / dist) * force * 0.65 + (dx / dist) * 0.35;
+                        }
+                    }
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.shadowColor = this.color;
+                    ctx.shadowBlur = 8;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            function startSystem() {
+                if (!canvas || !ctx) return;
+                isSystemActive = true;
+                canvas.classList.add('active');
+                if (hud) hud.classList.add('active');
+
+                const rect = tagline.getBoundingClientRect();
+                const startX = rect.left + rect.width / 2;
+                const startY = rect.top + rect.height / 2;
+
+                particles = [];
+                const count = window.innerWidth < 768 ? 50 : 85;
+                for (let i = 0; i < count; i++) {
+                    const angle = (Math.PI * 2 * i) / count;
+                    const speed = Math.random() * 4.5 + 2;
+                    const p = new SystemNode(startX, startY);
+                    p.vx = Math.cos(angle) * speed;
+                    p.vy = Math.sin(angle) * speed;
+                    particles.push(p);
+                }
+
+                function loop() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    for (let i = 0; i < particles.length; i++) {
+                        for (let j = i + 1; j < particles.length; j++) {
+                            const p1 = particles[i];
+                            const p2 = particles[j];
+                            const dx = p1.x - p2.x;
+                            const dy = p1.y - p2.y;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+                            const maxDist = 115;
+
+                            if (dist < maxDist) {
+                                const alpha = (1 - dist / maxDist) * 0.35;
+                                ctx.strokeStyle = `rgba(99, 102, 241, ${alpha})`;
+                                ctx.lineWidth = 1;
+                                ctx.beginPath();
+                                ctx.moveTo(p1.x, p1.y);
+                                ctx.lineTo(p2.x, p2.y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+
+                    particles.forEach(p => {
+                        p.update();
+                        p.draw();
+                    });
+
+                    if (isSystemActive) {
+                        animId = requestAnimationFrame(loop);
+                    }
+                }
+
+                cancelAnimationFrame(animId);
+                loop();
+            }
+
+            function stopSystem() {
+                isSystemActive = false;
+                if (canvas) canvas.classList.remove('active');
+                if (hud) hud.classList.remove('active');
+                cancelAnimationFrame(animId);
+            }
+
+            if (hudClose) {
+                hudClose.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    stopSystem();
+                });
+            }
+
+            // Cipher Scramble Sequence
+            const glyphs = '01#%&<>[]{}/*~+λ∑∆Ω⌘◈§';
+            const aphorisms = [
+                {
+                    es: '◈ SISTEMA COMPILADO: EL CAOS AHORA ES CÓDIGO',
+                    en: '◈ SYSTEM COMPILED: CHAOS IS NOW CODE'
+                },
+                {
+                    es: '◈ EL AZAR NO EXISTE: TODO ES UN PATRÓN',
+                    en: '◈ RANDOMNESS IS AN ILLUSION: EVERYTHING IS A PATTERN'
+                },
+                {
+                    es: '◈ LA ENTROPÍA SE DESAFÍA CREANDO',
+                    en: '◈ ENTROPY IS DEFIED BY CREATION'
+                },
+                {
+                    es: 'TUS IDEAS SE VUELVEN SISTEMAS',
+                    en: 'YOUR IDEAS BECOME SYSTEMS'
+                }
+            ];
+
+            let aphorismIdx = 0;
+            let isScrambling = false;
+
+            function scrambleTo(targetStr) {
+                if (isScrambling) return;
+                isScrambling = true;
+                let step = 0;
+                const totalSteps = targetStr.length * 2.2;
+
+                const timer = setInterval(() => {
+                    taglineText.textContent = targetStr
+                        .split('')
+                        .map((ch, idx) => {
+                            if (ch === ' ') return ' ';
+                            if (idx < step / 2.2) return targetStr[idx];
+                            return glyphs[Math.floor(Math.random() * glyphs.length)];
+                        })
+                        .join('');
+
+                    step++;
+                    if (step >= totalSteps) {
+                        clearInterval(timer);
+                        taglineText.textContent = targetStr;
+                        isScrambling = false;
+                    }
+                }, 22);
+            }
+
+            tagline.addEventListener('click', () => {
+                playSynthChord(aphorismIdx);
+                if (!isSystemActive) {
+                    startSystem();
+                }
+                aphorismIdx = (aphorismIdx + 1) % aphorisms.length;
+                const lang = document.documentElement.lang || 'es';
+                const nextPhrase = aphorisms[aphorismIdx][lang] || aphorisms[aphorismIdx]['es'];
+                scrambleTo(nextPhrase);
+            });
+
+            tagline.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    tagline.click();
+                }
+            });
+        })();
     </script>
 </body>
 </html>
